@@ -1,5 +1,6 @@
 %Modified from AS by KA 2019
-function [spike_data,fig]=prelim_ana(fname,data,call_onset,delay,len,reps)
+function [spike_data, fig]=prelim_ana(fname,data,call_onset,delay,len,reps)
+
 %type: 1=3D, 2=FT
 %FUTURE KATE: figure out if you wanna loop or run FT and 3D separate, just
 %does 3d for now
@@ -11,10 +12,10 @@ spike_data.unit{1,1}=fname;%
 
  
 %Not strictly necessary, but handy
-matFile = ['E:\KA001\stimuli\3Dstim2','.mat'];%loads stimuli
+matFile = ['E:\KA001\stimuli\3Dstim','.mat'];%loads stimuli
 if exist(matFile,'file')
     load(matFile);
-    stim3D=stims3D.stim;
+    stim3D=stim2;
     spike_data.stims{1,1}=stim3D;
 else
     disp('you gonna need 3D stims')
@@ -48,8 +49,8 @@ for n=1:size(call_onset,1)
     call_onset(n)=call_onset(n)+delay;
 end
 
-%% Make the rasters
-fig=makeras(data,len,reps,40000,stims3D); %including stims here isn't necessesary, just adds a plot on the raster
+%% Make the rasters 
+fig=makeras(data,len,reps,stim3D); %including stims here isn't necessesary, just adds a plot on the raster
 
 %% set up storage cells
 num=(size(data,2)/reps);
@@ -80,9 +81,6 @@ for x=1:(size(data,2)/reps)
     spike_data.dur_total(x,:) = resp_dur_total;
     spike_data.fr(x,:) = spikerate;
 
-    %KATE figure out new way to ignore bad neurons
-%     if isempty(timesave) || all(isnan(timesave)) % allows me to ignore bad neurons
-%         spike_data.calls=[];
-%         return
-%     end
+    %bad neurons will be filtered at next step by spike count and echo
+    %response
 end
