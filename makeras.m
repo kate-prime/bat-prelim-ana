@@ -1,4 +1,4 @@
-function fig=makeras(data,len,reps,sr,stim,varargin)
+function fig=makeras(data,len,reps,stim,varargin)
 %modified from AS by KA 2019
 %data is a matrix of spike times of of (m * n) where m is spike times in bin and
 %n is number of trials * reps. 
@@ -12,9 +12,6 @@ function fig=makeras(data,len,reps,sr,stim,varargin)
 %   consider making reps inputtable
 %   consider restructuring into 3d matrices
 
-if exist('sr')==0
-    sr=40000;
-end
 
 [r,num]=size(data);
 for i=1:reps:num;
@@ -40,8 +37,8 @@ for i=1:reps:num
     end
     plot(bins((round(i/reps)+1),:),val((round(i/reps)+1),:),'-r') %plot spk count
     try %adds stimulus to hist to visualize onset and echo - Not strictly necessary, just handy
-        temp=cell2mat(stim.stim(n));
-        ind=find(temp>.05);
+        temp=(stim(:,n));
+        ind=find(temp>.06);
         temp2=zeros(size(temp));
         temp2(ind)=2;
         temp2=temp2+22;
