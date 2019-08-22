@@ -39,15 +39,15 @@ for i=1:reps:num
         hold on
     end
     plot(bins((round(i/reps)+1),:),val((round(i/reps)+1),:),'-r') %plot spk count
-%     try %adds stimulus to hist to visualize onset and echo - Not strictly necessary, just handy
-%         temp=cell2mat(stim.stim(n));
-%         ind=find(temp>.05);
-%         temp2=zeros(size(temp));
-%         temp2(ind)=2;
-%         temp2=temp2+22;
-%         xax=(1:length(temp))./(sr/100); %there is a scaling issue in here somewhere
-%         plot(xax,temp2,'-b')
-%     end
+    try %adds stimulus to hist to visualize onset and echo - Not strictly necessary, just handy
+        temp=cell2mat(stim.stim(n));
+        ind=find(temp>.05);
+        temp2=zeros(size(temp));
+        temp2(ind)=2;
+        temp2=temp2+22;
+        xax=(1:length(temp))./(250);
+        plot(xax,temp2,'-b')
+    end
 
     
     
