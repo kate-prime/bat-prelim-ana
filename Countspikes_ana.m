@@ -18,7 +18,7 @@ function [spk_number,jitter,spikerate,resp_dur_total,latency] = Countspikes_ana(
 %pulse. FUTURE KATE:consider filtering each stim for after echo onset
 for i=1:size(bins,2)
     for j=1:2:reps %20 
-        if bins(x,i)>=delay/2 %looking at line X of bins and val
+        if bins(x,i)>delay/2 %looking at line X of bins and val %SOMETHING FUCKY IN HERE
             resp1st((j*.5)+.5,i)=bins(x,i);%looking at line X of bins and val
         else
             resp1st((j*.5)+.5,i)=NaN;
@@ -62,9 +62,9 @@ spike_times(r,length(times))=NaN;
 %for k=1:2:length(times) %filters for only spikes after stim onset
     for i=1:length(times)
         for j=1:r
-            if (spiketimes(j,i)>(times(i)/10000)) %was k, scaling? 
-                spike_times(j,i)=spiketimes(j,i);
-            else
+            if (spiketimes(j,i)>=(delay-1)) %looks like spike times are already... 
+                spike_times(j,i)=spiketimes(j,i);%based on relative time, not clock time,...
+            else                                 %so delay works here %something weird where responses start before delay? check sr
                 spike_times(j,i)=NaN;
             end
         end
