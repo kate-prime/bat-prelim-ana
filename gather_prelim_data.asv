@@ -1,0 +1,44 @@
+dates=[20190628 20190708 20190628 20190709 20190711 20190710]; 
+home=('E:\');
+
+by_delay=struct;
+by_obj=struct;
+by_angle=struct;
+
+for i_date = 1 : length(dates)
+    date= num2str(dates(i_date));
+    folder_dir=dir(['E:\KA001\Analyzed\',date]);
+    for i_dep=1:length(folder_dir)
+        depth= folder_dir(i_dep).name;
+        
+        if depth(1)=='.' || depth(1) == 'F' %for weird empty folders
+            continue
+        end
+        file_dir=dir(['E:\KA001\Analyzed\',date,'\',depth,'\*.mat']);
+        for i_data=1:size(file_dir,1)
+            cd(['E:\KA001\Analyzed\',date,'\',depth])
+            fname=file_dir(i_data,1);
+            load([file_dir(i_data).folder,'\', file_dir(i_data).name],'use')
+            if use==1
+              load([file_dir(i_data).folder,'\', file_dir(i_data).name])
+              if pref_delay==5
+                  by_delay.five.name(size(delay.five.name,1)+1,:)=([date,' ',depth,' ',fname.name]);
+                  by_delay.five.count(size(delay.five.count,1)+1,:)=spike_data.count';
+                  by_delay.five.jitter(size(delay.five.jitter,1)+1,:)=spike_data.jitter';
+              elseif pref_delay==10
+                  by_delay.ten.name(size(delay.ten.name,1)+1,:)=([date,' ',depth,' ',fname.name]);
+                  by_delay.ten.count(size(delay.ten.count,1)+1,:)=spike_data.count';
+                  by_delay.ten.jitter(size(delay.ten.jitter,1)+1,:)=spike_data.jitter';
+              elseif pref_delay==15
+                  by_delay.fifteen.name(size(delay.fifteen.name,1)+1,:)=([date,' ',depth,' ',fname.name]);
+                  by_delay.fifteen.count(size(delay.fifteen.count,1)+1,:)=spike_data.count';
+                  by_delay.fifteen.jitter(size(delay.fifteen.jitter,1)+1,:)=spike_data.jitter';
+              end
+            elseif use==0
+                 disp('nope');
+            end
+            close all
+            cd(home)
+        end
+    end
+end
