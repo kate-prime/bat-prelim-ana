@@ -1,5 +1,5 @@
 %Modified from AS by KA 2019
-function [spike_data, fig]=prelim_ana(fname,data,call_onset,delay,len,reps)
+function [fig,spike_data]=prelim_ana(fname,data,call_onset,delay,len,reps)
 
 %type: 1=3D, 2=FT
 %FUTURE KATE: figure out if you wanna loop or run FT and 3D separate, just
@@ -57,9 +57,10 @@ num=(size(data,2)/reps);
 spike_data.latency=NaN(num,1);
 spike_data.jitter=NaN(num,1);
 spike_data.count=NaN(num,1);
-spike_data.times=NaN(num,reps);%
+spike_data.call_times=NaN(num,reps);%
 spike_data.dur_total=NaN(num,1);
-spike_data.fr=NaN(num,1);
+spike_data.fr_all=NaN(num,1);
+spike_data.spike_times=data;
 
 %% loop for each stim
 for x=1:(size(data,2)/reps)
@@ -79,7 +80,7 @@ for x=1:(size(data,2)/reps)
     spike_data.count(x,:)=spk_number;
     spike_data.times(x,:)=times';
     spike_data.dur_total(x,:) = resp_dur_total;
-    spike_data.fr(x,:) = spikerate;
+    spike_data.fr_all(x,:) = spikerate;
 
     %bad neurons will be filtered at next step by spike count and echo
     %response
