@@ -18,7 +18,7 @@ function [spk_number,jitter,spikerate,resp_dur_total,latency] = Countspikes_ana(
 %pulse. FUTURE KATE:consider filtering each stim for after echo onset
 for i=1:size(bins,2)
     for j=1:2:reps %20 
-        if bins(x,i)>delay/2 %looking at line X of bins and val %SOMETHING FUCKY IN HERE
+        if bins(x,i)>delay/2 %looking at line X of bins and val 
             resp1st((j*.5)+.5,i)=bins(x,i);%looking at line X of bins and val
         else
             resp1st((j*.5)+.5,i)=NaN;
