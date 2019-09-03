@@ -2,6 +2,7 @@
 function [h1,h2,h3,pref_delay,pref_obj,pref_ang,means,use]=second_ana(spike_data,stim_data)
 %after prelim analysis, check neurons for responses and find some basics
 %like prefered delay and plots them
+%still in testing for thresholds
 %%
 %check for <5 spikes per stim to throw out bad ones quick
 n=(max(spike_data.count)<=5);
@@ -10,7 +11,7 @@ if n~=1  %find peaks in post call hist
     pks_box=nan(size (spike_data.hist{1,2}));
     locs_box=nan(size (spike_data.hist{1,2}));
     for p=1:size(spike_data.hist{1,2},1)
-        [pks, locs]=findpeaks(spike_data.hist{1,2}(p,:),'MinPeakHeight',2); %can be made more strict
+        [pks, locs]=findpeaks(spike_data.hist{1,2}(p,:),'MinPeakHeight',3); %can be made more strict, but purposely ~1/2 of thresh (5) in case responses are split over 2 bins
         pks_box(p,1:size(pks,2))=pks;
         locs_box(p,1:size(locs,2))=locs;
     end
@@ -19,16 +20,37 @@ if n~=1  %find peaks in post call hist
        test(q,1:2)=isnan(locs_box(q,1:2));
     end
     test=sum(test,1);
-    if test(1,1)<test(1,2) %&& test(1,2)>16
+    %creates a scatter plot of peaks from hist vals to check if timing is
+    %consistent or not
+    if (test(1,2)-test(1,1))>3 %can be more or less strict. 2 works, but you gotta sift more. 
         disp('seems like theres only 1 peak, plotting to check timing')
         h=figure;
         for r=1:size(locs_box,1)
+            hold on
             scatter(locs_box(r,:),pks_box(r,:),'filled');
+            x(1:20)=5;
+            plot (x,'r')
             xlim([0 20])
-            ylim([0 20])
-            pause;
+            ylim([0 25])
+            title([spike_data.unit])
+            hold off
         end
-        use=input('looks ok? 1=yes, 0=no');
+        use=inputdlg('looks ok? 1=yes, 0=no, 9=not sure, show me by stimulus');
+        use=str2double(use);
+        %plots again by stimulus group (useful to see if it's not responsive
+        %and noisy or just very selective)
+        if use==9
+            h=figure;
+            for r=1:size(locs_box,1)
+                scatter(locs_box(r,:),pks_box(r,:),'filled');
+                title(r)
+                xlim([0 20])
+                ylim([0 25])
+                pause;
+            end
+            use=inputdlg('looks ok? 1=yes, 0=no');
+            use=str2double(use);
+        end
         close (h)
     else
         use=1;
