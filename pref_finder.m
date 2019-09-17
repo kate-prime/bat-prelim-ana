@@ -16,6 +16,7 @@ delay_box(:,1)=spike_data.count;
 delay_box(:,2)=stim_data(:,1);
 delay_box=sortrows(delay_box,'descend');
 pref_delay=mode(delay_box(1:11,2)); %finds most common delay value in top 1/3
+
 %find means
 ind5=find(delay_box(:,2)==5);
 ind10=find(delay_box(:,2)==10);
