@@ -1,12 +1,14 @@
 %Modified from AS by KA 2019
-function [fig,spike_data]=prelim_ana(fname,data,call_onset,delay,len,reps)
+function [fig,spike_data]=prelim_ana(fname,data,call_onset,delay,len,wind,reps)
 
 %type: 1=3D, 2=FT
 %FUTURE KATE: figure out if you wanna loop or run FT and 3D separate, just
 %does 3d for now
 %delay=length to stim onset-KATE: use 5 ms
 %len=length of stimulus in ms
-%reps is stimulus repeats
+%wind=window of the response to analayze in ms
+%reps=stimulus repeats
+
 %% load data and stim files
 spike_data.unit{1,1}=fname;%
 
@@ -62,6 +64,17 @@ spike_data.dur_total=NaN(num,1);
 spike_data.fr_all=NaN(num,1);
 spike_data.spike_times=data;
 
+%% generates a box of expected echo onset delays. only works if stims are in 5,10,15ms order
+echos=[]; 
+       for i=1:round(num/3) %makes a column corresponding to echo delays
+           echos=[echos;[5;10;15]];
+       end
+       if num-length(echos)==1 %this is not an elegant solution
+           echos=[echos;5];
+       elseif num-length(echos)==2
+           echos=[echos;5;10];
+       end
+
 %% loop for each stim
 for x=1:(size(data,2)/reps)
     r2=x*reps; %end of range
@@ -71,8 +84,9 @@ for x=1:(size(data,2)/reps)
     r=size(data(:,r1:r2),1);%looking at stim X
     spiketimes=data(:,r1:r2); %all spike times for that stim
     times=call_onset(r1:r2,:); %all onset times for that stim
+    echoX=echos(x);
     %% Actually do the analysis
-    [spk_number,jitter,spikerate,resp_dur_total,latency] = Countspikes_ana(times,spiketimes,r,x,bins,delay,val,len,reps);
+    [spk_number,jitter,spikerate,resp_dur_total,latency] = Countspikes_ana(times,spiketimes,r,x,bins,delay,val,len,wind,reps,echoX);
     
     spike_data.spikenumber(x,:) =spk_number';
     spike_data.jitter(x,:)=jitter;
