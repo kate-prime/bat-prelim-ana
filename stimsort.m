@@ -5,8 +5,14 @@ close all
 %versionX='V3' made inputable
 
 if strcmp(versionX,'V1')
-    dates=[20190708 20190628 20190709 20190711  20190710]; 
+    dates=[ 20190628 ]; %20190708 20190709 20190711  20190710
     stimnumb3D=680;
+    stimnumbFT=1350;%change if needed is numb of different stim*times played each stim, usually 20
+end
+
+if strcmp(versionX,'V2')
+    dates=[20190904 20190905 20190906 20190909 20190910 20190911]; 
+    stimnumb3D=1320;
     stimnumbFT=1350;%change if needed is numb of different stim*times played each stim, usually 20
 end
 
@@ -71,13 +77,13 @@ for i_date = 1 : length(dates)
 
             tdms_path3D=(['E:\KA001\3D_stim\', date,'\Nat',depth(9:end-1),'1']);
             tdms3D=dir([tdms_path3D,'\*.tdms']);
-            assert(length(tdms3D)==1) % will error if TDMS is wrong
+            assert(length(tdms3D)==1); % will error if TDMS is wrong
             tdmsfile3D={[tdms_path3D,'\',tdms3D(1).name]};
             ConvertedData3D = convertTDMS(1,tdmsfile3D);
             
             tdms_pathFT=(['E:\KA001\3D_stim\', date,'\FT',depth(9:end),]);
             tdmsFT=dir([tdms_pathFT,'\*.tdms']);
-            assert(length(tdmsFT)==1) % will error if TDMS is wrong
+            assert(length(tdmsFT)==1); % will error if TDMS is wrong
             tdmsfileFT={[tdms_pathFT,'\',tdmsFT(1).name]};
             ConvertedDataFT = convertTDMS(1,tdmsfileFT);
 
@@ -137,7 +143,7 @@ for i_date = 1 : length(dates)
                 end
                 assert(isequal(size(loc_times),[2,stimnumb]));
                 stim_onset = zeros(1,stimnumb);
-                for i=1:length(loc_times) %stims that las 100 ms or 50ms make a difference here %KA I think my stims ar 50ms
+                for i=1:length(loc_times) %stims that las 100 ms or 50ms make a difference here
 %                     if ismember(loc_times(2,i),onehund)
 %                         stim_onset(1,i)=loc_times(1,i)-220;
 %                     else
