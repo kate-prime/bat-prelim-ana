@@ -16,7 +16,7 @@ for j=1:reps:length(data) %deletes spikes that happen after stimulus (between st
 end
   
 for i=1:reps:length(data)
-    binstemp = 0:wid:(len+reps);
+    binstemp = 0:wid:(len); %+reps that was in there for reasons, but I'm not sure why
     bins(round(i/reps)+1,1:length(binstemp))=binstemp;
     val(round(i/reps)+1,1:length(binstemp)-1)=histcounts(data(:,i:i+reps-1),binstemp);   
 end
