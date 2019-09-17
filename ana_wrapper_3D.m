@@ -18,10 +18,10 @@ for i_date = 1 : length(dates)
             cd(['E:\KA001\Sorted\',date,'\',depth,'\clust'])
             fname=file_dir(i_data,1).name;
             load([file_dir(i_data).folder,'\', file_dir(i_data).name],'trials_3D','stimon_3D');
-            disp([file_dir(i_data).folder,'\', file_dir(i_data).name]) %can be removed but makes sure I know what files are being loaded
+            disp([file_dir(i_data).folder,'\', file_dir(i_data).name]) %can be removed but makes sure I record what files are being loaded
             data=trials_3D;
             call_onset=stimon_3D';
-            [fig,spike_data]=prelim_ana(fname,data,call_onset,5,30,20);
+            [fig,spike_data]=prelim_ana(fname,data,call_onset,5,30,10,20);
             cd(['E:\KA001\Analyzed\',date,'\',depth])
             savefig(fig,[fname(1:end-4) '_ras'])
             save([fname(1:end-4), '_prelim'],'spike_data')
