@@ -1,24 +1,31 @@
+
+
+function [spk_number,jitter,spikerate,resp_dur_total,latency] = Countspikes_ana(times,spiketimes,r,x,bins,delay,val,len,wind,reps,echo)
 %Modified from AS by KA 2019
 
-function [spk_number,jitter,spikerate,resp_dur_total,latency] = Countspikes_ana(times,spiketimes,r,x,bins,delay,val,len,reps)
 %function for preliminary analysis on spikes data from wave_clus
 %x=stim you're on (numeral)
 %times=vector of stim start times for stim x + delay
 %spiketimes=matrix of spike times for stim x
 %r=size of spike matrix
-%bins is from hist
-%val is from hist
+%bins is bin ID from binfun
+%val spike count in bins from binfun
 %len=length of stimulus window in ms
+%wind=window of the response to analayze in ms
 %delay=length from stim start to call onset in ms
 %reps is stimulus repeats
-
+%echo=echo onset delay in ms
 
 %% find bins and number of spikes after call onset
-%resp1st is a filtered version of bins removes spikes occoring before first
-%pulse. FUTURE KATE:consider filtering each stim for after echo onset
+%resp1st is a filtered version of bins removes spikes occuring before first
+%pulse and selects response window for analysis based on stim delays
+
+       
 for i=1:size(bins,2)
-    for j=1:2:reps %20 
-        if bins(x,i)>delay/2 %looking at line X of bins and val 
+    for j=1:2:reps
+        if bins(x,i)>=(delay+echo) && bins(x,i)<(delay+echo+wind)
+            %finds bins between echo onset and end of designated response
+            %window
             resp1st((j*.5)+.5,i)=bins(x,i);%looking at line X of bins and val
         else
             resp1st((j*.5)+.5,i)=NaN;
@@ -45,12 +52,12 @@ for i=1:(length(times)/2)
         resp_y(i,1:size(pos,2))=nan;
     end
 end
-resp_y(resp_x==0)=NaN;
+resp_y(resp_x==0)=NaN; %is this necessary? figure out why this is here
 resp_x(resp_x==0)=NaN;
 
 for i=1:length(times)/2;
     %resp_dur_total(i) = times(i*2)-times(i*2-1);
-    resp_dur_total = len-delay; %needed to calculate fr, currently only works if all stims are same length
+    resp_dur_total = wind; %needed to calculate fr, currently only works if all stims are same length
 end
 % KATE-consider fixing response_dur or adding to response_dur to find time
 % from first spike to last spike, although might not be informative for
@@ -62,9 +69,9 @@ spike_times(r,length(times))=NaN;
 %for k=1:2:length(times) %filters for only spikes after stim onset
     for i=1:length(times)
         for j=1:r
-            if (spiketimes(j,i)>=(delay-1)) %looks like spike times are already... 
+            if (spiketimes(j,i)>=((delay+echo)-1))&& spiketimes(j,i)<=((delay+echo+wind))%looks like spike times are already... 
                 spike_times(j,i)=spiketimes(j,i);%based on relative time, not clock time,...
-            else                                 %so delay works here %something weird where responses start before delay? check sr
+            else                                 %so delay works here
                 spike_times(j,i)=NaN;
             end
         end
