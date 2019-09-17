@@ -1,5 +1,6 @@
 
 function [h1,h2,h3,pref_delay,pref_obj,pref_ang,means,use]=second_ana(spike_data,stim_data)
+%KA 2019
 %after prelim analysis, check neurons for responses and find some basics
 %like prefered delay and plots them
 %still in testing for thresholds
@@ -173,5 +174,5 @@ if use==0
     pref_ang=0;
     means=0;
 end
-    % worth determinine peak fr from isi? probably unless most are very low
+    % Kate: worth determinine peak fr from isi? probably unless most are very low
     % firing
