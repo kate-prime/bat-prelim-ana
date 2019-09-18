@@ -4,7 +4,8 @@ function [h1,h2,h3,pref_delay,pref_obj,pref_ang,means,use]=second_ana(spike_data
 %after prelim analysis, check neurons for responses and find some basics
 %like prefered delay and plots them
 %still in testing for thresholds
-%%
+
+%% initial sorting steps
 %check for <5 spikes per stim to throw out bad ones quick
 n=(max(spike_data.count)<=5);
 
@@ -56,7 +57,7 @@ if n~=1  %find peaks in post call hist
     else
         use=1;
     end
-    %%
+    %% starts generating plots if use==1
     if use==1 %find preferred stims based on total spike count (maybe try peak fr instead)
         [pref_delay,pref_obj,pref_ang,means]=pref_finder(spike_data,stim_data);
         h1=figure;
