@@ -7,13 +7,13 @@ close all
 if strcmp(versionX,'V1')
     dates=[ 20190628 ]; %20190708 20190709 20190711  20190710
     stimnumb3D=680;
-    stimnumbFT=1350;%change if needed is numb of different stim*times played each stim, usually 20
+    stimnumbFT=1350;%change if needed; stimuli*reps, usually 20
 end
 
 if strcmp(versionX,'V2')
     dates=[20190904 20190905 20190906 20190909 20190910 20190911]; 
     stimnumb3D=1320;
-    stimnumbFT=1350;%change if needed is numb of different stim*times played each stim, usually 20
+    stimnumbFT=1350;%change if needed; stimuli*reps, usually 20
 end
 
 %% for getting spike times. Has a lot for automagic, but can be ui-ed
