@@ -2,7 +2,6 @@
 
 function [spk_number,jitter,spikerate,resp_dur_total,latency] = Countspikes_ana(times,spiketimes,r,x,bins,delay,val,len,wind,reps,echo)
 %Modified from AS by KA 2019
-
 %function for preliminary analysis on spikes data from wave_clus
 %x=stim you're on (numeral)
 %times=vector of stim start times for stim x + delay
