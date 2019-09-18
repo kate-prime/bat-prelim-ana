@@ -2,14 +2,12 @@ function fig=makeras(data,len,reps,stim,varargin)
 %modified from AS by KA 2019
 %data is a matrix of spike times of of (m * n) where m is spike times in bin and
 %n is number of trials * reps. 
-%len is the length of response window/stim length in ms
-%stimuli should be organized a struct with stim name and
+%len is stim length in ms
+%stimuli should be organized in a struct with stim name and
 %stimulus as separate cells
 %sr=sampling rate
 %reps is stimulus repeats
 %FUTURE KATE
-%   still need to make cells for FT stim
-%   consider making reps inputtable
 %   consider restructuring into 3d matrices
 
 
