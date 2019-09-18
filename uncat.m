@@ -1,6 +1,6 @@
 function uncat
-%separates spike times for concatenated files, select a reference file for
-%each depth, each reference works for all channels
+%separates spike times for concatenated files. select a reference file for
+%each depth, each reference works for all channels at that depth
 
 num=input('number of files to uncat');
 disp('select reference file')
