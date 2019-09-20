@@ -2,12 +2,8 @@
 function wrapper_clutter(versionX)
 close all
 
-if strcmp(versionX,'V1')
-    dates=[20190628,20190708,20190709,20190710,20190711]
-end
-if strcmp(versionX,'V2')
-    dates=[20190904,20190905,20190906,20190909,20190910,20190911]
-end
+dates = datesOrga(versionX);
+
 source_path='E:\Angie\Bats\NSF shapes project\neural_data_2019\clutter_stim\Sorted\';
 dest_path='E:\Angie\Bats\NSF shapes project\neural_data_2019\clutter_stim\Analyzed\';
 
