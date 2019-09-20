@@ -1,7 +1,12 @@
-function uncat %written by KAllen, modified by ASalles
+function uncat_AngieMod (versionX) %written by KAllen, modified by ASalles
 %separates spike times for concatenated files, select a reference file for
 %each depth, each reference works for all channels
-day='20190711';%day to uncat
+
+dates = datesOrga(versionX);
+
+for idx_day=1:length(dates)
+    day=num2str(dates(idx_day))
+    
 pathtouncat=['E:\Angie\Bats\NSF shapes project\neural_data_2019\clutter_stim\',day,'\'];%put the path that leads to the files you want to uncat
 depthlist=dir(pathtouncat);
 
@@ -25,7 +30,7 @@ for idx_depth=1:length(depthlist)
     
     ref=size(data,2)/(sr/1000);
     num=dir([pathtouncat,'\All_',depth,'\times_','*.mat']);
- for i=1:length(num);
+ for i=1:length(num)
         %disp('channel to uncat')%choose the channel of the times_ files, it saves over it adding the new info
         %     [fname,fpath2]=uigetfile;
         %     cd(fpath2)
@@ -38,5 +43,6 @@ for idx_depth=1:length(depthlist)
         save(fname, 'spkFT','spkClutter','ref','-append');
     end
     
+end
 end
 end
