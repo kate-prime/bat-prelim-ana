@@ -30,22 +30,14 @@ for i_date = 1 : length(dates)
             continue
         end
         
-        mkdir([sourcepath,date,'\',depth,'\clust\']);
-        times_dir=dir([sourcepath,date,'\',depth,'\*.mat']);
-        for i_tt=1:length(times_dir)         % might not need?
-            if times_dir(i_tt).name(1) == 't' 
-                copyfile([sourcepath,date,'\',depth,'\',times_dir(i_tt).name],[sourcepath,date,'\',depth,'\clust\']) %source,destination
-            end
-        end
-        
-        file_dir=dir([sourcepath,date,'\',depth,'\clust\*.mat']);
+        file_dir=dir([sourcepath,date,'\',depth,'\times*.mat']);
         
         for i_clust=1:length(file_dir) %loads clusters, changed for split files
             file_s1=strsplit(file_dir(i_clust).name,'_');%splits up file names
             file_s2=strsplit(file_s1{2},'.');
             ch= file_s2{1};
             
-            path_spk_times=([sourcepath,date,'\',depth,'\clust\']); 
+            path_spk_times=([sourcepath,date,'\',depth,'\']); 
             
             x=load([path_spk_times,file_dir(i_clust).name]);
             for t=1:size(x.spkFT,1);%rescale FT spike times so that stim switch time is 0, because FT was collected after Clutter
