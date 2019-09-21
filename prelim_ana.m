@@ -49,7 +49,7 @@ for n=1:size(call_onset,1)
 end
 
 %% Make the rasters 
-fig=makeras(data,len,reps,stimclutter); %including stims here isn't necessesary, just adds a plot on the raster
+fig=makeras(data,len,reps,stim_clutter); %including stims here isn't necessesary, just adds a plot on the raster
 
 %% set up storage cells
 num=(size(data,2)/reps);
