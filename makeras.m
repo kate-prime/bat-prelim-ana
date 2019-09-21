@@ -27,7 +27,7 @@ end
 %
 bins(:,length(bins))=[];
 n=0;
-fig=figure;
+fig=figure('units','normalized','outerposition',[0 0 1 1]);
 for i=1:reps:num
     n=n+1; %counter
     subplot(4,round((num/reps)/4),round(i/reps)+1)
