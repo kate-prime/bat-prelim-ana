@@ -31,9 +31,10 @@ for i_date = 1 : length(dates)
             load([source_path,date,'\',depth,'\',fname],'trials_clutter','stimon_clutter');
             data=trials_clutter;
             call_onset=stimon_clutter';
+            
             [spike_data,fig]=prelim_ana(fname,data,call_onset,5,30,20);
             
-            savefig(fig,['G:\Angie data\shapes project\rasters',date,'\',depth,'\',fname(1:end-4) '_ras'])%avoid saving rasters on google drive
+            saveas(fig,['G:\Angie data\shapes project\rasters\',date,'\',depth,'\',fname(1:end-4) '_ras.png'])%avoid saving rasters on google drive
             
             save([dest_path,date,'\',depth,'\',fname(1:end-4), '_prelim'],'spike_data')
             close all
