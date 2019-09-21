@@ -36,8 +36,8 @@ for idx_depth=1:length(depthlist)
         %     cd(fpath2)
        fname=[pathtouncat,'\All_',depth,'\',num(i).name];
         load(fname,'cluster_class');
-        ind1=find(cluster_class(:,2)<ref);
-        ind2=find(cluster_class(:,2)>ref);
+        ind1=find(cluster_class(:,2)>ref);
+        ind2=find(cluster_class(:,2)<ref);
         spkFT=cluster_class(ind1,:);
         spkClutter=cluster_class(ind2,:);
         save(fname, 'spkFT','spkClutter','ref','-append');
