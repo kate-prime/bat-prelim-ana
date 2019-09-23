@@ -156,9 +156,9 @@ for i_date = 1 : length(dates)
                 
                 % separate response in columns in trials_sorted
                 if ii==1
-                    clusters=clusters_FT;
-                elseif ii==2
                     clusters=clusters_Clutter;
+                elseif ii==2
+                    clusters=clusters_FT;
                 end
                 for d=1:max(x.cluster_class(:,1))
                     clear trials
