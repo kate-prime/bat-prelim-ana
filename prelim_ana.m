@@ -1,5 +1,5 @@
 %Modified from AS by KA 2019
-function [spike_data, fig]=prelim_ana(fname,data,call_onset,delay,len,reps)
+function [spike_data, fig]=prelim_ana(fname,data,call_onset,delay,len,reps,subProws)
 
 %type: 1=clutter, 2=FT
 %FUTURE KATE: figure out if you wanna loop or run FT and clutter separate, just
@@ -49,7 +49,7 @@ for n=1:size(call_onset,1)
 end
 
 %% Make the rasters 
-fig=makeras(data,len,reps,stim_clutter); %including stims here isn't necessesary, just adds a plot on the raster
+fig=makeras(data,len,reps,stim_clutter,subProws); %including stims here isn't necessesary, just adds a plot on the raster
 
 %% set up storage cells
 num=(size(data,2)/reps);

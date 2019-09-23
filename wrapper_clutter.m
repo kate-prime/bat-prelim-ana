@@ -2,7 +2,7 @@
 function wrapper_clutter(versionX)
 close all
 
-dates = datesOrga(versionX);
+[dates,~,~,subProws] = datesOrga(versionX);
 
 source_path='E:\Angie\Bats\NSF shapes project\neural_data_2019\clutter_stim\Sorted\';
 dest_path='E:\Angie\Bats\NSF shapes project\neural_data_2019\clutter_stim\Analyzed\';
@@ -32,8 +32,8 @@ for i_date = 1 : length(dates)
             data=trials_clutter;
             call_onset=stimon_clutter';
             
-            [spike_data,fig]=prelim_ana(fname,data,call_onset,5,30,20);
-            
+            [spike_data,fig]=prelim_ana(fname,data,call_onset,5,30,20,subProws);
+                                      
             saveas(fig,['G:\Angie data\shapes project\rasters\',date,'\',depth,'\',fname(1:end-4) '_ras.png'])%avoid saving rasters on google drive
             
             save([dest_path,date,'\',depth,'\',fname(1:end-4), '_prelim'],'spike_data')
