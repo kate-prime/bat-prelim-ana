@@ -1,8 +1,8 @@
 %Modified from AS by KA 2019
-function [spike_data, fig]=prelim_ana(fname,data,call_onset,delay,len,reps)
+function [spike_data, fig]=prelim_ana(fname,data,call_onset,delay,len,reps,subProws)
 
-%type: 1=3D, 2=FT
-%FUTURE KATE: figure out if you wanna loop or run FT and 3D separate, just
+%type: 1=clutter, 2=FT
+%FUTURE KATE: figure out if you wanna loop or run FT and clutter separate, just
 %does 3d for now
 %delay=length to stim onset-KATE: use 5 ms
 %len=length of stimulus in ms
@@ -12,18 +12,17 @@ spike_data.unit{1,1}=fname;%
 
  
 %Not strictly necessary, but handy
-matFile = ['E:\KA001\stimuli\3Dstim','.mat'];%loads stimuli
+matFile = ['E:\Angie\Bats\NSF shapes project\neural_stim\clutterstim_org.mat'];%loads stimuli
 if exist(matFile,'file')
     load(matFile);
-    stim3D=stim2;
-    spike_data.stims{1,1}=stim3D;
+    spike_data.stims{1,1}=stim_clutter;
 else
-    disp('you gonna need 3D stims')
+    disp('you gonna need stims')
 end
 
 
 %% make the bins
-[data,bins,val]=binfun(data,len,2,reps);
+[data,bins,val]=binfun(data,len,2,reps);  
 bins(:,size(bins,2))=[];
 spike_data.hist{1,1}=bins;
 spike_data.hist{1,2}=val;
@@ -50,7 +49,7 @@ for n=1:size(call_onset,1)
 end
 
 %% Make the rasters 
-fig=makeras(data,len,reps,stim3D); %including stims here isn't necessesary, just adds a plot on the raster
+fig=makeras(data,len,reps,stim_clutter,subProws); %including stims here isn't necessesary, just adds a plot on the raster
 
 %% set up storage cells
 num=(size(data,2)/reps);
