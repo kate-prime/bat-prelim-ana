@@ -1,4 +1,4 @@
-function fig=makeras(data,len,reps,stim,varargin)
+function fig=makeras(data,len,reps,stim,subProws,varargin)
 %modified from AS by KA 2019
 %data is a matrix of spike times of of (m * n) where m is spike times in bin and
 %n is number of trials * reps. 
@@ -25,10 +25,10 @@ end
 %
 bins(:,length(bins))=[];
 n=0;
-fig=figure;
+fig=figure('units','normalized','outerposition',[0 0 1 1]);
 for i=1:reps:num
     n=n+1; %counter
-    subplot(4,round((num/reps)/4),round(i/reps)+1)
+    subplot(subProws,round((num/reps)/subProws),round(i/reps)+1)
     for j=0:reps-1
         plot(data(:,i+j),j+1,'.k')
         hold on
