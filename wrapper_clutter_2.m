@@ -10,16 +10,16 @@ load('E:\Angie\Bats\NSF shapes project\neural_stim\clutterstim_org.mat','stim_da
 
 for i_date = 1 : length(dates)
     date= num2str(dates(i_date));
-    folder_dir=dir(['E:\Angie\Bats\NSF shapes project\neural_data_2019\clutter_stim\Analyzed',date]);
+    folder_dir=dir(['E:\Angie\Bats\NSF shapes project\neural_data_2019\clutter_stim\Analyzed\',date]);
     for i_dep=1:length(folder_dir)
         depth= folder_dir(i_dep).name;
         
         if depth(1)=='.' || depth(1) == 'F' %for weird empty folders
             continue
         end
-        file_dir=dir(['E:\Angie\Bats\NSF shapes project\neural_data_2019\clutter_stim\Analyzed',date,'\',depth,'\*.mat']);
+        file_dir=dir(['E:\Angie\Bats\NSF shapes project\neural_data_2019\clutter_stim\Analyzed\',date,'\',depth,'\*.mat']);
         for i_data=1:size(file_dir,1)
-            cd(['E:\Angie\Bats\NSF shapes project\neural_data_2019\clutter_stim\Analyzed',date,'\',depth])
+            cd(['E:\Angie\Bats\NSF shapes project\neural_data_2019\clutter_stim\Analyzed\',date,'\',depth])
             fname=file_dir(i_data,1);
             load([file_dir(i_data).folder,'\', file_dir(i_data).name],'spike_data');
             disp([file_dir(i_data).folder,'\', file_dir(i_data).name])%can be removed, but lets me keep track

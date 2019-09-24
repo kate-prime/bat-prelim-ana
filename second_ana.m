@@ -80,12 +80,13 @@ if n~=1  %find peaks in post call hist
         hold on
         scatter(stim_data(:,3),spike_data.count,'filled','g')
         xlim([-10 105])
-        scatter([0 45 90],means(3,1:3),'filled','k')
+        scatter([0 10 20],means(3,1:3),'filled','k')
         title(h(3),'Clutter distance')
         hold off
     end
     %% Plot jitter
     if use==1
+        
         jitter_box=[spike_data.jitter stim_data]; %by delay
         ind5=find(jitter_box(:,2)==5);
         ind10=find(jitter_box(:,2)==10);
@@ -97,19 +98,21 @@ if n~=1  %find peaks in post call hist
         
         indcyl=find(jitter_box(:,3)==1);%by object
         indcube=find(jitter_box(:,3)==2);
+        indsphere=find(jitter_box(:,3)==3);
         indLD=find(jitter_box(:,3)==3);
-        indSD=find(jitter_box(:,3)==4);
+        indSD=find(jitter_box(:,3)==5);
+        indMP=find(jitter_box(:,3)==6);
         means(2,1,2)=mean(jitter_box(indcyl,1)); 
         means(2,2,2)=mean(jitter_box(indcube,1));
         means(2,3,2)=mean(jitter_box(indLD,1));
         means(2,4,2)=mean(jitter_box(indSD,1));
         
-        ind0=find(jitter_box(:,4)==0);
-        ind45=find(jitter_box(:,4)==45);
-        ind90=find(jitter_box(:,4)==90);
+        ind0=find(jitter_box(:,4)==0);%by clutter distance
+        ind10=find(jitter_box(:,4)==10);
+        ind20=find(jitter_box(:,4)==20);
         means(3,1,2)=mean(jitter_box(ind0,1));
-        means(3,2,2)=mean(jitter_box(ind45,1));
-        means(3,3,2)=mean(jitter_box(ind90,1));
+        means(3,2,2)=mean(jitter_box(ind10,1));
+        means(3,3,2)=mean(jitter_box(ind20,1));
         means(3,4,2)=nan;
         
         h2=figure;
@@ -133,7 +136,7 @@ if n~=1  %find peaks in post call hist
         scatter(stim_data(:,3),spike_data.jitter,'filled','g')
         scatter([0 45 90],means(3,1:3,2),'filled','k')
         xlim([-10 105])
-        title(h(3),'Angle')
+        title(h(3),'Clutter distance')
         hold off
     end
     %% simple bar graph for fr in each stim condition
