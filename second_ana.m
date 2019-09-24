@@ -153,11 +153,11 @@ if n~=1  %find peaks in post call hist
             end
             x{i}=[num2str(fr_box(i,2)), num2str(fr_box(i,4)),nom];
         end
-        x1=(1:34);
+        x1=(1:length(x));
         h3=figure;
         hold on
         bar(x1,fr_box(:,1))
-        xticks(1:34)
+        xticks(1:length(x))
         xticklabels(x)
         xtickangle(45)
         hold off
