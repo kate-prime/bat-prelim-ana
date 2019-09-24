@@ -1,5 +1,5 @@
 %a wrapper for automating prelim ana
-dates=[20190904 20190905 20190906 20190910 20190911]; 
+dates=20190909; 
 home=('E:\');
 for i_date = 1 : length(dates)
     date= num2str(dates(i_date));
@@ -13,9 +13,9 @@ for i_date = 1 : length(dates)
         end
         
         mkdir(['E:\KA001\Analyzed\',date,'\',depth]);
-        file_dir=dir(['E:\KA001\Sorted\',date,'\',depth,'\clust\*.mat']);
+        file_dir=dir(['E:\KA001\Sorted\',date,'\',depth,'\','*.mat']);
         for i_data=1:size(file_dir,1)
-            cd(['E:\KA001\Sorted\',date,'\',depth,'\clust'])
+            cd(['E:\KA001\Sorted\',date,'\',depth,'\'])
             fname=file_dir(i_data,1).name;
             load([file_dir(i_data).folder,'\', file_dir(i_data).name],'trials_3D','stimon_3D');
             disp([file_dir(i_data).folder,'\', file_dir(i_data).name]) %can be removed but makes sure I record what files are being loaded
