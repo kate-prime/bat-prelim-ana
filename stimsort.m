@@ -11,7 +11,7 @@ if strcmp(versionX,'V1')
 end
 
 if strcmp(versionX,'V2')
-    dates=[20190904 20190905 20190906 20190909 20190910 20190911]; 
+    dates=[20190904 20190905 20190906 20190910 20190911]; %20190909
     stimnumb3D=1320;
     stimnumbFT=1350;%change if needed; stimuli*reps, usually 20
 end
@@ -23,23 +23,23 @@ for i_date = 1 : length(dates)
     % [file_spk_times,path_spk_times] = uigetfile('*.mat', 'Open the spike times');
     date= num2str(dates(i_date));% this I need to chane for every date of recordings
     mkdir(['E:\KA001\Sorted\',date])
-    folder_dir=dir(['E:\KA001\IC units\',date]);   
+    folder_dir=dir(['E:\KA001\IC units\',date,'\Matfile\']);   
     for i_dep=1:length(folder_dir)
         depth= folder_dir(i_dep).name;
         
-        if depth(1)=='.' || depth(1) == 'F' %for weird empty folders
+        if length(depth(10:end))<3 %this gets rid of empties and selects the 3DplusFT folders
             continue
         end
         
-        mkdir(['E:\KA001\Sorted\',date,'\',depth,'\clust\']);
-        file_dir=dir(['E:\KA001\IC units\',date,'\',depth,'\*.mat']);
+        mkdir(['E:\KA001\Sorted\',date,'\',depth,'\']);
+        file_dir=dir(['E:\KA001\IC units\',date,'\Matfile\',depth,'\times_','*.mat']);
         
         for i_clust=1:length(file_dir) %loads clusters, changed for split files
             file_s1=strsplit(file_dir(i_clust).name,'_');%splits up file names
             file_s2=strsplit(file_s1{2},'.');
             ch= file_s2{1};
             
-            path_spk_times=(['E:\KA001\IC units\',date,'\',depth]); 
+            path_spk_times=(['E:\KA001\IC units\',date,'\Matfile\',depth]); 
             
             x=load([path_spk_times,'/',file_dir(i_clust).name]);
             disp([path_spk_times,'/',file_dir(i_clust).name])
@@ -66,22 +66,22 @@ for i_date = 1 : length(dates)
             %loading channel with TTLs
             % change path and name accordingly
             % [file,path] = uigetfile('*.mat', 'Open the TTL channel',path_spk_times);
-            path=(['E:\KA001\3D_stim\',date,'\3D\','3D', depth(9:end-1),'1']);
+            path=(['E:\KA001\IC units\',date,'\Matfile\','3D', depth(9:end-1),'1']);
             file='\Chn17.mat';
             ch17=load([path,file],'data','sr');
             ch17_3D=ch17.data;
             sr=ch17.sr;
-            path=(['E:\KA001\3D_stim\',date,'\FT\','FT', depth(9:end)]);
+            path=(['E:\KA001\IC units\',date,'\Matfile\FT',depth(9:end)]);
             ch17=load([path,file],'data');
             ch17_FT=ch17.data;
 
-            tdms_path3D=(['E:\KA001\3D_stim\', date,'\Nat',depth(9:end-1),'1']);
+            tdms_path3D=(['E:\KA001\IC units\', date,'\NI\Nat',depth(9:end-1),'1']);
             tdms3D=dir([tdms_path3D,'\*.tdms']);
             assert(length(tdms3D)==1); % will error if TDMS is wrong
             tdmsfile3D={[tdms_path3D,'\',tdms3D(1).name]};
             ConvertedData3D = convertTDMS(1,tdmsfile3D);
             
-            tdms_pathFT=(['E:\KA001\3D_stim\', date,'\FT',depth(9:end),]);
+            tdms_pathFT=(['E:\KA001\IC units\', date,'\NI\FT',depth(9:end),]);
             tdmsFT=dir([tdms_pathFT,'\*.tdms']);
             assert(length(tdmsFT)==1); % will error if TDMS is wrong
             tdmsfileFT={[tdms_pathFT,'\',tdmsFT(1).name]};
@@ -186,13 +186,13 @@ for i_date = 1 : length(dates)
                         trials_3D=trials_sorted;
                         stimon_3D=stim_onset;
                     end
-                    savepath=(['E:\KA001\Sorted\',date,'\',depth,'\clust\']);
+                    savepath=(['E:\KA001\Sorted\',date,'\',depth]);
                     if ii==1
                         %cd(savepath)
-                        save([savepath,ch,'_',num2str(d),'_neuron.mat'],'trials_FT','stimon_FT')
+                        save([savepath,'/',ch,'_',num2str(d),'_neuron.mat'],'trials_FT','stimon_FT')
                     elseif ii==2
                         %cd(savepath)
-                        save([savepath,ch,'_',num2str(d),'_neuron.mat'],'trials_3D','stimon_3D','-append')
+                        save([savepath,'/',ch,'_',num2str(d),'_neuron.mat'],'trials_3D','stimon_3D','-append')
                     end    
                 end
             end
