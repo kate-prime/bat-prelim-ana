@@ -81,7 +81,7 @@ if n~=1  %find peaks in post call hist
         scatter(stim_data(:,3),spike_data.count,'filled','g')
         xlim([-10 105])
         scatter([0 45 90],means(3,1:3),'filled','k')
-        title(h(3),'Angle')
+        title(h(3),'Clutter distance')
         hold off
     end
     %% Plot jitter
