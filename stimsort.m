@@ -5,7 +5,7 @@ close all
 %versionX='V3' made inputable
 
 if strcmp(versionX,'V1')
-    dates=[ 20190628 ]; %20190708 20190709 20190711  20190710
+    dates=[20190628 20190708 20190709 20190711  20190710]; %
     stimnumb3D=680;
     stimnumbFT=1350;%change if needed; stimuli*reps, usually 20
 end
@@ -16,6 +16,11 @@ if strcmp(versionX,'V2')
     stimnumbFT=1350;%change if needed; stimuli*reps, usually 20
 end
 
+if strcmp(versionX,'V3')
+    dates=20190909
+    stimnumb3D=1320;
+    stimnumbFT=1350;%change if needed; stimuli*reps, usually 20
+end
 %% for getting spike times. Has a lot for automagic, but can be ui-ed
 
 for i_date = 1 : length(dates)
