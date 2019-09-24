@@ -1,5 +1,5 @@
 %a wrapper for automating secondary ana
-dates=[ 20190709 20190711 20190710]; %20190628 20190708 20190628
+dates=[ 20190909]; %20190628 20190708 20190628
 home=('E:\');
 cd('E:\KA001\stimuli')
 load('3Dstim.mat','stim_data');
