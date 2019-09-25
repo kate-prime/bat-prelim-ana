@@ -28,9 +28,9 @@ for i_date = 1 : length(dates)
             disp([file_dir(i_data).folder,'\', file_dir(i_data).name])%can be removed, but lets me keep track
             [h1,h2,h3,pref_delay,pref_obj,pref_clutter_distance,means,use]=second_ana(spike_data,stim_data);
             if use==1
-                saveas(h1,['G:\Angie data\shapes project\Figures',fname.name(1:end-4) '_spike_count.png'])
-                saveas(h2,['G:\Angie data\shapes project\Figures',fname.name(1:end-4) '_jitter.png'])
-                saveas(h3,['G:\Angie data\shapes project\Figures',fname.name(1:end-4) '_all_fr.png'])
+                saveas(h1,['G:\Angie data\shapes project\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_spike_count.png'])
+                saveas(h2,['G:\Angie data\shapes project\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_jitter.png'])
+                saveas(h3,['G:\Angie data\shapes project\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_all_fr.png'])
                 save(fname.name,'pref_delay','pref_obj','pref_clutter_distance','means','use','-append');
             elseif use==0
                  save(fname.name,'use','-append');
