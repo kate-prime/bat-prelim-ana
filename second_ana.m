@@ -67,7 +67,7 @@ if n~=1  %find peaks in post call hist
 %     end
     
 %% starts generating plots if use==1
-use=1
+use=1;
     if use==1 %find preferred stims based on total spike count (maybe try peak fr instead)
         [pref_delay,pref_obj,pref_clutter_distance,means]=pref_finder(spike_data,stim_data);
         h1=figure;
