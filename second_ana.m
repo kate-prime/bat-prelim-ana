@@ -141,7 +141,7 @@ if n~=1  %find peaks in post call hist
     end
     %% simple bar graph for fr in each stim condition
     if use==1
-        fr_box=[spike_data.fr_all stim_data];
+        fr_box=[spike_data.fr stim_data];
         fr_box=sortrows(fr_box);
         x={};
         for i=1:(length(fr_box))
