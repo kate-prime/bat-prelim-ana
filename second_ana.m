@@ -18,47 +18,56 @@ if n~=1  %find peaks in post call hist
         pks_box(p,1:size(pks,2))=pks;
         locs_box(p,1:size(locs,2))=locs;
     end
-    %tests if majority of responses have only one peak
-    for q=1:size(locs_box,1)
-        test(q,1:2)=isnan(locs_box(q,1:2));
-    end
-    test=sum(test,1);
-    %creates a scatter plot of peaks from hist vals to check if timing is
-    %consistent or not
-    if (test(1,2)-test(1,1))>3 %can be more or less strict. 2 works, but you gotta sift more.
-        disp('seems like theres only 1 peak, plotting to check timing')
-        h=figure;
-        for r=1:size(locs_box,1)
-            hold on
-            scatter(locs_box(r,:),pks_box(r,:),'filled');
-            x(1:20)=5;
-            plot (x,'r')
-            xlim([0 20])
-            ylim([0 25])
-            title([spike_data.unit])
-            hold off
-        end
-        use=inputdlg('looks ok? 1=yes, 0=no, 9=not sure, show me by stimulus');
-        use=str2double(use);
-        %plots again by stimulus group (useful to see if it's not responsive
-        %and noisy or just very selective)
-        if use==9
-            h=figure;
-            for r=1:size(locs_box,1)
-                scatter(locs_box(r,:),pks_box(r,:),'filled');
-                title(r)
-                xlim([0 20])
-                ylim([0 25])
-                pause;
-            end
-            use=inputdlg('looks ok? 1=yes, 0=no');
-            use=str2double(use);
-        end
-        close (h)
-    else
-        use=1;
-    end
-    %% starts generating plots if use==1
+    
+    %This next few lines are useful when we are looking at the whole stim set (call and
+    %echo) and therefore have to choose if the neuron responds to the call
+    %or the echo. in the case of this code we are only looking at responses
+    %that occur after the echo (see prelim_ana line 48) so having only one
+    %response is good.
+    
+    %tests if majority of responses have only one peak 
+%     for q=1:size(locs_box,1)
+%         test(q,1:2)=isnan(locs_box(q,1:2));
+%     end
+%     test=sum(test,1);
+%     %creates a scatter plot of peaks from hist vals to check if timing is
+%     %consistent or not
+%     if (test(1,2)-test(1,1))>3 %can be more or less strict. 2 works, but you gotta sift more.
+%         disp('seems like theres only 1 peak, plotting to check timing')
+%         h=figure;
+%         for r=1:size(locs_box,1)
+%             hold on
+%             scatter(locs_box(r,:),pks_box(r,:),'filled');
+%             x(1:20)=5;
+%             plot (x,'r')
+%             xlim([0 20])
+%             ylim([0 25])
+%             title([spike_data.unit])
+%             hold off
+%         end
+%         use=inputdlg('looks ok? 1=yes, 0=no, 9=not sure, show me by stimulus');
+%         use=str2double(use);
+%         %plots again by stimulus group (useful to see if it's not responsive
+%         %and noisy or just very selective)
+%         if use==9
+%             h=figure;
+%             for r=1:size(locs_box,1)
+%                 scatter(locs_box(r,:),pks_box(r,:),'filled');
+%                 title(r)
+%                 xlim([0 20])
+%                 ylim([0 25])
+%                 pause;
+%             end
+%             use=inputdlg('looks ok? 1=yes, 0=no');
+%             use=str2double(use);
+%         end
+%         close (h)
+%     else
+%         use=1;
+%     end
+    
+%% starts generating plots if use==1
+use=1
     if use==1 %find preferred stims based on total spike count (maybe try peak fr instead)
         [pref_delay,pref_obj,pref_clutter_distance,means]=pref_finder(spike_data,stim_data);
         h1=figure;
