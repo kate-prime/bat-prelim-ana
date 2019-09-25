@@ -1,5 +1,5 @@
 
-function [h1,h2,h3,pref_delay,pref_obj,pref_clutter_distanc,means,use]=second_ana(spike_data,stim_data)
+function [h1,h2,h3,pref_delay,pref_obj,pref_clutter_distance,means,use]=second_ana(spike_data,stim_data)
 %KA 2019
 %after prelim analysis, check neurons for responses and find some basics
 %like prefered delay and plots them
@@ -60,7 +60,7 @@ if n~=1  %find peaks in post call hist
     end
     %% starts generating plots if use==1
     if use==1 %find preferred stims based on total spike count (maybe try peak fr instead)
-        [pref_delay,pref_obj,pref_clutter_distanc,means]=pref_finder(spike_data,stim_data);
+        [pref_delay,pref_obj,pref_clutter_distance,means]=pref_finder(spike_data,stim_data);
         h1=figure;
         
         set(h1,'Position',[150 150 1000 500])
@@ -70,7 +70,7 @@ if n~=1  %find peaks in post call hist
         scatter([5 10 15],means(1,1:3),'filled','k')
         xlim([0 20])
         title(h(1),'Delay')
-        xlabel('spike count(every dot is for the 20 presentationson that stim)')
+        ylabel('spike count(every dot is for the 20 presentationson that stim)')
         hold off
         h(2)=subplot(1,3,2);
         hold on
@@ -127,7 +127,7 @@ if n~=1  %find peaks in post call hist
         scatter([5 10 15],means(1,1:3,2),'filled','k')
         xlim([0 20])
         title(h(1),'Delay')
-        xlabel('jitter(every dot is for the 20 presentationson that stim)')
+        ylabel('jitter(every dot is for the 20 presentationson that stim)')
         hold off
         h(2)=subplot(1,3,2);
         hold on
@@ -196,7 +196,7 @@ if use==0
     h3=0;
     pref_delay=0;
     pref_obj=0;
-    pref_clutter_distanc=0;
+    pref_clutter_distance=0;
     means=0;
 end
 % Kate: worth determinine peak fr from isi? probably unless most are very low

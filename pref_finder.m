@@ -1,4 +1,4 @@
-function [pref_delay,pref_obj,pref_clutter_distanc,means]=pref_finder(spike_data,stim_data)
+function [pref_delay,pref_obj,pref_clutter_distance,means]=pref_finder(spike_data,stim_data)
 %finds preferred angle,delay, and echo for 3d stims based on total spike
 %count in response window. can be reconfigured to use peak fr
 %% find preferred delay
@@ -85,7 +85,7 @@ end
 clut_dist_box(:,1)=spike_data.count;
 clut_dist_box(:,2)=stim_data(:,3);
 clut_dist_box=sortrows(clut_dist_box,'descend');
-pref_clutter_distanc=mode(clut_dist_box(1:11,2)); %finds most common ang value in top 1/3
+pref_clutter_distance=mode(clut_dist_box(1:11,2)); %finds most common ang value in top 1/3
 %use w/ caution, might be biased against 90 because of cube
 ind0=find(clut_dist_box(:,2)==0);
 ind10=find(clut_dist_box(:,2)==10);
