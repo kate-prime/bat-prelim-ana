@@ -23,7 +23,7 @@ for i_date = 1 : length(dates)
             fname=file_dir(i_data,1);
             load([file_dir(i_data).folder,'\', file_dir(i_data).name],'spike_data');
             if versionX=='V1'
-                stim_data=stim_data(1:34);%Hardcoded 34 becasue hopefully in the future we won't have versions with a different number if its the same stimulus set.
+                stim_data=stim_data(1:34,:);%Hardcoded 34 becasue hopefully in the future we won't have versions with a different number if its the same stimulus set.
             end
             disp([file_dir(i_data).folder,'\', file_dir(i_data).name])%can be removed, but lets me keep track
             [h1,h2,h3,pref_delay,pref_obj,pref_ang,means,use]=second_ana(spike_data,stim_data);
