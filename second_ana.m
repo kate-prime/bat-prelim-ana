@@ -17,46 +17,54 @@ if n~=1  %find peaks in post call hist
         pks_box(p,1:size(pks,2))=pks;
         locs_box(p,1:size(locs,2))=locs;
     end
-    %tests if majority of responses have only one peak
-    for q=1:size(locs_box,1)
-       test(q,1:2)=isnan(locs_box(q,1:2));
-    end
-    test=sum(test,1);
-    %creates a scatter plot of peaks from hist vals to check if timing is
-    %consistent or not
-    if (test(1,2)-test(1,1))>3 %can be more or less strict. 2 works, but you gotta sift more. 
-        disp('seems like theres only 1 peak, plotting to check timing')
-        h=figure;
-        for r=1:size(locs_box,1)
-            hold on
-            scatter(locs_box(r,:),pks_box(r,:),'filled');
-            x(1:20)=5;
-            plot (x,'r')
-            xlim([0 20])
-            ylim([0 25])
-            title([spike_data.unit])
-            hold off
-        end
-        use=inputdlg('looks ok? 1=yes, 0=no, 9=not sure, show me by stimulus');
-        use=str2double(use);
-        %plots again by stimulus group (useful to see if it's not responsive
-        %and noisy or just very selective)
-        if use==9
-            h=figure;
-            for r=1:size(locs_box,1)
-                scatter(locs_box(r,:),pks_box(r,:),'filled');
-                title(r)
-                xlim([0 20])
-                ylim([0 25])
-                pause;
-            end
-            use=inputdlg('looks ok? 1=yes, 0=no');
-            use=str2double(use);
-        end
-        close (h)
-    else
-        use=1;
-    end
+    use=1;
+        %This next few lines are useful when we are looking at the whole stim set (call and
+    %echo) and therefore have to choose if the neuron responds to the call
+    %or the echo. in the case of this code we are only looking at responses
+    %that occur after the echo (see prelim_ana line 48) so having only one
+    %response is good.
+    
+    %tests if majority of responses have only one peak 
+%     for q=1:size(locs_box,1)
+%         test(q,1:2)=isnan(locs_box(q,1:2));
+%     end
+%     test=sum(test,1);
+%     %creates a scatter plot of peaks from hist vals to check if timing is
+%     %consistent or not
+%     if (test(1,2)-test(1,1))>3 %can be more or less strict. 2 works, but you gotta sift more.
+%         disp('seems like theres only 1 peak, plotting to check timing')
+%         h=figure;
+%         for r=1:size(locs_box,1)
+%             hold on
+%             scatter(locs_box(r,:),pks_box(r,:),'filled');
+%             x(1:20)=5;
+%             plot (x,'r')
+%             xlim([0 20])
+%             ylim([0 25])
+%             title([spike_data.unit])
+%             hold off
+%         end
+%         use=inputdlg('looks ok? 1=yes, 0=no, 9=not sure, show me by stimulus');
+%         use=str2double(use);
+%         %plots again by stimulus group (useful to see if it's not responsive
+%         %and noisy or just very selective)
+%         if use==9
+%             h=figure;
+%             for r=1:size(locs_box,1)
+%                 scatter(locs_box(r,:),pks_box(r,:),'filled');
+%                 title(r)
+%                 xlim([0 20])
+%                 ylim([0 25])
+%                 pause;
+%             end
+%             use=inputdlg('looks ok? 1=yes, 0=no');
+%             use=str2double(use);
+%         end
+%         close (h)
+%     else
+%         use=1;
+%     end
+    
     %% starts generating plots if use==1
     if use==1 %find preferred stims based on total spike count (maybe try peak fr instead)
         [pref_delay,pref_obj,pref_ang,means]=pref_finder(spike_data,stim_data);
@@ -64,21 +72,22 @@ if n~=1  %find peaks in post call hist
         set(h1,'Position',[150 150 1000 500])
         h(1)=subplot(1,3,1);
         hold on
-        scatter(stim_data(:,1),spike_data.count,'filled','r')
+        scatter(stim_data(1:size(spike_data.count,1),1),spike_data.count,'filled','r')
         scatter([5 10 15],means(1,1:3),'filled','k')
         xlim([0 20])
+        ylabel('spike count(every dot is for the 20 presentations of that stim)')
         title(h(1),'Delay')
         hold off
         h(2)=subplot(1,3,2);
         hold on
-        scatter(stim_data(:,2),spike_data.count,'filled','b')
+        scatter(stim_data(1:size(spike_data.count,1),2),spike_data.count,'filled','b')
         scatter((1:4),means(2,1:4),'filled','k')
         xlim([0 5])
         title(h(2),'Object')
         hold off
         h(3)=subplot(1,3,3);
         hold on
-        scatter(stim_data(:,3),spike_data.count,'filled','g')
+        scatter(stim_data(1:size(spike_data.count,1),3),spike_data.count,'filled','g')
         xlim([-10 105])
         scatter([0 45 90],means(3,1:3),'filled','k')
         title(h(3),'Angle')
@@ -86,7 +95,7 @@ if n~=1  %find peaks in post call hist
     end
     %% Plot jitter
     if use==1
-        jitter_box=[spike_data.jitter stim_data]; %by delay
+        jitter_box=[spike_data.jitter stim_data(1:size(spike_data.jitter,1),:)]; %by delay
         ind5=find(jitter_box(:,2)==5);
         ind10=find(jitter_box(:,2)==10);
         ind15=find(jitter_box(:,2)==15);
@@ -116,21 +125,22 @@ if n~=1  %find peaks in post call hist
         set(h2,'Position',[150 150 1000 500])
         h(1)=subplot(1,3,1);
         hold on
-        scatter(stim_data(:,1),spike_data.jitter,'filled','r')
+        scatter(stim_data(1:size(spike_data.jitter,1),1),spike_data.jitter,'filled','r')
         scatter([5 10 15],means(1,1:3,2),'filled','k')
         xlim([0 20])
+        ylabel('jitter (every dot is for the 20 presentations of that stim)')
         title(h(1),'Delay')
         hold off
         h(2)=subplot(1,3,2);
         hold on
-        scatter(stim_data(:,2),spike_data.jitter,'filled','b')
+        scatter(stim_data(1:size(spike_data.jitter,1),2),spike_data.jitter,'filled','b')
         scatter((1:4),means(2,1:4,2),'filled','k')
         xlim([0 5])
         title(h(2),'Object')
         hold off
         h(3)=subplot(1,3,3);
         hold on
-        scatter(stim_data(:,3),spike_data.jitter,'filled','g')
+        scatter(stim_data(1:size(spike_data.jitter,1),3),spike_data.jitter,'filled','g')
         scatter([0 45 90],means(3,1:3,2),'filled','k')
         xlim([-10 105])
         title(h(3),'Angle')
@@ -138,7 +148,7 @@ if n~=1  %find peaks in post call hist
     end
     %% simple bar graph for fr in each stim condition
     if use==1
-        fr_box=[spike_data.fr_all stim_data];
+        fr_box=[spike_data.count stim_data(1:size(spike_data.count,1),:)];
         fr_box=sortrows(fr_box);
         x={};
         for i=1:(length(fr_box))
