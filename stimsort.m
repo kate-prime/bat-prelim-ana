@@ -160,7 +160,7 @@ for i_date = 1 : length(dates)
                 elseif ii==2
                     clusters=clusters_FT;
                 end
-                for d=1:max(x.cluster_class(:,1))
+                for d=1:size(clusters,2)
                     clear trials
                     for i=1:length(loc)
                         m=clusters{1,d}((clusters{1,d}>stim_onset(1,i)));
