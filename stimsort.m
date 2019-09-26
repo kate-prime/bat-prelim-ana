@@ -37,11 +37,11 @@ for i_date = 1 : length(dates)
             file_s2=strsplit(file_s1{2},'.');
             ch= file_s2{1};
             
-            path_spk_times=([sourcepath,date,'\',depth,'\']); 
+            path_spk_times=([sourcepath,date,'\',depth,'\']);
             
             x=load([path_spk_times,file_dir(i_clust).name]);
-            for t=1:size(x.spkFT,1);%rescale FT spike times so that stim switch time is 0, because FT was collected after Clutter
-                x.spkFT(t,2)=x.spkFT(t,2)-x.ref;
+            for t=1:size(x.spkClutter,1);%rescale FT spike times so that stim switch time is 0, because FT was collected after Clutter
+                x.spkClutter(t,2)=x.spkClutter(t,2)-x.ref;%
             end
             clusters_Clutter = cell(1, max(x.spkClutter(:,1)));
             clusters_FT = cell(1, max(x.spkFT(:,1)));
@@ -85,7 +85,7 @@ for i_date = 1 : length(dates)
             assert(length(tdmsFT)==1) % will error if TDMS is wrong
             tdmsfileFT={[tdms_pathFT,'/',tdmsFT(1).name]};
             ConvertedDataFT = convertTDMS(1,tdmsfileFT);
-
+            
             
             %% find onset of the TTL, set to loop twice for 3d and ft
             for ii=1:2
@@ -128,7 +128,7 @@ for i_date = 1 : length(dates)
                 if ii==1
                     ConvertedData=ConvertedDataClutter;
                 elseif ii==2
-                   ConvertedData=ConvertedDataFT; 
+                    ConvertedData=ConvertedDataFT;
                 end
                 temp=ConvertedData.Data.MeasuredData(3).Data;
                 temp=temp';
@@ -142,14 +142,18 @@ for i_date = 1 : length(dates)
                 end
                 assert(isequal(size(loc_times),[2,stimnumb]));
                 stim_onset = zeros(1,stimnumb);
-                for iON=1:length(loc_times) %stims that las 100 ms or 50ms make a difference here %KA I think my stims ar 30ms
-%                     if ismember(loc_times(2,i),onehund)
-%                         stim_onset(1,i)=loc_times(1,i)-220;
-%                     else
-%                         stim_onset(1,i)=loc_times(1,i)-170;
-%                     end
-                    stim_onset(1,iON)=loc_times(1,iON)-150; %resized for 30 ms stims, I think, yes
+                if ii==1
+                    for iON=1:length(loc_times) %stims that las 100 ms or 50ms make a difference here %KA I think my stims ar 30ms
+                        
+                        stim_onset(1,iON)=loc_times(1,iON)-150; %resized for 30 ms stims, I think, yes
+                    end
+                elseif ii==2
+                    for iON=1:length(loc_times) %stims that las 100 ms or 50ms make a difference here %KA I think my stims ar 30ms
+                        
+                        stim_onset(1,iON)=loc_times(1,iON)-125; %resized for 30 ms stims, I think, yes
+                    end
                 end
+                
                 stim_onset(2,:)=loc_times(2,:);
                 % x(1,:)=loc_times(1,:)-stim_onset(1,:);
                 % x(2,:)=loc_times(2,:);
@@ -181,11 +185,11 @@ for i_date = 1 : length(dates)
                     if ii==1
                         trials_clutter=trials_sorted;
                         stimon_clutter=stim_onset;
-
+                        
                     elseif ii==2
                         trials_FT=trials_sorted;
                         stimon_FT=stim_onset;
-
+                        
                     end
                     mkdir([destpath,date,'\',depth,'\']);
                     savepath=([destpath,date,'\',depth,'\']);
@@ -193,7 +197,7 @@ for i_date = 1 : length(dates)
                         save([savepath,ch,'_',num2str(d),'_neuron.mat'],'trials_clutter','stimon_clutter')
                     elseif ii==2
                         save([savepath,ch,'_',num2str(d),'_neuron.mat'],'trials_FT','stimon_FT','-append')
-                    end    
+                    end
                 end
             end
             

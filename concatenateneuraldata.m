@@ -19,7 +19,7 @@ for idx2 = 1 : length(files)
         
 %  newpath=([path,strrep(files(idx2).name,'FT','3DplusFT'),filesep]);%this is for 3D
         newpath=([path,strrep(files(idx2).name,'FT','All'),filesep])% this is for clutter
-       % mkdir(newpath)
-       % save([newpath,channel,'.mat'],'data','sr')
+       mkdir(newpath)
+       save([newpath,channel,'.mat'],'data','sr')
     end
 end
