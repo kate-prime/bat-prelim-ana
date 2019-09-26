@@ -40,8 +40,8 @@ for i_date = 1 : length(dates)
             path_spk_times=([sourcepath,date,'\',depth,'\']); 
             
             x=load([path_spk_times,file_dir(i_clust).name]);
-            for t=1:size(x.spkFT,1);%rescale FT spike times so that stim switch time is 0, because FT was collected after Clutter
-                x.spkFT(t,2)=x.spkFT(t,2)-x.ref;
+            for t=1:size(x.spkClutter,1);%rescale FT spike times so that stim switch time is 0, because FT was collected after Clutter
+                x.spkClutter(t,2)=x.spkClutter(t,2)-x.ref;% 
             end
             clusters_Clutter = cell(1, max(x.spkClutter(:,1)));
             clusters_FT = cell(1, max(x.spkFT(:,1)));
@@ -142,13 +142,16 @@ for i_date = 1 : length(dates)
                 end
                 assert(isequal(size(loc_times),[2,stimnumb]));
                 stim_onset = zeros(1,stimnumb);
+                if ii==1
                 for iON=1:length(loc_times) %stims that las 100 ms or 50ms make a difference here %KA I think my stims ar 30ms
-%                     if ismember(loc_times(2,i),onehund)
-%                         stim_onset(1,i)=loc_times(1,i)-220;
-%                     else
-%                         stim_onset(1,i)=loc_times(1,i)-170;
-%                     end
+
                     stim_onset(1,iON)=loc_times(1,iON)-150; %resized for 30 ms stims, I think, yes
+                end
+                if ii==2
+                    for iON=1:length(loc_times) %stims that las 100 ms or 50ms make a difference here %KA I think my stims ar 30ms
+
+                    stim_onset(1,iON)=loc_times(1,iON)-125; %resized for 30 ms stims, I think, yes
+                    end
                 end
                 stim_onset(2,:)=loc_times(2,:);
                 % x(1,:)=loc_times(1,:)-stim_onset(1,:);
