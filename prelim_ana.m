@@ -1,5 +1,5 @@
 %Modified from AS by KA 2019
-function [spike_data, fig]=prelim_ana(fname,data,call_onset,delay,len,reps,subProws)
+function [spike_data, fig]=prelim_ana(fname,data,call_onset,delay,len,reps,subProws,type)
 
 %type: 1=clutter, 2=FT
 %FUTURE KATE: figure out if you wanna loop or run FT and clutter separate, just
@@ -10,19 +10,22 @@ function [spike_data, fig]=prelim_ana(fname,data,call_onset,delay,len,reps,subPr
 %% load data and stim files
 spike_data.unit{1,1}=fname;%
 
- 
-%Not strictly necessary, but handy
-matFile = ['E:\Angie\Bats\NSF shapes project\neural_stim\clutterstim_org.mat'];%loads stimuli
-if exist(matFile,'file')
-    load(matFile);
+if type==1
+    %Not strictly necessary, but handy
+    matFile = ['E:\Angie\Bats\NSF shapes project\neural_stim\clutterstim_org.mat'];%loads stimuli
+    if exist(matFile,'file')
+        load(matFile);
+        spike_data.stims{1,1}=stim_clutter;
+    else
+        disp('you gonna need stims')
+    end
+elseif type==2
+    stim_clutter=[];
     spike_data.stims{1,1}=stim_clutter;
-else
-    disp('you gonna need stims')
 end
-
-
+%
 %% make the bins
-[data,bins,val]=binfun(data,len,2,reps);  
+[data,bins,val]=binfun(data,len,2,reps);
 bins(:,size(bins,2))=[];
 spike_data.hist{1,1}=bins;
 spike_data.hist{1,2}=val;
@@ -31,9 +34,9 @@ spike_data.hist{1,2}=val;
 %takes stim onset from ttls then adds delay to determine actual call onset
 %might be worth figuring out echo onset too
 
- ind=[];
+ind=[];
 for i=1:(size(call_onset,1)/reps) %sorts stims
-    temp=find(call_onset(:,2)==i); 
+    temp=find(call_onset(:,2)==i);
     ind=[ind,temp];
 end
 
@@ -48,7 +51,8 @@ for n=1:size(call_onset,1)
     call_onset(n)=call_onset(n)+delay;
 end
 
-%% Make the rasters 
+%% Make the rasters
+
 fig=makeras(data,len,reps,stim_clutter,subProws); %including stims here isn't necessesary, just adds a plot on the raster
 
 %% set up storage cells
@@ -64,8 +68,8 @@ spike_data.fr=NaN(num,1);
 for x=1:(size(data,2)/reps)
     r2=x*reps; %end of range
     r1=r2-(reps-1); %start of range
-%     r3=r1-1;
-%     r4=r2+1; %what is this?
+    %     r3=r1-1;
+    %     r4=r2+1; %what is this?
     r=size(data(:,r1:r2),1);%looking at stim X
     spiketimes=data(:,r1:r2); %all spike times for that stim
     times=call_onset(r1:r2,:); %all onset times for that stim
@@ -79,7 +83,7 @@ for x=1:(size(data,2)/reps)
     spike_data.times(x,:)=times';
     spike_data.dur_total(x,:) = resp_dur_total;
     spike_data.fr(x,:) = spikerate;
-
+    
     %bad neurons will be filtered at next step by spike count and echo
     %response
 end

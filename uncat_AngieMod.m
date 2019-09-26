@@ -40,6 +40,7 @@ for idx_depth=1:length(depthlist)
         ind2=find(cluster_class(:,2)>ref);
         spkFT=cluster_class(ind1,:);
         spkClutter=cluster_class(ind2,:);
+        
         save(fname, 'spkFT','spkClutter','ref','-append');
     end
     
