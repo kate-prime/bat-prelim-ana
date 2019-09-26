@@ -13,7 +13,7 @@ delay_box(:,1)=spike_data.count;
 %        elseif length(delay_box)-length(delays)==2
 %            delays=[delay;5;10];
 %        end
-delay_box(:,2)=stim_data(:,1);
+delay_box(:,2)=stim_data(1:size(delay_box,1),1);
 delay_box=sortrows(delay_box,'descend');
 pref_delay=mode(delay_box(1:11,2)); %finds most common delay value in top 1/3
 
@@ -28,16 +28,16 @@ means(1,4)=nan;
  %%  find preferred object
  
  obj_box(:,1)=spike_data.count;
- obj_box(:,2)=stim_data(:,2);
+ obj_box(:,2)=stim_data(1:size(obj_box,1),2);
  obj_box=sortrows(obj_box,'descend');
 indcyl=find(obj_box(:,2)==1);
 indcube=find(obj_box(:,2)==2);
 indLD=find(obj_box(:,2)==3);
 indSD=find(obj_box(:,2)==4);
-means(2,1)=mean(delay_box(indcyl,1));
-means(2,2)=mean(delay_box(indcube,1));
-means(2,3)=mean(delay_box(indLD,1));
-means(2,4)=mean(delay_box(indSD,1));
+means(2,1)=mean(obj_box(indcyl,1));
+means(2,2)=mean(obj_box(indcube,1));
+means(2,3)=mean(obj_box(indLD,1));
+means(2,4)=mean(obj_box(indSD,1));
 pref_obj=find(means(2,:)==max(means(2,:))); %finds max from mean counts
  if pref_obj==1
      pref_obj=('cyl');
@@ -51,7 +51,7 @@ pref_obj=find(means(2,:)==max(means(2,:))); %finds max from mean counts
 
 %% find preferred angle
 ang_box(:,1)=spike_data.count;
-ang_box(:,2)=stim_data(:,3);
+ang_box(:,2)=stim_data(1:size(ang_box,1),3);
 ang_box=sortrows(ang_box,'descend');
 pref_ang=mode(ang_box(1:11,2)); %finds most common ang value in top 1/3
 %use w/ caution, might be biased against 90 because of cube
