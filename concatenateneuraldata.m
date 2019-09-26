@@ -1,5 +1,5 @@
 
-day='20190910'
+day='20190628'
 
 path=['G:\Angie data\shapes project\',day,'\Matfile\'];
 
@@ -14,12 +14,12 @@ for idx2 = 1 : length(files)
 %         
         temp2=load([path,files(idx2).name,'\',channel,'.mat']); %this is the FT
         
-        data=[temp2.data,temp.data];%stim was presented clutter-FT-3D so one concatenation is clutter-FT and the next is FT-3D
+        data=[temp2.data,temp.data];%temp2 is always FT so FT comes before clutter and 3D ALWAYS
         sr=temp.sr;
         
 %  newpath=([path,strrep(files(idx2).name,'FT','3DplusFT'),filesep]);%this is for 3D
         newpath=([path,strrep(files(idx2).name,'FT','All'),filesep])% this is for clutter
-        mkdir(newpath)
-        save([newpath,channel,'.mat'],'data','sr')
+       % mkdir(newpath)
+       % save([newpath,channel,'.mat'],'data','sr')
     end
 end
