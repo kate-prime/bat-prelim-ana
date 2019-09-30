@@ -70,7 +70,7 @@ if n~=1  %find peaks in post call hist
 use=1;
     if use==1 %find preferred stims based on total spike count (maybe try peak fr instead)
         [pref_delay,pref_obj,pref_clutter_distance,means]=pref_finder(spike_data,stim_data);
-        h1=figure;
+        h1=figure('units','normalized','outerposition',[0 0 1 1]);
         
         set(h1,'Position',[150 150 1000 500])
         h(1)=subplot(1,3,1);
@@ -127,7 +127,7 @@ use=1;
         means(3,3,2)=mean(jitter_box(ind20,1));
         means(3,4,2)=nan;
         
-        h2=figure;
+        h2=figure('units','normalized','outerposition',[0 0 1 1]);
         
         set(h2,'Position',[150 150 1000 500])
         h(1)=subplot(1,3,1);
@@ -187,7 +187,7 @@ use=1;
             x{i}=[num2str(fr_box(i,2)), num2str(fr_box(i,4)),nom];
         end
         x1=(1:length(x));
-        h3=figure;
+        h3=figure('units','normalized','outerposition',[0 0 1 1]);
         hold on
         bar(x1,fr_box(:,1))
         xticks(1:length(x))
