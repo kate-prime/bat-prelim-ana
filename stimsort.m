@@ -12,8 +12,11 @@ close all
 %     onehund=A;%put in all stim that are 100ms long for the stim set
 % end
 %% for getting spike times. Has a lot for automagic, but can be ui-ed
-sourcepath='E:\Angie\Bats\NSF shapes project\neural_data_2019\clutter_stim\';
-destpath='E:\Angie\Bats\NSF shapes project\neural_data_2019\clutter_stim\Sorted\';
+% sourcepath='D:\AngieDrive\Bats\NSF shapes project\neural_data_2019\clutter_stim\';
+% destpath='D:\AngieDrive\Bats\NSF shapes project\neural_data_2019\clutter_stim\Sorted\';
+sourcepath='E:\Angie data\shapes project\badlywavedclused\';%NEEDTOGO
+destpath='E:\Angie data\shapes project\badlywavedclused\Sorted\';%NEEDTOGO
+
 for i_date = 1 : length(dates)
     %load the spike times after spike sorting
     % [file_spk_times,path_spk_times] = uigetfile('*.mat', 'Open the spike times');
@@ -63,24 +66,24 @@ for i_date = 1 : length(dates)
             %loading channel with TTLs
             % change path and name accordingly
             % [file,path] = uigetfile('*.mat', 'Open the TTL channel',path_spk_times);
-            path=(['G:\Angie data\shapes project\',date,'\Matfile\','Clutter',depth(4:end)]);
+            path=(['E:\Angie data\shapes project\',date,'\Matfile\','Clutter',depth(4:end)]);
             file='\Chn17.mat';
             ch17=load([path,file],'data','sr');
             ch17_Clutter=ch17.data;
             sr=ch17.sr;
-            path=(['G:\Angie data\shapes project\',date,'\Matfile\','FT', depth(4:end)]);
+            path=(['E:\Angie data\shapes project\',date,'\Matfile\','FT', depth(4:end)]);
             ch17=load([path,file],'data');
             ch17_FT=ch17.data;
             
             
             
-            tdms_pathClutter=(['G:\Angie data\shapes project\',date,'\NI\Nat',depth(4:end),'\']);
+            tdms_pathClutter=(['E:\Angie data\shapes project\',date,'\NI\Nat',depth(4:end),'\']);
             tdmsClutter=dir([tdms_pathClutter,'*.tdms']);
             assert(length(tdmsClutter)==1) % will error if TDMS is wrong
             tdmsfileClutter={[tdms_pathClutter,'/',tdmsClutter(1).name]};
             ConvertedDataClutter = convertTDMS(1,tdmsfileClutter);
             
-            tdms_pathFT=(['G:\Angie data\shapes project\',date,'\NI\FT',depth(4:end),'\']);
+            tdms_pathFT=(['E:\Angie data\shapes project\',date,'\NI\FT',depth(4:end),'\']);
             tdmsFT=dir([tdms_pathFT,'*.tdms']);
             assert(length(tdmsFT)==1) % will error if TDMS is wrong
             tdmsfileFT={[tdms_pathFT,'/',tdmsFT(1).name]};
