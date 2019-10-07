@@ -47,7 +47,7 @@ for i=1:reps:num
 %     end
 
     
+    xlim([-10 len+40]); ylim([0 reps+5])
     
-    xlim([0 len+10]); ylim([0 reps+5])
     %try title(stim.name(n)); end %labels individual plots, remember to fix names
 end
