@@ -36,11 +36,12 @@ f(1)=subplot(1,2,1);
 hold on
 % scatter(data(:,3),data(:,1),'filled','MarkerFaceColor',[.6 1 .6])
 % scatter(1:size(obj_means,2),obj_means(1,:),'filled','k')
-boxplot(data(:,1),data(:,3))
+boxplot(data(:,1),data(:,3),'Labels',{'cylinder','cube','shpere','LD','SD','MP','AMPcyl','AMPcube','AMPsphere','AMPLD','AMPSD','AMPMP'},'LabelOrientation','inline')
+
 xlim([0 (size(obj_means,2)+1)])
 %ylim([0 40]) %super aribitrary
 title(f(1),'Object')
-
+set(findobj(gca,'type','line'),'linew',1.5)
 ylabel('spike count(20 summed repitions)')
 hold off
 
@@ -48,14 +49,16 @@ f(2)=subplot(1,2,2);
  hold on
 % scatter(data(:,4),data(:,1),'filled','MarkerFaceColor',[1 .6 1])
 % scatter([0 10 20],ang_means(1,:),'filled','k')
-%to fix problem that it looks at it as a group
-orgbyclutter=sortrows(data,4);
+orgbyclutter=sortrows(data,4);%to fix problem that it looks at it as a group
 boxplot(orgbyclutter(:,1),(orgbyclutter(:,4))) %turns out this is a super pain in the ass
 %because it treats them as a group, not numbers, so scale gets fucked up I
 %can do it if we like it, but ehhhhh
 %xlim([-10 30])
 %ylim([0 40]) %super aribitrary
+set(findobj(gca,'type','line'),'linew',1.5)
+xlabel('clutter distance')
 title(f(2),'Clutter')
 hold off
 %% save
 saveas(f1,[fname(1:end-4) '_delay_sorted.png'])
+
