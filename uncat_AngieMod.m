@@ -7,8 +7,8 @@ dates = datesOrga(versionX);
 for idx_day=1:length(dates)
     day=num2str(dates(idx_day))
     
-% pathtouncat=['D:\AngieDrive\Bats\NSF shapes project\neural_data_2019\clutter_stim\',day,'\'];%put the path that leads to the files you want to uncat
-pathtouncat=['E:\Angie data\shapes project\badlywavedclused\',day,'\'];%NEEDTOGO
+ pathtouncat=['D:\AngieDrive\Bats\NSF shapes project\neural_data_2019\clutter_stim\',day,'\'];%put the path that leads to the files you want to uncat
+%pathtouncat=['E:\Angie data\shapes project\badlywavedclused\',day,'\'];%NEEDTOGO
 
 depthlist=dir(pathtouncat);
 

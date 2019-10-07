@@ -156,7 +156,7 @@ use=1;
     %% simple bar graph for fr in each stim condition
     if use==1
         fr_box=[spike_data.fr stim_data];
-        fr_box=sortrows(fr_box);
+       % fr_box=sortrows(fr_box);
         x={};
         for i=1:(length(fr_box))
             if fr_box(i,3)==1

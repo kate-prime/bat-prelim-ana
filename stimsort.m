@@ -12,10 +12,10 @@ close all
 %     onehund=A;%put in all stim that are 100ms long for the stim set
 % end
 %% for getting spike times. Has a lot for automagic, but can be ui-ed
-% sourcepath='D:\AngieDrive\Bats\NSF shapes project\neural_data_2019\clutter_stim\';
-% destpath='D:\AngieDrive\Bats\NSF shapes project\neural_data_2019\clutter_stim\Sorted\';
-sourcepath='E:\Angie data\shapes project\badlywavedclused\';%NEEDTOGO
-destpath='E:\Angie data\shapes project\badlywavedclused\Sorted\';%NEEDTOGO
+sourcepath='D:\AngieDrive\Bats\NSF shapes project\neural_data_2019\clutter_stim\';
+destpath='D:\AngieDrive\Bats\NSF shapes project\neural_data_2019\clutter_stim\Sorted\';
+% sourcepath='E:\Angie data\shapes project\badlywavedclused\';%NEEDTOGO
+% destpath='E:\Angie data\shapes project\badlywavedclused\Sorted\';%NEEDTOGO
 
 for i_date = 1 : length(dates)
     %load the spike times after spike sorting
