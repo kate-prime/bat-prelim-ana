@@ -4,7 +4,7 @@ function f1=delaysortedfigs
 %it calls the same stim data file used in second ana
 disp('chose a neuron')
 [fname, fpath]=uigetfile;
-load([fpath,fname],'spike_data', 'pref_delay');
+load([fpath,fname],'spike_data', 'pref_delay','pref_obj');
 load('E:\KA001\stimuli\3Dstim.mat','stim_data')
 %% find relevant data  and means
 data=[spike_data.count stim_data];
@@ -35,25 +35,46 @@ set(f1,'Position',[150 150 1000 500])
 f(1)=subplot(1,2,1);
 hold on
 scatter(data(:,3),data(:,1),'filled','MarkerFaceColor',[.6 1 .6])
-scatter(1:size(obj_means,2),obj_means(1,:),'filled','k')
-boxplot(data(:,1),data(:,3))
+%scatter(1:size(obj_means,2),obj_means(1,:),'filled','k')
+boxplot(data(:,1),data(:,3),'Labels',{'cylinder','cube','LD','SD','AMPcyl','AMPcube','AMPLD','AMPSD'},'LabelOrientation','inline');
 xlim([0 (size(obj_means,2)+1)])
-ylim([0 40]) %super aribitrary
+ylim([0 50]) %super aribitrary
 title(f(1),'Object')
-
-ylabel('spike count(20 summed repitions)')
+set(findobj(gca,'type','line'),'Color',[0 1 0],'linew',1.5)
+ylabel('spike count(20 summed repititions)')
 hold off
 
 f(2)=subplot(1,2,2);
 hold on
-scatter(data(:,4),data(:,1),'filled','MarkerFaceColor',[1 .6 1])
-scatter([0 45 90],ang_means(1,:),'filled','k')
-%boxplot(data(:,1),(data(:,4))) turns out this is a super pain in the ass
-%because it treats them as a group, not numbers, so scale gets fucked up I
-%can do it if we like it, but ehhhhh
-xlim([-10 100])
-ylim([0 40]) %super aribitrary
-title(f(2),'Angle')
+ %to pick out object
+if strcmp('cyl',pref_obj)==1
+    y=1;
+elseif strcmp('cube',pref_obj)==1
+    y=2;
+elseif strcmp('LD',pref_obj)==1
+    y=3;
+elseif strcmp('SD',pref_obj)==1
+    y=4;
+elseif strcmp('AMPcyl',pref_obj)==1
+    y=5;
+elseif strcmp('AMPcube',pref_obj)==1
+    y=6;
+elseif strcmp('AMPLD',pref_obj)==1
+    y=7;
+elseif strcmp('AMPSD',pref_obj)==1
+    y=8;
+end
+ind3=find(data(:,3)==y);
+data2=data(ind3,:);
+temp=(data2(:,4)./45)+1; %to fix scaling
+scatter(temp,data2(:,1),'filled','MarkerFaceColor',[1 .6 1])
+%scatter([0 45 90],ang_means(1,:),'filled','k')
+boxplot(data2(:,1),(data2(:,4))) 
+xlim([0 4])
+ylim([0 50]) %super aribitrary
+title(f(2),[pref_obj,' Angle'])
+set(findobj(gca,'type','line'),'Color',[1 0 1],'linew',1.5)
+xlabel('Degrees Rotated')
 hold off
 %% save
 saveas(f1,[fname(1:end-4) '_delay_sorted.png'])
