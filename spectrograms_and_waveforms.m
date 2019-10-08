@@ -1,13 +1,13 @@
 %you need to pick the stim you want 
 
-[fname, fpath]=uigetfile; %load your stim
-load([fpath,fname])
+% [fname, fpath]=uigetfile; %load your stim
+% load([fpath,fname])
 
-stimname='stim.cube_10echo15msdelay';%change by hand
+stimname='stim.cyl_10echo05msdelay';%change by hand
 
 shape=eval(stimname);
 
-shapename=strsplit(stim_name,'_');
+shapename=strsplit(stimname,'_');
 object=shapename{1}(6:end);
 clutter=shapename{2}(1:2);
 delay=shapename{2}(7:end);
