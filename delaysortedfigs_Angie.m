@@ -21,12 +21,12 @@ for i=1:max(data(:,3))
 end
 
 ang_means=zeros(2,3);
-for i=[0 45 90]
+for i=[0 10 20]
     ind2=find(data(:,4)==i);
     m=mean(data(ind2,1));
     s=std(data(ind2,1));
-    ang_means(1,(i/45)+1)=m;
-    ang_means(2,(i/45)+1)=s;
+    ang_means(1,(i/10)+1)=m;
+    ang_means(2,(i/10)+1)=s;
 end
 
 %% make the figure

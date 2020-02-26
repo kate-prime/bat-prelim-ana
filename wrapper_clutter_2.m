@@ -10,19 +10,19 @@ load('D:\AngieDrive\Bats\NSF shapes project\neural_stim\clutterstim_org.mat','st
 
 for i_date = 1 : length(dates)
     date= num2str(dates(i_date));
-   folder_dir=dir(['D:\AngieDrive\Bats\NSF shapes project\neural_data_2019\clutter_stim\Analyzed\',date]);
-%    folder_dir=dir(['E:\Angie data\shapes project\badlywavedclused\Analyzed\',date]); %NEEDTOGO
+   %folder_dir=dir(['D:\AngieDrive\Bats\NSF shapes project\neural_data_2019\clutter_stim\Analyzed\',date]);
+   folder_dir=dir(['E:\Angie data\shapes project\badlywavedclused\Analyzed\',date]); %NEEDTOGO
     for i_dep=1:length(folder_dir)
         depth= folder_dir(i_dep).name;
         
         if depth(1)=='.' || depth(1) == 'F' %for weird empty folders
             continue
         end
-%        file_dir=dir(['E:\Angie data\shapes project\badlywavedclused\Analyzed\',date,'\',depth,'\*.mat']);%NEEDTOGO
-        file_dir=dir(['D:\AngieDrive\Bats\NSF shapes project\neural_data_2019\clutter_stim\Analyzed\',date,'\',depth,'\*.mat']);
+       file_dir=dir(['E:\Angie data\shapes project\badlywavedclused\Analyzed\',date,'\',depth,'\*.mat']);%NEEDTOGO
+%         file_dir=dir(['D:\AngieDrive\Bats\NSF shapes project\neural_data_2019\clutter_stim\Analyzed\',date,'\',depth,'\*.mat']);
         for i_data=1:size(file_dir,1)
-%             cd(['E:\Angie data\shapes project\badlywavedclused\Analyzed\',date,'\',depth])%NEEDTOGO
-           cd(['D:\AngieDrive\Bats\NSF shapes project\neural_data_2019\clutter_stim\Analyzed\',date,'\',depth])
+            cd(['E:\Angie data\shapes project\badlywavedclused\Analyzed\',date,'\',depth])%NEEDTOGO
+%            cd(['D:\AngieDrive\Bats\NSF shapes project\neural_data_2019\clutter_stim\Analyzed\',date,'\',depth])
             fname=file_dir(i_data,1);
             load([file_dir(i_data).folder,'\', file_dir(i_data).name],'spike_data');
             if versionX=='V1'
@@ -32,16 +32,16 @@ for i_date = 1 : length(dates)
             [h1,h2,h3,pref_delay,pref_obj,pref_clutter_distance,means,use]=second_ana(spike_data,stim_data);
             if use==1
                 
-%                 saveas(h1,['E:\Angie data\shapes project\badlywavedclused\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_spike_count.png'])%NEEDTOGO
-%                 saveas(h2,['E:\Angie data\shapes project\badlywavedclused\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_jitter.png'])%NEEDTOGO
-%                 saveas(h3,['E:\Angie data\shapes project\badlywavedclused\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_all_fr.png'])%NEEDTOGO
-%                 save(fname.name,'pref_delay','pref_obj','pref_clutter_distance','means','use','-append');%NEEDTOGO
+                saveas(h1,['E:\Angie data\shapes project\badlywavedclused\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_spike_count.png'])%NEEDTOGO
+                saveas(h2,['E:\Angie data\shapes project\badlywavedclused\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_jitter.png'])%NEEDTOGO
+                saveas(h3,['E:\Angie data\shapes project\badlywavedclused\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_all_fr.png'])%NEEDTOGO
+                save(fname.name,'pref_delay','pref_obj','pref_clutter_distance','means','use','-append');%NEEDTOGO
                          
-                              
-                saveas(h1,['E:\Angie data\shapes project\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_spike_count.png'])
-                saveas(h2,['E:\Angie data\shapes project\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_jitter.png'])
-                saveas(h3,['E:\Angie data\shapes project\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_all_fr.png'])
-                save(fname.name,'pref_delay','pref_obj','pref_clutter_distance','means','use','-append');
+%                               
+%                 saveas(h1,['E:\Angie data\shapes project\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_spike_count.png'])
+%                 saveas(h2,['E:\Angie data\shapes project\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_jitter.png'])
+%                 saveas(h3,['E:\Angie data\shapes project\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_all_fr.png'])
+%                 save(fname.name,'pref_delay','pref_obj','pref_clutter_distance','means','use','-append');
             elseif use==0
                  save(fname.name,'use','-append');
             end
