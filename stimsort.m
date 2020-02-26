@@ -5,19 +5,13 @@ close all
 %versionX='V3' made inputable
 
 if strcmp(versionX,'V1')
-    dates=[20190628 20190708 20190709 20190711  20190710]; %
+    dates=[20190628 20190708 20190709 20190711 20190710]; 
     stimnumb3D=680;
     stimnumbFT=1350;%change if needed; stimuli*reps, usually 20
 end
 
 if strcmp(versionX,'V2')
-    dates=[20190904 20190905 20190906 20190910 20190911]; %20190909
-    stimnumb3D=1320;
-    stimnumbFT=1350;%change if needed; stimuli*reps, usually 20
-end
-
-if strcmp(versionX,'V3')
-    dates=20190909
+    dates=[20190904 20190905 20190906 20190909 20190910 20190911]; %
     stimnumb3D=1320;
     stimnumbFT=1350;%change if needed; stimuli*reps, usually 20
 end
@@ -44,10 +38,12 @@ for i_date = 1 : length(dates)
             file_s2=strsplit(file_s1{2},'.');
             ch= file_s2{1};
             
-            path_spk_times=(['E:\KA001\IC units\',date,'\Matfile\',depth]); 
+            path_spk_times=(['E:\KA001\IC units\',date,'\Matfile\',depth,'\']); 
             
-            x=load([path_spk_times,'/',file_dir(i_clust).name]);
-            disp([path_spk_times,'/',file_dir(i_clust).name])
+            
+             x=load([path_spk_times,file_dir(i_clust).name]);
+%             for t=1:size(x.spkClutter,1);%rescale FT spike times so that stim switch time is 0, because FT was collected after Clutter
+%                 x.spkClutter(t,2)=x.spkClutter(t,2)-x.ref;%
             for t=1:size(x.spk3D,1)%rescale 3D spike times so that stim switch time is 0
                 x.spk3D(t,2)=x.spk3D(t,2)-x.ref;
             end
@@ -71,12 +67,12 @@ for i_date = 1 : length(dates)
             %loading channel with TTLs
             % change path and name accordingly
             % [file,path] = uigetfile('*.mat', 'Open the TTL channel',path_spk_times);
-            path=(['E:\KA001\IC units\',date,'\Matfile\','3D', depth(9:end-1),'1']);
+            path=(['E:\KA001\IC units\',date,'\Matfile\','3D', depth(9:end-1),'1']);%FIX in a minute
             file='\Chn17.mat';
             ch17=load([path,file],'data','sr');
             ch17_3D=ch17.data;
             sr=ch17.sr;
-            path=(['E:\KA001\IC units\',date,'\Matfile\FT',depth(9:end)]);
+            path=(['E:\KA001\IC units\',date,'\Matfile\','FT',depth(9:end)]);
             ch17=load([path,file],'data');
             ch17_FT=ch17.data;
 
@@ -86,7 +82,7 @@ for i_date = 1 : length(dates)
             tdmsfile3D={[tdms_path3D,'\',tdms3D(1).name]};
             ConvertedData3D = convertTDMS(1,tdmsfile3D);
             
-            tdms_pathFT=(['E:\KA001\IC units\', date,'\NI\FT',depth(9:end),]);
+            tdms_pathFT=(['E:\KA001\IC units\', date,'\NI\FT',depth(9:end)]);
             tdmsFT=dir([tdms_pathFT,'\*.tdms']);
             assert(length(tdmsFT)==1); % will error if TDMS is wrong
             tdmsfileFT={[tdms_pathFT,'\',tdmsFT(1).name]};
@@ -148,23 +144,25 @@ for i_date = 1 : length(dates)
                 end
                 assert(isequal(size(loc_times),[2,stimnumb]));
                 stim_onset = zeros(1,stimnumb);
-                for i=1:length(loc_times) %stims that las 100 ms or 50ms make a difference here
-%                     if ismember(loc_times(2,i),onehund)
-%                         stim_onset(1,i)=loc_times(1,i)-220;
-%                     else
-%                         stim_onset(1,i)=loc_times(1,i)-170;
-%                     end
-                    stim_onset(1,i)=loc_times(1,i)-150; %resized for 30 ms stims, I think %KATE this might not be 100% correct, but seems like it's only off by 1 ms
+                if ii==2
+                    for iON=1:length(loc_times) 
+                        stim_onset(1,iON)=loc_times(1,iON)-150; %resized for 30 ms stims, I think, yes
+                    end
+                elseif ii==1
+                    for iON=1:length(loc_times)
+                        
+                        stim_onset(1,iON)=loc_times(1,iON)-125; %resized for FT
+                    end
                 end
                 stim_onset(2,:)=loc_times(2,:);
                 % x(1,:)=loc_times(1,:)-stim_onset(1,:);
                 % x(2,:)=loc_times(2,:);
                 
                 % separate response in columns in trials_sorted
-                if ii==1
-                    clusters=clusters_FT;
-                elseif ii==2
+                if ii==2
                     clusters=clusters_3D;
+                elseif ii==1
+                    clusters=clusters_FT;
                 end
                 for d=1:max(x.cluster_class(:,1))
                     clear trials
@@ -184,6 +182,7 @@ for i_date = 1 : length(dates)
                     trials_sorted=sortrows(trials,1);
                     trials_sorted=trials_sorted';
                     trials_sorted(1,:)=[];
+ %% DANGER DANGER REMEMBER TO FIX
                     if ii==1
                         trials_FT=trials_sorted;
                         stimon_FT=stim_onset;
