@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 function fig=makeras(data,len,reps,stim,subProws,varargin)%
+=======
+function fig=makeras(data,len,reps,stim,subProws)
+>>>>>>> 7a55f90d7837dca246b385592c74044dc7ee2903
 %modified from AS by KA 2019
 %data is a matrix of spike times of of (m * n) where m is spike times in bin and
 %n is number of trials * reps. 
@@ -34,7 +38,10 @@ for i=1:reps:num
         hold on
     end
     plot(bins((round(i/reps)+1),:),val((round(i/reps)+1),:),'-r') %plot spk count
+<<<<<<< HEAD
     title(n) 
+=======
+>>>>>>> 7a55f90d7837dca246b385592c74044dc7ee2903
 %     try %adds stimulus to hist to visualize onset and echo - Not strictly necessary, just handy
 %         temp=(stim(:,n));
 %         ind=find(temp>.06);
@@ -46,7 +53,11 @@ for i=1:reps:num
 %     end
 
     
-    
     xlim([-10 len+40]); ylim([0 reps+5])
+    
+<<<<<<< HEAD
+    xlim([-10 len+40]); ylim([0 reps+5])
+=======
+>>>>>>> 7a55f90d7837dca246b385592c74044dc7ee2903
     %try title(stim.name(n)); end %labels individual plots, remember to fix names
 end
