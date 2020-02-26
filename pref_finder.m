@@ -34,10 +34,18 @@ indcyl=find(obj_box(:,2)==1);
 indcube=find(obj_box(:,2)==2);
 indLD=find(obj_box(:,2)==3);
 indSD=find(obj_box(:,2)==4);
+indAMPcyl=find(obj_box(:,2)==5);
+indAMPcube=find(obj_box(:,2)==6);
+indAMPLD=find(obj_box(:,2)==7);
+indAMPSD=find(obj_box(:,2)==8);
 means(2,1)=mean(obj_box(indcyl,1));
 means(2,2)=mean(obj_box(indcube,1));
 means(2,3)=mean(obj_box(indLD,1));
 means(2,4)=mean(obj_box(indSD,1));
+means(2,5)=mean(obj_box(indAMPcyl,1));
+means(2,6)=mean(obj_box(indAMPcube,1));
+means(2,7)=mean(obj_box(indAMPLD,1));
+means(2,8)=mean(obj_box(indAMPSD,1));
 pref_obj=find(means(2,:)==max(means(2,:))); %finds max from mean counts
  if pref_obj==1
      pref_obj=('cyl');
@@ -47,6 +55,14 @@ pref_obj=find(means(2,:)==max(means(2,:))); %finds max from mean counts
      pref_obj=('LD');
  elseif pref_obj==4
      pref_obj=('SD');
+ elseif pref_obj==5
+     pref_obj=('AMPcyl');
+ elseif pref_obj==6
+     pref_obj=('AMPcube');
+ elseif pref_obj==7
+     pref_obj=('AMPLD');
+ elseif pref_obj==8
+     pref_obj=('AMPSD');
  end
 
 %% find preferred angle
