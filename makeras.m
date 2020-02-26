@@ -34,6 +34,7 @@ for i=1:reps:num
         hold on
     end
     plot(bins((round(i/reps)+1),:),val((round(i/reps)+1),:),'-r') %plot spk count
+    title(n) 
 %     try %adds stimulus to hist to visualize onset and echo - Not strictly necessary, just handy
 %         temp=(stim(:,n));
 %         ind=find(temp>.06);
