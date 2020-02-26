@@ -36,18 +36,18 @@ for i=1:reps:num
         hold on
     end
     plot(bins((round(i/reps)+1),:),val((round(i/reps)+1),:),'-r') %plot spk count
-    try %adds stimulus to hist to visualize onset and echo - Not strictly necessary, just handy
-        temp=(stim(:,n));
-        ind=find(temp>.06);
-        temp2=zeros(size(temp));
-        temp2(ind)=2;
-        temp2=temp2+22;
-        xax=(1:length(temp))./(250);
-        plot(xax,temp2,'-b')
-    end
+%     try %adds stimulus to hist to visualize onset and echo - Not strictly necessary, just handy
+%         temp=(stim(:,n));
+%         ind=find(temp>.06);
+%         temp2=zeros(size(temp));
+%         temp2(ind)=2;
+%         temp2=temp2+22;
+%         xax=(1:length(temp))./(250);
+%         plot(xax,temp2,'-b')
+%     end
 
     
+    xlim([-10 len+40]); ylim([0 reps+5])
     
-    xlim([0 len+10]); ylim([0 reps+5])
     %try title(stim.name(n)); end %labels individual plots, remember to fix names
 end

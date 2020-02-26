@@ -7,7 +7,9 @@ dates = datesOrga(versionX);
 for idx_day=1:length(dates)
     day=num2str(dates(idx_day))
     
-pathtouncat=['E:\Angie\Bats\NSF shapes project\neural_data_2019\clutter_stim\',day,'\'];%put the path that leads to the files you want to uncat
+ pathtouncat=['D:\AngieDrive\Bats\NSF shapes project\neural_data_2019\clutter_stim\',day,'\'];%put the path that leads to the files you want to uncat
+%pathtouncat=['E:\Angie data\shapes project\badlywavedclused\',day,'\'];%NEEDTOGO
+
 depthlist=dir(pathtouncat);
 
 for idx_depth=1:length(depthlist)
@@ -17,7 +19,7 @@ for idx_depth=1:length(depthlist)
     
     depth=depthlist(idx_depth).name(5:end); %this will need to be 10:end for Kate
     
-    pathref=['G:\Angie data\shapes project\',day,'\Matfile\FT_',depth,'\';];%put the path that you want as reference, always use FT becuase it was concatenated with FT first
+    pathref=['E:\Angie data\shapes project\',day,'\Matfile\FT_',depth,'\';];%put the path that you want as reference, always use FT becuase it was concatenated with FT first
     
     
     %num=input('number of files to uncat');% all channels per depth
@@ -40,6 +42,7 @@ for idx_depth=1:length(depthlist)
         ind2=find(cluster_class(:,2)>ref);
         spkFT=cluster_class(ind1,:);
         spkClutter=cluster_class(ind2,:);
+        
         save(fname, 'spkFT','spkClutter','ref','-append');
     end
     

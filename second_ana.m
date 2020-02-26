@@ -156,7 +156,7 @@ use=1;
     %% simple bar graph for fr in each stim condition
     if use==1
         fr_box=[spike_data.fr stim_data];
-        fr_box=sortrows(fr_box);
+       % fr_box=sortrows(fr_box);
         x={};
         for i=1:(length(fr_box))
             if fr_box(i,3)==1
@@ -187,7 +187,7 @@ use=1;
             x{i}=[num2str(fr_box(i,2)), num2str(fr_box(i,4)),nom];
         end
         x1=(1:length(x));
-        h3=figure;
+        h3=figure('units','normalized','outerposition',[0 0 1 1]);
         hold on
         bar(x1,fr_box(:,1))
         xticks(1:length(x))
