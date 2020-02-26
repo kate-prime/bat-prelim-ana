@@ -14,7 +14,7 @@ spike_data.unit{1,1}=fname;%
 
  
 %Not strictly necessary, but handy
-matFile = ['E:\KA001\stimuli\3Dstim','.mat'];%loads stimuli
+matFile = ['/Volumes/Data1/Kate/KA001/KA001/stimuli/stims','.mat'];%loads stimuli
 if exist(matFile,'file')
     load(matFile);
     stim3D=stim2;
