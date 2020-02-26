@@ -1,4 +1,4 @@
-function uncat
+open uncatfunction uncat
 %separates spike times for concatenated files. select a reference file for
 %each depth, each reference works for all channels at that depth
 
