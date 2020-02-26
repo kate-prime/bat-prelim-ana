@@ -81,8 +81,8 @@ if n~=1  %find peaks in post call hist
         h(2)=subplot(1,3,2);
         hold on
         scatter(stim_data(1:size(spike_data.count,1),2),spike_data.count,'filled','b')
-        scatter((1:4),means(2,1:4),'filled','k')
-        xlim([0 5])
+        scatter((1:8),means(2,1:8),'filled','k')
+        xlim([0 9])
         title(h(2),'Object')
         hold off
         h(3)=subplot(1,3,3);
@@ -108,10 +108,14 @@ if n~=1  %find peaks in post call hist
         indcube=find(jitter_box(:,3)==2);
         indLD=find(jitter_box(:,3)==3);
         indSD=find(jitter_box(:,3)==4);
-        means(2,1,2)=mean(jitter_box(indcyl,1)); 
-        means(2,2,2)=mean(jitter_box(indcube,1));
-        means(2,3,2)=mean(jitter_box(indLD,1));
-        means(2,4,2)=mean(jitter_box(indSD,1));
+        indAMPcyl=find(jitter_box(:,3)==5);%by object
+        indAMPcube=find(jitter_box(:,3)==6);
+        indAMPLD=find(jitter_box(:,3)==7);
+        indAMPSD=find(jitter_box(:,3)==8);
+        means(2,1,2)=mean(jitter_box(indAMPcyl,1)); 
+        means(2,2,2)=mean(jitter_box(indAMPcube,1));
+        means(2,3,2)=mean(jitter_box(indAMPLD,1));
+        means(2,4,2)=mean(jitter_box(indAMPSD,1));
         
         ind0=find(jitter_box(:,4)==0);
         ind45=find(jitter_box(:,4)==45);
@@ -135,7 +139,7 @@ if n~=1  %find peaks in post call hist
         hold on
         scatter(stim_data(1:size(spike_data.jitter,1),2),spike_data.jitter,'filled','b')
         scatter((1:4),means(2,1:4,2),'filled','k')
-        xlim([0 5])
+        xlim([0 9])
         title(h(2),'Object')
         hold off
         h(3)=subplot(1,3,3);
@@ -148,25 +152,33 @@ if n~=1  %find peaks in post call hist
     end
     %% simple bar graph for fr in each stim condition
     if use==1
-        fr_box=[spike_data.count stim_data(1:size(spike_data.count,1),:)];
-        fr_box=sortrows(fr_box);
+        count_box=[spike_data.count stim_data(1:size(spike_data.count,1),:)];
+        %count_box=sortrows(count_box);
         x={};
-        for i=1:(length(fr_box))
-            if fr_box(i,3)==1
+        for i=1:(length(count_box))
+            if count_box(i,3)==1
                 nom='cyl';
-            elseif fr_box(i,3)==2
+            elseif count_box(i,3)==2
                 nom='cube';
-            elseif fr_box(i,3)==3
+            elseif count_box(i,3)==3
                 nom='LD';
-            elseif fr_box(i,3)==4
+            elseif count_box(i,3)==4
                 nom='SD';
+            elseif count_box(i,3)==5
+                nom='AMPcyl';
+            elseif count_box(i,3)==6
+                nom='AMPcube';
+            elseif count_box(i,3)==7
+                nom='AMPLD';
+            elseif count_box(i,3)==8
+                nom='AMPSD';
             end
-            x{i}=[num2str(fr_box(i,2)), num2str(fr_box(i,4)),nom];
+            x{i}=[num2str(count_box(i,2)), num2str(count_box(i,4)),nom];
         end
         x1=(1:length(x));
         h3=figure;
         hold on
-        bar(x1,fr_box(:,1))
+        bar(x1,count_box(:,1))
         xticks(1:length(x))
         xticklabels(x)
         xtickangle(45)
