@@ -2,50 +2,15 @@
 function stimsort(versionX)
 close all
 %clear
-%versionX='V3' made inputable
+[ dates, stimnumbClutter,stimnumbFT ] = datesOrga(versionX);
 
-<<<<<<< HEAD
-if strcmp(versionX,'V1')
-    dates=[20190628 20190708 20190709 20190711 20190710]; 
-    stimnumb3D=680;
-    stimnumbFT=1350;%change if needed; stimuli*reps, usually 20
-end
-
-if strcmp(versionX,'V2')
-    dates=[20190904 20190905 20190906 20190909 20190910 20190911]; %
-    stimnumb3D=1320;
-    stimnumbFT=1350;%change if needed; stimuli*reps, usually 20
-end
-=======
-[ dates, stimnumbClutter,stimnumbFT ] = datesOrga(versionX)
-% if strcmp(versionX,'V3')
-%     dates = [20180411  20180608  20180611 20180606 20180607];
-%     stimnumb=680; %change if needed is numb of different stim*times played each stim, usually 20
-%     A=setdiff(1:34,[3,4,5,6,7,18,19,20,21]);%number of stimuli minus the ones that are not 100
-%     onehund=A;%put in all stim that are 100ms long for the stim set
-% end
->>>>>>> 7a55f90d7837dca246b385592c74044dc7ee2903
-%% for getting spike times. Has a lot for automagic, but can be ui-ed
-sourcepath='D:\AngieDrive\Bats\NSF shapes project\neural_data_2019\clutter_stim\';
-destpath='D:\AngieDrive\Bats\NSF shapes project\neural_data_2019\clutter_stim\Sorted\';
-% sourcepath='E:\Angie data\shapes project\badlywavedclused\';%NEEDTOGO
-% destpath='E:\Angie data\shapes project\badlywavedclused\Sorted\';%NEEDTOGO
-
+%% Setting paths and loading
+sourcepath=%%%
+destpath=%%%\Sorted\';
 for i_date = 1 : length(dates)
-    %load the spike times after spike sorting
-    % [file_spk_times,path_spk_times] = uigetfile('*.mat', 'Open the spike times');
-<<<<<<< HEAD
-    date= num2str(dates(i_date));% this I need to chane for every date of recordings
-    mkdir(['E:\KA001\Sorted\',date])
-    folder_dir=dir(['E:\KA001\IC units\',date,'\Matfile\']);   
-=======
-    date= num2str(dates(i_date));% this I need to change for every date of recordings
-    mkdir([destpath,date])
-    folder_dir=dir([sourcepath,date]);
-    
-    
-    
->>>>>>> 7a55f90d7837dca246b385592c74044dc7ee2903
+    date= num2str(dates(i_date));
+    mkdir(['destpath\',date])
+    folder_dir=dir([sourcepath,date,'\Matfile\']);    
     for i_dep=1:length(folder_dir)
         depth= folder_dir(i_dep).name;
         
@@ -53,34 +18,21 @@ for i_date = 1 : length(dates)
             continue
         end
         
-<<<<<<< HEAD
-        mkdir(['E:\KA001\Sorted\',date,'\',depth,'\']);
-        file_dir=dir(['E:\KA001\IC units\',date,'\Matfile\',depth,'\times_','*.mat']);
-=======
+
+        mkdir([destpath,date,'\',depth,'\']);
         file_dir=dir([sourcepath,date,'\',depth,'\times*.mat']);
->>>>>>> 7a55f90d7837dca246b385592c74044dc7ee2903
         
         for i_clust=1:length(file_dir) %loads clusters, changed for split files
             file_s1=strsplit(file_dir(i_clust).name,'_');%splits up file names
             file_s2=strsplit(file_s1{2},'.');
             ch= file_s2{1};
             
-<<<<<<< HEAD
-            path_spk_times=(['E:\KA001\IC units\',date,'\Matfile\',depth,'\']); 
-            
-            
+            path_spk_times=([sourcepath,date,'\Matfile\',depth,'\']); 
              x=load([path_spk_times,file_dir(i_clust).name]);
 %             for t=1:size(x.spkClutter,1);%rescale FT spike times so that stim switch time is 0, because FT was collected after Clutter
 %                 x.spkClutter(t,2)=x.spkClutter(t,2)-x.ref;%
             for t=1:size(x.spk3D,1)%rescale 3D spike times so that stim switch time is 0
                 x.spk3D(t,2)=x.spk3D(t,2)-x.ref;
-=======
-            path_spk_times=([sourcepath,date,'\',depth,'\']);
-            
-            x=load([path_spk_times,file_dir(i_clust).name]);
-            for t=1:size(x.spkClutter,1);%rescale FT spike times so that stim switch time is 0, because FT was collected after Clutter
-                x.spkClutter(t,2)=x.spkClutter(t,2)-x.ref;%
->>>>>>> 7a55f90d7837dca246b385592c74044dc7ee2903
             end
             clusters_Clutter = cell(1, max(x.spkClutter(:,1)));
             clusters_FT = cell(1, max(x.spkFT(:,1)));
