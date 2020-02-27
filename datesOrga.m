@@ -18,7 +18,7 @@ if strcmp(versionX,'V2')
 end
 
 if strcmp(versionX,'V3')
-    dates=[20200217];
+    dates=[20200217, 20191105,20191106,20191107,20191108,20191111,20191112];
     subProws=10;
     stimnumb3D=880;
     stimnumbClutter=1400;
