@@ -1,11 +1,11 @@
-function uncat_AngieMod (versionX) %written by KAllen, modified by ASalles
+function uncat_AngieMod_3D (versionX) %written by KAllen, modified by ASalles
 %separates spike times for concatenated files, select a reference file for
 %each depth, each reference works for all channels
 
 dates = datesOrga(versionX);
 
 for idx_day=1:length(dates)
-    day=num2str(dates(idx_day))
+    day=num2str(dates(idx_day));
 pathtouncat=['Z:\Kate\KA001\IC units\',day,'\Matfile'];%put the path that leads to the files you want to uncat
 depthlist=dir([pathtouncat,'\3DplusFT*']);
 
