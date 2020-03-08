@@ -1,3 +1,4 @@
+%Last touched by KA 20200229
 function [ dates,stimnumb3D, stimnumbClutter,stimnumbFT,subProws] = datesOrga( versionX )
 if strcmp(versionX,'V1')
     dates=[20190628,20190708,20190709,20190710,20190711];
@@ -18,7 +19,7 @@ if strcmp(versionX,'V2')
 end
 
 if strcmp(versionX,'V3')
-    dates=[20200217, 20191105,20191106,20191107,20191108,20191111,20191112];
+    dates=[20200217,20191105,20191106,20191107,20191108,20191111,20191112];
     subProws=10;
     stimnumb3D=880;
     stimnumbClutter=1400;

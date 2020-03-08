@@ -1,6 +1,7 @@
+%Last touched by KA 20200229
 %Modified from AS by KA 2019
 %counts spikes and builds rasters for prelim data analysis
-function [spike_data, fig]=prelim_ana(fname,data,call_onset,delay,len,reps,subProws)
+function [spike_data, fig]=prelim_ana(fname,data,call_onset,delay,len,reps,subProws,stim_reps)
 
 %FUTURE KATE: figure out if you wanna loop or run FT and clutter separate, just
 %does 3d for now
@@ -8,49 +9,41 @@ function [spike_data, fig]=prelim_ana(fname,data,call_onset,delay,len,reps,subPr
 %len=length of stimulus in ms
 %wind=window of the response to analayze in ms
 %reps=stimulus repeats
-%type: 1=clutter, 2=FT
+
 %% load data and stim files
 spike_data.unit{1,1}=fname;%
 %tidy this up
-% if type==1
 %     %Not strictly necessary, but handy
 %     matFile = ['D:\AngieDrive\Bats\NSF shapes project\neural_stim\clutterstim_org.mat'];%loads stimuli
 %     if exist(matFile,'file')
 %         load(matFile);
-%         spike_data.stims{1,1}=stim_clutter;
-%     else
-%         disp('you gonna need stims')
+%         spike_data.stims{1,1}=stim;
 %     end
-% elseif type==2
-%     stim_clutter=[];
-%     spike_data.stims{1,1}=stim_clutter;
-% end
-%
+
 %% make the bins
-[data,bins,val]=binfun(data,len,2,reps);
+[data,bins,val]=binfun(data,(len+15),1,reps); %added some cushion for delay+echo
 bins(:,size(bins,2))=[];
 spike_data.hist{1,1}=bins;
 spike_data.hist{1,2}=val;
 
 %% get call onset times
 %takes stim onset from ttls then adds delay to determine actual call onset
-%might be worth figuring out echo onset too
-
+call_onset_temp=call_onset;
 ind=[];
 for i=1:(size(call_onset,1)/reps) %sorts stims
     temp=find(call_onset(:,2)==i);
     ind=[ind,temp];
 end
 
-call_onset=call_onset(ind,1);
-for n=1:size(call_onset,1)
-    call_onset(n)=call_onset(n)+delay;
-end
-
+% call_onset=call_onset(ind,1);
+% for n=1:size(call_onset,1)
+%     call_onset(n)=call_onset(n)+delay;
+% end
+call_onset=sortrows(call_onset,2); %added 20200303
 
 %% Make the rasters
-
-fig=makeras(data,len,reps,stim_clutter,subProws); %including stims here isn't necessesary, just adds a plot on the raster
+fig=RASnew(data,bins,val,call_onset,stim_reps);
+%fig=makeras(data,len,reps,subProws); %including stims here isn't necessesary, just adds a plot on the raster
 
 
 %% set up storage cells
@@ -65,15 +58,15 @@ spike_data.spike_times=data;
 
 %% generates a box of expected echo onset delays. only works if stims are in 5,10,15ms order
 %this may not be necessary anymore
-echos=[]; 
-       for i=1:round(num/3) %makes a column corresponding to echo delays
-           echos=[echos;[5;10;15]];
-       end
-       if num-length(echos)==1 %this is not an elegant solution
-           echos=[echos;5];
-       elseif num-length(echos)==2
-           echos=[echos;5;10];
-       end
+% echos=[]; 
+%        for i=1:round(num/3) %makes a column corresponding to echo delays
+%            echos=[echos;[5;10;15]];
+%        end
+%        if num-length(echos)==1 %this is not an elegant solution
+%            echos=[echos;5];
+%        elseif num-length(echos)==2
+%            echos=[echos;5;10];
+%        end
 
 %% loop for each stim
 for x=1:(size(data,2)/reps)
@@ -84,9 +77,10 @@ for x=1:(size(data,2)/reps)
     r=size(data(:,r1:r2),1);%looking at stim X
     spiketimes=data(:,r1:r2); %all spike times for that stim
     times=call_onset(r1:r2,:); %all onset times for that stim
-    echoX=echos(x);
+    echo=10; %FUTURE KATE remember that you hard coded this
+
     %% Actually do the analysis
-    [spk_number,jitter,spikerate,resp_dur_total,latency] = Countspikes_ana(times,spiketimes,r,x,bins,delay,val,len,wind,reps,echoX);
+    [spk_number,jitter,spikerate,resp_dur_total,latency] = Countspikes_ana(times,spiketimes,r,x,bins,delay,val,45,reps,echo);
     
     spike_data.spikenumber(x,:) =spk_number';
     spike_data.jitter(x,:)=jitter;

@@ -1,4 +1,4 @@
-function uncat_AngieMod (versionX) %written by KAllen, modified by ASalles
+function uncat_AngieMod_Clut (versionX) %written by KAllen, modified by ASalles
 %separates spike times for concatenated files, select a reference file for
 %each depth, each reference works for all channels
 
@@ -35,6 +35,8 @@ for idx_depth=1:length(depthlist)
         %     cd(fpath2)
        fname=[pathtouncat,'\All_',depth,'\',num(i).name];
         load(fname,'cluster_class');
+
+
 
         ind1=find(cluster_class(:,2)<ref);
         ind2=find(cluster_class(:,2)>ref);
