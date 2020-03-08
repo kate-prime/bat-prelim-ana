@@ -3,11 +3,11 @@ function f1=delaysortedfigs_Angie
 %delay
 %it calls the same stim data file used in second ana
 disp('chose a neuron')
-[fname, fpath]=uigetfile;
+[fname, fpath]=uigetfile('W:\Kate\KA001\Analyzed\20200217\Clut_250\Chn14_1_neuron_prelim.mat');
 load([fpath,fname],'spike_data', 'pref_delay','pref_obj');
-load('D:\AngieDrive\Bats\NSF shapes project\neural_stim\clutterstim_org.mat','stim_data');
+[stim_data,shapes] = make_stim_data();
 %% find relevant data  and means
-data=[spike_data.count stim_data];
+data=[spike_data.count cell2mat(stim_data(:,[1,4,3]))];
 ind=find(data(:,2)==pref_delay);
 data=data(ind,:);
 
@@ -36,7 +36,7 @@ f(1)=subplot(1,2,1);
 hold on
 scatter(data(:,3),data(:,1),'filled','MarkerFaceColor',[.6 1 .6])
 % scatter(1:size(obj_means,2),obj_means(1,:),'filled','k')
-boxplot(data(:,1),data(:,3),'Labels',{'cylinder','cube','shpere','LD','SD','MP','AMPcyl','AMPcube','AMPsphere','AMPLD','AMPSD','AMPMP'},'LabelOrientation','inline')
+boxplot(data(:,1),data(:,3),'Labels',stim_data(:,2),'LabelOrientation','inline')
 
 xlim([0 (size(obj_means,2)+1)])
 %ylim([0 40]) %super aribitrary
