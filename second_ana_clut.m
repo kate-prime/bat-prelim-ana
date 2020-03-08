@@ -1,5 +1,5 @@
 
-function [h1,h2,h3,pref_delay,pref_obj,pref_clutter_distance,means,use]=second_ana(spike_data,stim_data,shapes)
+function [h1,h2,h3,pref_delay,pref_obj,pref_clutter_distance,means,use]=second_ana_clut(spike_data,stim_data,shapes)
 %KA 2019
 %after prelim analysis, check neurons for responses and find some basics
 %like prefered delay and plots them
