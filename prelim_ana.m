@@ -76,7 +76,7 @@ for x=1:(size(data,2)/reps)
     %     r4=r2+1; %what is this?
     r=size(data(:,r1:r2),1);%looking at stim X
     spiketimes=data(:,r1:r2); %all spike times for that stim
-    times=call_onset(r1:r2,:); %all onset times for that stim
+    times=call_onset(r1:r2,1); %all onset times for that stim
     echo=10; %FUTURE KATE remember that you hard coded this
 
     %% Actually do the analysis
