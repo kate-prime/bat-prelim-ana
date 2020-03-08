@@ -1,5 +1,5 @@
 
-function [h1,h2,h3,pref_delay,pref_obj,pref_clutter_distance,means,use]=second_ana(spike_data,stim_data)
+function [h1,h2,h3,pref_delay,pref_obj,pref_clutter_distance,means,use]=second_ana(spike_data,stim_data,shapes)
 %KA 2019
 %after prelim analysis, check neurons for responses and find some basics
 %like prefered delay and plots them
@@ -8,7 +8,7 @@ function [h1,h2,h3,pref_delay,pref_obj,pref_clutter_distance,means,use]=second_a
 %% initial sorting steps
 %check for <5 spikes per stim to throw out bad ones quick
 n=(max(spike_data.count)<=5);
-object_number=max(stim_data(:,2));
+object_number=length(unique(shapes));
 
 if n~=1  %find peaks in post call hist
     pks_box=nan(size (spike_data.hist{1,2}));
@@ -75,7 +75,7 @@ use=1;
         set(h1,'Position',[150 150 1000 500])
         h(1)=subplot(1,3,1);
         hold on
-        scatter(stim_data(:,1),spike_data.count,'filled','r')
+        scatter(cell2mat(stim_data(:,1)),spike_data.count,'filled','r')
         scatter([5 10 15],means(1,1:3),'filled','k')
         xlim([0 20])
         title(h(1),'Delay')
@@ -83,14 +83,14 @@ use=1;
         hold off
         h(2)=subplot(1,3,2);
         hold on
-        scatter(stim_data(:,2),spike_data.count,'filled','b')
+        scatter(cell2mat(stim_data(:,4)),spike_data.count,'filled','b')
         scatter((1:4),means(2,1:4),'filled','k')
         xlim([0 (object_number+1)])
         title(h(2),'Object')
         hold off
         h(3)=subplot(1,3,3);
         hold on
-        scatter(stim_data(:,3),spike_data.count,'filled','g')
+        scatter(cell2mat(stim_data(:,3)),spike_data.count,'filled','g')
         xlim([-5 25])
         scatter([0 10 20],means(3,1:3),'filled','k')
         title(h(3),'Clutter distance')
@@ -99,7 +99,7 @@ use=1;
     %% Plot jitter
     if use==1
         
-        jitter_box=[spike_data.jitter stim_data]; %by delay
+        jitter_box=[spike_data.jitter cell2mat(stim_data(:,[1,4,3]))]; %by delay
         ind5=find(jitter_box(:,2)==5);
         ind10=find(jitter_box(:,2)==10);
         ind15=find(jitter_box(:,2)==15);
@@ -132,7 +132,7 @@ use=1;
         set(h2,'Position',[150 150 1000 500])
         h(1)=subplot(1,3,1);
         hold on
-        scatter(stim_data(:,1),spike_data.jitter,'filled','r')
+        scatter(cell2mat(stim_data(:,1)),spike_data.jitter,'filled','r')
         scatter([5 10 15],means(1,1:3,2),'filled','k')
         xlim([0 20])
         title(h(1),'Delay')
@@ -140,14 +140,14 @@ use=1;
         hold off
         h(2)=subplot(1,3,2);
         hold on
-        scatter(stim_data(:,2),spike_data.jitter,'filled','b')
+        scatter(cell2mat(stim_data(:,4)),spike_data.jitter,'filled','b')
         scatter((1:4),means(2,1:4,2),'filled','k')
         xlim([0 (object_number+1)])
         title(h(2),'Object')
         hold off
         h(3)=subplot(1,3,3);
         hold on
-        scatter(stim_data(:,3),spike_data.jitter,'filled','g')
+        scatter(cell2mat(stim_data(:,3)),spike_data.jitter,'filled','g')
         scatter([0 10 20],means(3,1:3,2),'filled','k')
         xlim([-5 25])
         title(h(3),'Clutter distance')
@@ -155,36 +155,12 @@ use=1;
     end
     %% simple bar graph for fr in each stim condition
     if use==1
-        fr_box=[spike_data.fr stim_data];
+        fr_box=[spike_data.fr_all cell2mat(stim_data(:,[1,4,3]))];
        % fr_box=sortrows(fr_box);
         x={};
-        for i=1:(length(fr_box))
-            if fr_box(i,3)==1
-                nom='cyl';
-            elseif fr_box(i,3)==2
-                nom='cube';
-            elseif fr_box(i,3)==3
-                nom='shpere';
-            elseif fr_box(i,3)==4
-                nom='LD';
-            elseif fr_box(i,3)==5
-                nom='SD';
-            elseif fr_box(i,3)==6
-                nom='MP';
-            elseif fr_box(i,3)==7
-                nom='AMPcyl';
-            elseif fr_box(i,3)==8
-                nom='AMPcube';
-            elseif fr_box(i,3)==9
-                nom='AMPshpere';
-            elseif fr_box(i,3)==10
-                nom='AMPLD';
-            elseif fr_box(i,3)==11
-                nom='AMPSD';
-            elseif fr_box(i,3)==12
-                nom='AMPMP';
-            end
-            x{i}=[num2str(fr_box(i,2)), num2str(fr_box(i,4)),nom];
+        for idx=1:(size(fr_box,1))
+            nom=stim_data{idx,2};
+            x{idx}=[num2str(fr_box(idx,2)), num2str(fr_box(idx,4)),nom];
         end
         x1=(1:length(x));
         h3=figure('units','normalized','outerposition',[0 0 1 1]);
