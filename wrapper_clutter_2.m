@@ -42,6 +42,7 @@ for i_date = 1 : length(dates)
                 saveas(h2,['E:\Angie data\shapes project\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_jitter.png'])
                 saveas(h3,['E:\Angie data\shapes project\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_all_fr.png'])
                 save(fname.name,'pref_delay','pref_obj','pref_clutter_distance','means','use','-append');
+                delaysortedfigs_Angie(fname.name);
             elseif use==0
                  save(fname.name,'use','-append');
             end

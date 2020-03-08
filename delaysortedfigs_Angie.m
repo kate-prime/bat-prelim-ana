@@ -1,10 +1,8 @@
-function f1=delaysortedfigs_Angie
+function f1=delaysortedfigs_Angie(fname)
 %creates a scatter plotsa that only display trials from neuron's preferred
 %delay
 %it calls the same stim data file used in second ana
-disp('chose a neuron')
-[fname, fpath]=uigetfile('W:\Kate\KA001\Analyzed\20200217\Clut_250\Chn14_1_neuron_prelim.mat');
-load([fpath,fname],'spike_data', 'pref_delay','pref_obj');
+load(fname,'spike_data', 'pref_delay','pref_obj');
 [stim_data,shapes] = make_stim_data();
 %% find relevant data  and means
 data=[spike_data.count cell2mat(stim_data(:,[1,4,3]))];
@@ -46,39 +44,9 @@ ylabel('spike count(20 summed repetitions)')
 hold off
 
 f(2)=subplot(1,2,2);
- hold on
- %to pick out object
-if strcmp('cyl',pref_obj)==1
-    y=1;
-elseif strcmp('cube',pref_obj)==1
-    y=2;
-elseif strcmp('sphere',pref_obj)==1
-    y=3;
-elseif strcmp('LD',pref_obj)==1
-    y=4;
-elseif strcmp('SD',pref_obj)==1
-    y=5;
-elseif strcmp('MP',pref_obj)==1
-    y=6;
-elseif strcmp('AMPcyl',pref_obj)==1
-    y=7;
-elseif strcmp('AMPcube',pref_obj)==1
-    y=8;
-elseif strcmp('AMPsphere',pref_obj)==1
-    y=9;
-elseif strcmp('AMPLD',pref_obj)==1
-    y=10;
-    elseif strcmp('AMPSD',pref_obj)==1
-    y=11;
-elseif strcmp('AMPMP',pref_obj)==1
-    y=12;
-end
-ind3=find(data(:,3)==y);
-data2=data(ind3,:);
-temp=(data2(:,4)./45)+1; %to fix scaling
-%scatter(temp,data2(:,1),'filled','MarkerFaceColor',[1 .6 1])
-%scatter([0 45 90],ang_means(1,:),'filled','k')
-boxplot(data2(:,1),(data2(:,4))) 
+hold on
+%to pick out object
+bar(cell2mat(stim_data((cell2mat(stim_data(:,4))==pref_obj),3)),spike_data.spikenumber(cell2mat(stim_data(:,4))==pref_obj))
 %xlim([0 4])
 ylim([0 50]) %super aribitrary
 title(f(2),[pref_obj,' Clutter'])
