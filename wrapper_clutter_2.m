@@ -6,16 +6,7 @@ close all
 [dates] = datesOrga(versionX);
 %a wrapper for automating secondary ana
 
-load("W:\Kate\KA001\stimuli\clutter_v2.mat");
-fieldN = fieldnames(stim);
-fieldN_split =cellfun(@(x){strsplit(x,'_')}, fieldN);
-for idx = 1 : length(fieldN_split)
-    stim_data{idx,2} = strjoin(fieldN_split{idx}(1:end-2),'');
-    stim_data{idx,3} = str2num(fieldN_split{idx}{end-1}(1:2));
-    stim_data{idx,1} = str2num(fieldN_split{idx}{end}(1:2));
-end
-[shapes,~,ic] = unique(stim_data(:,2));
-stim_data(:,4) = arrayfun(@(x){x},ic);
+
 for i_date = 1 : length(dates)
     date= num2str(dates(i_date));
    folder_dir=dir(['W:\Kate\KA001\Analyzed\',date]);

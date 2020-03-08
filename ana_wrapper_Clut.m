@@ -2,7 +2,7 @@
 %a wrapper for automating prelim ana
 dates=datesOrga('V3');
 %dates=[20200217];
-
+[stim_data,shapes] = make_stim_data();
 home=('W:\Kate\KA001');
 for i_date = 1 : length(dates)
     date= num2str(dates(i_date));
