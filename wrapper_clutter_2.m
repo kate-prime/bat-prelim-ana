@@ -5,6 +5,7 @@ close all
 
 [dates] = datesOrga(versionX);
 %a wrapper for automating secondary ana
+[stim_data,shapes] = make_stim_data();
 
 
 for i_date = 1 : length(dates)
