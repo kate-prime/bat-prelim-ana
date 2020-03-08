@@ -29,7 +29,7 @@ for i_date = 1 : length(dates)
                 stim_data=stim_data(1:34,:);%Hardcoded 34 becasue hopefully in the future we won't have versions with a different number if its the same stimulus set.
             end
             disp([file_dir(i_data).folder,'\', file_dir(i_data).name])%can be removed, but lets me keep track
-            [h1,h2,h3,pref_delay,pref_obj,pref_clutter_distance,means,use]=second_ana(spike_data,stim_data);
+            [h1,h2,h3,pref_delay,pref_obj,pref_clutter_distance,means,use]=second_ana_clut(spike_data,stim_data);
             if use==1
                 
 %                 saveas(h1,['E:\Angie data\shapes project\badlywavedclused\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_spike_count.png'])%NEEDTOGO
