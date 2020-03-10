@@ -47,12 +47,18 @@ f(2)=subplot(1,2,2);
 hold on
 %to pick out object
 for idx = 1 : length(pref_obj)
-    plot(cell2mat(stim_data((cell2mat(stim_data(:,4))==pref_obj(idx)),3)),spike_data.spikenumber(cell2mat(stim_data(:,4))==pref_obj(idx)))
+    clutterspikes(:,1)=cell2mat(stim_data((cell2mat(stim_data(:,4))==pref_obj(idx)),3));
+    clutterspikes(:,2)=spike_data.spikenumber(cell2mat(stim_data(:,4))==pref_obj(idx));
+    clutterspikes=sortrows(clutterspikes);%this fixes the sphere being out of order problem
+     
+    plot(clutterspikes(:,1),clutterspikes(:,2),'LineWidth',1.5)
+    
 end
 %xlim([0 4])
-ylim([0 50]) %super aribitrary
+uppylim=max(clutterspikes(:,2))+20;
+ylim([0 uppylim]) %the +20 is super aribitrary, just to make sure that previous lines get in too, because this only looks at the last pref object
 title(f(2),[shapes{pref_obj(1)},' Clutter'])
-set(findobj(gca,'type','line'),'Color',[1 0 1],'linew',1.5)
+
 legend(shapes(pref_obj));
 xlabel('Clutter distance')
 hold off
