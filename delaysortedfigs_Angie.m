@@ -46,7 +46,9 @@ hold off
 f(2)=subplot(1,2,2);
 hold on
 %to pick out object
+
 for idx = 1 : length(pref_obj)
+    clutterspikes=[];
     clutterspikes(:,1)=cell2mat(stim_data((cell2mat(stim_data(:,4))==pref_obj(idx)),3));
     clutterspikes(:,2)=spike_data.spikenumber(cell2mat(stim_data(:,4))==pref_obj(idx));
     clutterspikes=sortrows(clutterspikes);%this fixes the sphere being out of order problem
