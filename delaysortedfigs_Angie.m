@@ -1,4 +1,4 @@
-function f1=delaysortedfigs_Angie(fname)
+function [f1]=delaysortedfigs_Angie(fname)
 %creates a scatter plotsa that only display trials from neuron's preferred
 %delay
 %it calls the same stim data file used in second ana
@@ -54,5 +54,4 @@ set(findobj(gca,'type','line'),'Color',[1 0 1],'linew',1.5)
 xlabel('Clutter distance')
 hold off
 %% save
-saveas(f1,[fname(1:end-4) '_delay_sorted.png'])
 
