@@ -34,7 +34,7 @@ for idx = 1 : length(unique(obj_box(:,2)))
     means(2,idx)=mean(delay_box(obj_box(:,2)==idx),1);
 end
 pref_obj=find(means(2,:)==max(means(2,:))); %finds max from mean counts
-assert(length(pref_obj)==1);
+%assert(length(pref_obj)==1);
 
 %% find preferred angle
 clut_dist_box(:,1)=spike_data.count;

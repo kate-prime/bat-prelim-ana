@@ -46,12 +46,17 @@ hold off
 f(2)=subplot(1,2,2);
 hold on
 %to pick out object
-bar(cell2mat(stim_data((cell2mat(stim_data(:,4))==pref_obj),3)),spike_data.spikenumber(cell2mat(stim_data(:,4))==pref_obj))
+for idx = 1 : length(pref_obj)
+    plot(cell2mat(stim_data((cell2mat(stim_data(:,4))==pref_obj(idx)),3)),spike_data.spikenumber(cell2mat(stim_data(:,4))==pref_obj(idx)))
+end
 %xlim([0 4])
 ylim([0 50]) %super aribitrary
-title(f(2),[pref_obj,' Clutter'])
+title(f(2),[shapes{pref_obj(1)},' Clutter'])
 set(findobj(gca,'type','line'),'Color',[1 0 1],'linew',1.5)
+legend(shapes(pref_obj));
 xlabel('Clutter distance')
 hold off
 %% save
+end
+
 
