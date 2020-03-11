@@ -35,7 +35,6 @@ for i_date = 1 : length(dates)
             
             [s]=spikePOPclutter(spike_data,stim_data)
             if use==1
-                saveas(s,['E:\Angie data\shapes project\Figures\',date,'_',depth,'_',fname.name(1:end-4),'POPspikes.png'])
                 %
                 %                 saveas(h1,['E:\Angie data\shapes project\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_spike_count.png'])
                 %                 saveas(h2,['E:\Angie data\shapes project\Figures\',date,'_',depth,'_',fname.name(1:end-4) '_jitter.png'])
@@ -51,5 +50,5 @@ for i_date = 1 : length(dates)
         end
     end
 end
-
+ saveas(s,['E:\Angie data\shapes project\Figures\POPspikes.png'])
 end
