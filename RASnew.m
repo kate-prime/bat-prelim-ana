@@ -4,6 +4,7 @@ num=length(data);
 %stims=sortrows(stim_reps,6002);
 %stims=stims(:,1:30*40000/1000);
 fig=figure;
+fig.WindowState='fullscreen'%makes them big
 t=(1:size(stim_reps,2))./40;
 %call_onset=call_onset';
 call_onset(:,1)=call_onset(:,1)./40000;
@@ -21,4 +22,5 @@ for idxRAS=1:20:length(data)
     plot(bins((round(idxRAS/reps)+1),:),val((round(idxRAS/reps)+1),:),'-r')
 
 end
+
 end 

@@ -7,7 +7,7 @@ function [h1,h2,h3,pref_delay,pref_obj,pref_clutter_distance,means,use]=second_a
 
 %% initial sorting steps
 %check for <5 spikes per stim to throw out bad ones quick
-n=(max(spike_data.count)<=5);
+n=(max(spike_data.count)<=1);%careful here, I made more neurons usable
 object_number=length(unique(shapes));
 
 if n~=1  %find peaks in post call hist
