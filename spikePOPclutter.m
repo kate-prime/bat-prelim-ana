@@ -17,8 +17,8 @@ for idxShape=1:24
     
     s=scatter(clutterPOPspikes(:,1),clutterPOPspikes(:,2));
     
-    lookupLARGER={'r','b','m'};
-    lookupSMALLER={'g','c','y'};
+    lookupLARGER={'r','b','m'}; %r 10 is larger, b, 0 is larger, m 20 is larger
+    lookupSMALLER={'g','c','y'}; %r 10 is smaller, c, 0 is smaller,y 20 is smaller
     
     
     outlierscore = abs(clutterPOPspikes(:,2)-mean(clutterPOPspikes(:,2)));
