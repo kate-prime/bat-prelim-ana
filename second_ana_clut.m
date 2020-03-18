@@ -70,31 +70,31 @@ if n~=1  %find peaks in post call hist
 use=1;
     if use==1 %find preferred stims based on total spike count (maybe try peak fr instead)
         [pref_delay,pref_obj,pref_clutter_distance,means]=pref_finder(spike_data,stim_data);
-        h1=figure;
-        
-        set(h1,'Position',[150 150 1000 500])
-        h(1)=subplot(1,3,1);
-        hold on
-        scatter(cell2mat(stim_data(:,1)),spike_data.count,'filled','r')
-        scatter([5 10 15],means(1,1:3),'filled','k')
-        xlim([0 20])
-        title(h(1),'Delay')
-        ylabel('spike count(every dot is for the 20 presentationson that stim)')
-        hold off
-        h(2)=subplot(1,3,2);
-        hold on
-        scatter(cell2mat(stim_data(:,4)),spike_data.count,'filled','b')
-        scatter((1:4),means(2,1:4),'filled','k')
-        xlim([0 (object_number+1)])
-        title(h(2),'Object')
-        hold off
-        h(3)=subplot(1,3,3);
-        hold on
-        scatter(cell2mat(stim_data(:,3)),spike_data.count,'filled','g')
-        xlim([-5 25])
-        scatter([0 10 20],means(3,1:3),'filled','k')
-        title(h(3),'Clutter distance')
-        hold off
+   % h1=figure;
+    h1=0 ;   
+%         set(h1,'Position',[150 150 1000 500])
+%         h(1)=subplot(1,3,1);
+%         hold on
+%         scatter(cell2mat(stim_data(:,1)),spike_data.count,'filled','r')
+%         scatter([5 10 15],means(1,1:3),'filled','k')
+%         xlim([0 20])
+%         title(h(1),'Delay')
+%         ylabel('spike count(every dot is for the 20 presentationson that stim)')
+%         hold off
+%         h(2)=subplot(1,3,2);
+%         hold on
+%         scatter(cell2mat(stim_data(:,4)),spike_data.count,'filled','b')
+%         scatter((1:4),means(2,1:4),'filled','k')
+%         xlim([0 (object_number+1)])
+%         title(h(2),'Object')
+%         hold off
+%         h(3)=subplot(1,3,3);
+%         hold on
+%         scatter(cell2mat(stim_data(:,3)),spike_data.count,'filled','g')
+%         xlim([-5 25])
+%         scatter([0 10 20],means(3,1:3),'filled','k')
+%         title(h(3),'Clutter distance')
+%         hold off
     end
     %% Plot jitter
     if use==1
@@ -127,31 +127,32 @@ use=1;
         means(3,3,2)=mean(jitter_box(ind20,1));
         means(3,4,2)=nan;
         
-        h2=figure;
+        h2=0;
+      % h2=figure;
         
-        set(h2,'Position',[150 150 1000 500])
-        h(1)=subplot(1,3,1);
-        hold on
-        scatter(cell2mat(stim_data(:,1)),spike_data.jitter,'filled','r')
-        scatter([5 10 15],means(1,1:3,2),'filled','k')
-        xlim([0 20])
-        title(h(1),'Delay')
-        ylabel('jitter(every dot is for the 20 presentationson that stim)')
-        hold off
-        h(2)=subplot(1,3,2);
-        hold on
-        scatter(cell2mat(stim_data(:,4)),spike_data.jitter,'filled','b')
-        scatter((1:4),means(2,1:4,2),'filled','k')
-        xlim([0 (object_number+1)])
-        title(h(2),'Object')
-        hold off
-        h(3)=subplot(1,3,3);
-        hold on
-        scatter(cell2mat(stim_data(:,3)),spike_data.jitter,'filled','g')
-        scatter([0 10 20],means(3,1:3,2),'filled','k')
-        xlim([-5 25])
-        title(h(3),'Clutter distance')
-        hold off
+%         set(h2,'Position',[150 150 1000 500])
+%         h(1)=subplot(1,3,1);
+%         hold on
+%         scatter(cell2mat(stim_data(:,1)),spike_data.jitter,'filled','r')
+%         scatter([5 10 15],means(1,1:3,2),'filled','k')
+%         xlim([0 20])
+%         title(h(1),'Delay')
+%         ylabel('jitter(every dot is for the 20 presentationson that stim)')
+%         hold off
+%         h(2)=subplot(1,3,2);
+%         hold on
+%         scatter(cell2mat(stim_data(:,4)),spike_data.jitter,'filled','b')
+%         scatter((1:4),means(2,1:4,2),'filled','k')
+%         xlim([0 (object_number+1)])
+%         title(h(2),'Object')
+%         hold off
+%         h(3)=subplot(1,3,3);
+%         hold on
+%         scatter(cell2mat(stim_data(:,3)),spike_data.jitter,'filled','g')
+%         scatter([0 10 20],means(3,1:3,2),'filled','k')
+%         xlim([-5 25])
+%         title(h(3),'Clutter distance')
+%         hold off
     end
     %% simple bar graph for fr in each stim condition
     if use==1
@@ -163,13 +164,14 @@ use=1;
             x{idx}=[num2str(fr_box(idx,2)), num2str(fr_box(idx,4)),nom];
         end
         x1=(1:length(x));
-        h3=figure('units','normalized','outerposition',[0 0 1 1]);
-        hold on
-        bar(x1,fr_box(:,1))
-        xticks(1:length(x))
-        xticklabels(x)
-        xtickangle(45)
-        hold off
+      h3=0;
+    %  h3=figure('units','normalized','outerposition',[0 0 1 1]);
+%         hold on
+%         bar(x1,fr_box(:,1))
+%         xticks(1:length(x))
+%         xticklabels(x)
+%         xtickangle(45)
+%         hold off
     end
     
 else
