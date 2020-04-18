@@ -12,7 +12,7 @@ spike_data.unit{1,1}=fname;%
 
 if type==1
     %Not strictly necessary, but handy
-    matFile = ['E:\Angie\Bats\NSF shapes project\neural_stim\clutterstim_org.mat'];%loads stimuli
+    matFile = ['D:\AngieDrive\Bats\NSF shapes project\neural_stim\clutterstim_org.mat'];%loads stimuli
     if exist(matFile,'file')
         load(matFile);
         spike_data.stims{1,1}=stim_clutter;
