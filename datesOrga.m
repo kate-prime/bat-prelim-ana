@@ -26,3 +26,10 @@ if strcmp(versionX,'V3')
     stimnumbFT=1350;
 end
 
+if strcmp(versionX,'V4')
+    dates=[20200120 20200214 20200213 20200123];%20200214 20200213 20200123 
+    subProws=10;
+    stimnumb3D=880;
+    stimnumbClutter=1400;
+    stimnumbFT=1350;
+end

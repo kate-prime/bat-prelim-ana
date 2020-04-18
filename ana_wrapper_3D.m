@@ -1,6 +1,6 @@
 %Last Touched by KA 20200229
 %a wrapper for automating prelim ana
-dates=datesOrga('V3');
+dates=datesOrga('V4');
 %dates=[20200217];
 
 home=('Z:\Kate\KA001');
@@ -20,11 +20,12 @@ for i_date = 1 : length(dates)
         for i_data=1:size(file_dir,1)
             cd([home,'/Sorted/',date,'/',depth,'/'])
             fname=file_dir(i_data,1).name;
-            load([file_dir(i_data).folder,'/', file_dir(i_data).name],'trials_3D','stimon_3D');
+            load([file_dir(i_data).folder,'/', file_dir(i_data).name],'trials_3D','stimon_3D','stim_reps_3D');
             disp([file_dir(i_data).folder,'/', file_dir(i_data).name]) %can be removed but makes sure I record what files are being loaded
             data=trials_3D;
             call_onset=stimon_3D';
-            [spike_data,fig]=prelim_ana(fname,data,call_onset,5,30,20,11);
+            stim_reps=stim_reps_3D;
+            [spike_data,fig]=prelim_ana(fname,data,call_onset,5,30,20,stim_reps);
             cd([home,'/Analyzed/',date,'/',depth])
             saveas(fig,[fname(1:end-4) '_ras.png'])
             save([fname(1:end-4), '_prelim'],'spike_data')

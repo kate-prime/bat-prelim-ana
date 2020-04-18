@@ -1,7 +1,7 @@
 %Last touched by KA 20200229
 %Modified from AS by KA 2019
 %counts spikes and builds rasters for prelim data analysis
-function [spike_data, fig]=prelim_ana(fname,data,call_onset,delay,len,reps,subProws,stim_reps)
+function [spike_data, fig]=prelim_ana(fname,data,call_onset,delay,len,reps,stim_reps)
 
 %FUTURE KATE: figure out if you wanna loop or run FT and clutter separate, just
 %does 3d for now

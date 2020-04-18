@@ -12,8 +12,8 @@ close all
 %     onehund=A;%put in all stim that are 100ms long for the stim set
 % end
 %% for getting spike times. Has a lot for automagic, but can be ui-ed
-sourcepath='W:\Kate\KA001\uncat\';
-destpath='W:\Kate\KA001\Sorted\';
+sourcepath='Z:\Kate\KA001\uncat\';
+destpath='Z:\Kate\KA001\Sorted\';
 
 for i_date = 1 : length(dates)
     %load the spike times after spike sorting
@@ -65,7 +65,7 @@ for i_date = 1 : length(dates)
                         end
                     end
                     %loading channel with TTLs
-                    path=(['W:\Kate\KA001\IC units\',date,'\Matfile\','Clut_',depth(4:end)]);
+                    path=(['Z:\Kate\KA001\IC units\',date,'\Matfile\','Clut_',depth(4:end)]);
                     file='\Chn17.mat';
                     ch17=load([path,file],'data','sr');
                     ch17_Clutter=ch17.data;
@@ -76,7 +76,7 @@ for i_date = 1 : length(dates)
                         ch18_Clutter=ch18.data;
                     end
                     
-                    tdms_pathClutter=(['W:\Kate\KA001\IC units\',date,'\NI\Clut_',depth(4:end),'\']);
+                    tdms_pathClutter=(['Z:\Kate\KA001\IC units\',date,'\NI\Clut_',depth(4:end),'\']);
                     tdmsClutter=dir([tdms_pathClutter,'*.tdms']);
                     assert(length(tdmsClutter)==1) % will error if TDMS is wrong
                     tdmsfileClutter={[tdms_pathClutter,'/',tdmsClutter(1).name]};
@@ -105,7 +105,7 @@ for i_date = 1 : length(dates)
                         end
                     end
                     %loading channel with TTLs
-                    path=(['W:\Kate\KA001\IC units\',date,'\Matfile\','3D_', depth(4:end)]);
+                    path=(['Z:\Kate\KA001\IC units\',date,'\Matfile\','3D_', depth(4:end)]);
                     file='\Chn17.mat';
                     ch17=load([path,file],'data');
                     ch17_3D=ch17.data;
@@ -117,7 +117,7 @@ for i_date = 1 : length(dates)
                         ch18_3D=ch18.data;
                     end
                     
-                    tdms_path3D=(['W:\Kate\KA001\IC units\',date,'\NI\3D_',depth(4:end),'\']);
+                    tdms_path3D=(['Z:\Kate\KA001\IC units\',date,'\NI\3D_',depth(4:end),'\']);
                     tdms3D=dir([tdms_path3D,'*.tdms']);
                     assert(length(tdms3D)==1) % will error if TDMS is wrong
                     tdmsfile3D={[tdms_path3D,'/',tdms3D(1).name]};
@@ -132,7 +132,7 @@ for i_date = 1 : length(dates)
                 % [file,path] = uigetfile('*.mat', 'Open the TTL channel',path_spk_times);
                 
                 
-                path_FT=(['W:\Kate\KA001\IC units\',date,'\Matfile\','FT_',depth(4:end)]);
+                path_FT=(['Z:\Kate\KA001\IC units\',date,'\Matfile\','FT_',depth(4:end)]);
                 file='\Chn17.mat';
                 ch17=load([path_FT,file],'data');
                 ch17_FT=ch17.data;
@@ -144,7 +144,7 @@ for i_date = 1 : length(dates)
                     ch18_FT=ch18.data;
                 end
                 
-                tdms_pathFT=(['W:\Kate\KA001\IC units\',date,'\NI\FT_',depth(4:end),'\']);
+                tdms_pathFT=(['Z:\Kate\KA001\IC units\',date,'\NI\FT_',depth(4:end),'\']);
                 tdmsFT=dir([tdms_pathFT,'*.tdms']);
                 assert(length(tdmsFT)==1) % will error if TDMS is wrong
                 tdmsfileFT={[tdms_pathFT,'/',tdmsFT(1).name]};

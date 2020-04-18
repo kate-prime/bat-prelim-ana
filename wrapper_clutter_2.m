@@ -11,7 +11,7 @@ idxNeuron=0;
 
 for i_date = 1 : length(dates)
     date= num2str(dates(i_date));
-    folder_dir=dir(['W:\Kate\KA001\Analyzed\',date]);
+    folder_dir=dir(['Z:\Kate\KA001\Analyzed\',date]);
     %    folder_dir=dir(['E:\Angie data\shapes project\badlywavedclused\Analyzed\',date]); %NEEDTOGO
     for i_dep=1:length(folder_dir)
         depth= folder_dir(i_dep).name;
@@ -20,7 +20,7 @@ for i_date = 1 : length(dates)
             continue
         end
         %        file_dir=dir(['E:\Angie data\shapes project\badlywavedclused\Analyzed\',date,'\',depth,'\*.mat']);%NEEDTOGO
-        file_dir=dir(['W:\Kate\KA001\Analyzed\',date,'\',depth,'\*.mat']);
+        file_dir=dir(['Z:\Kate\KA001\Analyzed\',date,'\',depth,'\*.mat']);
         for i_data=1:size(file_dir,1)
             %             cd(['E:\Angie data\shapes project\badlywavedclused\Analyzed\',date,'\',depth])%NEEDTOGO
             % cd(['W:\Kate\KA001\Analyzed\',date,'\',depth])

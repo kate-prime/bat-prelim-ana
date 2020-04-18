@@ -2,7 +2,7 @@
 %a wrapper for automating prelim ana
 dates=datesOrga('V3');
 %dates=[20200217];
-home=('W:\Kate\KA001');
+home=('Z:\Kate\KA001');
 for i_date = 1 : length(dates)
     date= num2str(dates(i_date));
     mkdir([home,'/Analyzed/',date])
@@ -24,7 +24,7 @@ for i_date = 1 : length(dates)
             data=trials_clutter;
             call_onset=stimon_clutter';
             stim_reps=stim_reps_clutter;
-            [spike_data,fig]=prelim_ana(fname,data,call_onset,5,30,20,14,stim_reps);% lets use datesOrga
+            [spike_data,fig]=prelim_ana(fname,data,call_onset,5,30,20,stim_reps);% lets use datesOrga
             cd([home,'/Analyzed/',date,'/',depth])
             saveas(fig,[fname(1:end-4) '_ras.png'])
             save([fname(1:end-4), '_prelim'],'spike_data')
