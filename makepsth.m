@@ -34,7 +34,7 @@ for i=1:size(list,1)
         end
         data=trials(:,use(j)*20:use(j)*20+reps-1);
         [bins,val]=binfun2(data,45,1);
-        [gdata,mdata,dev]=gsmooth(val,sr,4);
+        [gdata,mdata,dev]=gsmooth(val,sr,2);%hardcoded 2 for gauss width, see how it does
         t=bins(1,1:end-1);
         plot(t,mdata,'LineWidth',2,'color',col)
         %plot(t,(mdata+dev),'LineWidth',.5,'color',col)
@@ -46,6 +46,6 @@ for i=1:size(list,1)
     title(shape)
     xlabel('Time (ms)')
     ylabel('FR (Hz)')
-    ylim([0 150])
+    ylim([0 200])
 end
         

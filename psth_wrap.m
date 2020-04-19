@@ -1,7 +1,7 @@
 
 %a wrapper for making psth figures for clutter conditions
 
-dates=datesOrga('V4');
+dates=datesOrga('V3');
 
 home=('Z:\Kate\KA001');
 for i_date = 1 : length(dates)
