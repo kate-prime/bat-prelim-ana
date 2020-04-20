@@ -1,8 +1,8 @@
 
 %a wrapper for making psth figures for clutter conditions
 
-dates=datesOrga('V3');
-
+%dates=datesOrga('V3');
+dates=20191112;
 home=('Z:\Kate\KA001');
 for i_date = 1 : length(dates)
     date= num2str(dates(i_date));
