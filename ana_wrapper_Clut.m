@@ -1,6 +1,6 @@
 %Last Touched by KA 20200229
 %a wrapper for automating prelim ana
-dates=datesOrga('V3');
+dates=datesOrga('V4');
 %dates=[20200217];
 home=('Z:\Kate\KA001');
 for i_date = 1 : length(dates)
