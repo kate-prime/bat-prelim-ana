@@ -36,7 +36,7 @@ for idx1=1:size(object,2)
         ylim([-120 -50])
         
     end
-    saveas(gcf,['/Users/angie/Google Drive/Bats/NSF shapes project/neural_stim_',object{idx1},'_',cluttercond{idx2},'.png'])
+    saveas(gcf,['/Users/angie/Google Drive/Bats/NSF shapes project/Neural_stim_figs/neural_stim_',object{idx1},'_',cluttercond{idx2},'.png'])
 end
 
 %%
