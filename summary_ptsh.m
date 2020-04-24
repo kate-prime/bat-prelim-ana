@@ -10,15 +10,14 @@ for i=1:size(list,1)
     hold on
     for j=1:3 %remember that you hard coded this
         if j==1
-            %col = [0 0.4470 0.7410];
-            col = 'k';
-            data=summary.tonicpop.(shape).mean_10;
+            col = [0 0.4470 0.7410];
+            data=summary.(pop).(shape).mean_10;
         elseif j==2
             col = [0.6350 0.0780 0.1840];
-            data=summary.tonicpop.(shape).mean_20;
+            data=summary.(pop).(shape).mean_20;
         elseif j==3
             col = [0.4660 0.6740 0.1880];
-            data=summary.tonicpop.(shape).mean_40;
+            data=summary.(pop).(shape).mean_40;
         end
         mdata=mean(data,1);
         dev=std(data,0,1);

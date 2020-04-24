@@ -57,55 +57,56 @@ for i_date = 1 : length(dates)
                             summary.allpop.(name).raw_40(:,:,1)=gdata(:,:,3);
                         end
                     end
-%                 if peaks_data.onset>0
-%                     for j=1:length(list)
-%                         name=cell2mat(list(j));
-%                         mdata=groups.(name).mdata;
-%                         gdata=groups.(name).gdata;
-%                         try
-%                             summary.onsetpop.(name).ID(size(summary.onsetpop.(name).ID,1)+1,:)={[date,depth,fname]};
-%                             summary.onsetpop.(name).mean_10(size(summary.onsetpop.(name).mean_10,1)+1,:)=mdata(1,:);
-%                             summary.onsetpop.(name).mean_20(size(summary.onsetpop.(name).mean_20,1)+1,:)=mdata(2,:);
-%                             summary.onsetpop.(name).mean_40(size(summary.onsetpop.(name).mean_40,1)+1,:)=mdata(3,:);
-%                             summary.onsetpop.(name).raw_10(:,:,size(summary.onsetpop.(name).raw_10,3)+1)=gdata(:,:,1);
-%                             summary.onsetpop.(name).raw_20(:,:,size(summary.onsetpop.(name).raw_20,3)+1)=gdata(:,:,2);
-%                             summary.onsetpop.(name).raw_40(:,:,size(summary.onsetpop.(name).raw_40,3)+1)=gdata(:,:,3);
-%                         catch
-%                             summary.onsetpop.(name).ID(1,:)={[date,depth,fname]};
-%                             summary.onsetpop.(name).mean_10(1,:)=mdata(1,:);
-%                             summary.onsetpop.(name).mean_20(1,:)=mdata(2,:);
-%                             summary.onsetpop.(name).mean_40(1,:)=mdata(3,:);
-%                             summary.onsetpop.(name).raw_10(:,:,1)=gdata(:,:,1);
-%                             summary.onsetpop.(name).raw_20(:,:,1)=gdata(:,:,2);
-%                             summary.onsetpop.(name).raw_40(:,:,1)=gdata(:,:,3);
-%                         end
-%                     end
-%                 else
-%                     for j=1:length(list)
-%                         name=cell2mat(list(j));
-%                         mdata=groups.(name).mdata;
-%                         gdata=groups.(name).gdata;
-%                         try
-%                             summary.nonsetpop.(name).ID(size(summary.nonsetpop.(name).mean_10,1)+1,:)={[date,depth,fname]};
-%                             summary.nonsetpop.(name).mean_10(size(summary.nonsetpop.(name).mean_10,1)+1,:)=mdata(1,:);
-%                             summary.nonsetpop.(name).mean_20(size(summary.nonsetpop.(name).mean_20,1)+1,:)=mdata(2,:);
-%                             summary.nonsetpop.(name).mean_40(size(summary.nonsetpop.(name).mean_40,1)+1,:)=mdata(3,:);
-%                             summary.nonsetpop.(name).raw_10(:,:,size(summary.nonsetpop.(name).raw_10,3)+1)=gdata(:,:,1);
-%                             summary.nonsetpop.(name).raw_20(:,:,size(summary.nonsetpop.(name).raw_20,3)+1)=gdata(:,:,2);
-%                             summary.nonsetpop.(name).raw_40(:,:,size(summary.nonsetpop.(name).raw_40,3)+1)=gdata(:,:,3);
-%                         catch
-%                             summary.nonsetpop.(name).ID(1,:)={[date,depth,fname]};
-%                             summary.nonsetpop.(name).ID(1)={[date,depth,fname]};
-%                             summary.nonsetpop.(name).mean_10(1,:)=mdata(1,:);
-%                             summary.nonsetpop.(name).mean_20(1,:)=mdata(2,:);
-%                             summary.nonsetpop.(name).mean_40(1,:)=mdata(3,:);
-%                             summary.nonsetpop.(name).raw_10(:,:,1)=gdata(:,:,1);
-%                             summary.nonsetpop.(name).raw_20(:,:,1)=gdata(:,:,2);
-%                             summary.nonsetpop.(name).raw_40(:,:,1)=gdata(:,:,3);
-%                         end
-%                     end                    
-%                 end
-%             
+                    %% does it prefer call or echo?
+                if peaks_data.early>peaks_data.late
+                    for j=1:length(list)
+                        name=cell2mat(list(j));
+                        mdata=groups.(name).mdata;
+                        gdata=groups.(name).gdata;
+                        try
+                            summary.earlypop.(name).ID(size(summary.earlypop.(name).ID,1)+1,:)={[date,depth,fname]};
+                            summary.earlypop.(name).mean_10(size(summary.earlypop.(name).mean_10,1)+1,:)=mdata(1,:);
+                            summary.earlypop.(name).mean_20(size(summary.earlypop.(name).mean_20,1)+1,:)=mdata(2,:);
+                            summary.earlypop.(name).mean_40(size(summary.earlypop.(name).mean_40,1)+1,:)=mdata(3,:);
+                            summary.earlypop.(name).raw_10(:,:,size(summary.earlypop.(name).raw_10,3)+1)=gdata(:,:,1);
+                            summary.earlypop.(name).raw_20(:,:,size(summary.earlypop.(name).raw_20,3)+1)=gdata(:,:,2);
+                            summary.earlypop.(name).raw_40(:,:,size(summary.earlypop.(name).raw_40,3)+1)=gdata(:,:,3);
+                        catch
+                            summary.earlypop.(name).ID(1,:)={[date,depth,fname]};
+                            summary.earlypop.(name).mean_10(1,:)=mdata(1,:);
+                            summary.earlypop.(name).mean_20(1,:)=mdata(2,:);
+                            summary.earlypop.(name).mean_40(1,:)=mdata(3,:);
+                            summary.earlypop.(name).raw_10(:,:,1)=gdata(:,:,1);
+                            summary.earlypop.(name).raw_20(:,:,1)=gdata(:,:,2);
+                            summary.earlypop.(name).raw_40(:,:,1)=gdata(:,:,3);
+                        end
+                    end
+                else
+                    for j=1:length(list)
+                        name=cell2mat(list(j));
+                        mdata=groups.(name).mdata;
+                        gdata=groups.(name).gdata;
+                        try
+                            summary.latepop.(name).ID(size(summary.latepop.(name).mean_10,1)+1,:)={[date,depth,fname]};
+                            summary.latepop.(name).mean_10(size(summary.latepop.(name).mean_10,1)+1,:)=mdata(1,:);
+                            summary.latepop.(name).mean_20(size(summary.latepop.(name).mean_20,1)+1,:)=mdata(2,:);
+                            summary.latepop.(name).mean_40(size(summary.latepop.(name).mean_40,1)+1,:)=mdata(3,:);
+                            summary.latepop.(name).raw_10(:,:,size(summary.latepop.(name).raw_10,3)+1)=gdata(:,:,1);
+                            summary.latepop.(name).raw_20(:,:,size(summary.latepop.(name).raw_20,3)+1)=gdata(:,:,2);
+                            summary.latepop.(name).raw_40(:,:,size(summary.latepop.(name).raw_40,3)+1)=gdata(:,:,3);
+                        catch
+                            summary.latepop.(name).ID(1,:)={[date,depth,fname]};
+                            summary.latepop.(name).ID(1)={[date,depth,fname]};
+                            summary.latepop.(name).mean_10(1,:)=mdata(1,:);
+                            summary.latepop.(name).mean_20(1,:)=mdata(2,:);
+                            summary.latepop.(name).mean_40(1,:)=mdata(3,:);
+                            summary.latepop.(name).raw_10(:,:,1)=gdata(:,:,1);
+                            summary.latepop.(name).raw_20(:,:,1)=gdata(:,:,2);
+                            summary.latepop.(name).raw_40(:,:,1)=gdata(:,:,3);
+                        end
+                    end                    
+                end
+            
             %% is it a sharp responder?        
                 list=fieldnames(groups);
                 if peaks_data.sharp>peaks_data.tonic

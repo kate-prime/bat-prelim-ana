@@ -22,8 +22,8 @@ for i_date = 1 : length(dates)
             trials=spike_data.spike_times;
             sr=1000;
             [fig,groups_3]=makepsth(trials,sr,20,3);
-            save([fname(1:end-4),'_psth'],'groups_3');
-            saveas(fig,[fname(1:end-4) '_psth.png'])
+            save([fname(1:end-4),'_psth'],'groups_3','-append');
+            %saveas(fig,[fname(1:end-4) '_psth.png'])
             close all
         end
     end
