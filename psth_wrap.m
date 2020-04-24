@@ -1,8 +1,8 @@
 
 %a wrapper for making psth figures for clutter conditions
 
-%dates=datesOrga('V3');
-dates=20191112;
+dates=datesOrga('V4');
+%dates=20191112;
 home=('Z:\Kate\KA001');
 for i_date = 1 : length(dates)
     date= num2str(dates(i_date));
@@ -21,8 +21,8 @@ for i_date = 1 : length(dates)
             disp([file_dir(i_data).folder,'/', file_dir(i_data).name]) %can be removed but makes sure I record what files are being loaded
             trials=spike_data.spike_times;
             sr=1000;
-            [fig,groups]=makepsth(trials,sr,20);
-            save([fname(1:end-4),'_psth'],'groups');
+            [fig,groups_3]=makepsth(trials,sr,20,3);
+            save([fname(1:end-4),'_psth'],'groups_3');
             saveas(fig,[fname(1:end-4) '_psth.png'])
             close all
         end
