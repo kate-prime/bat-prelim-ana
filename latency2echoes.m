@@ -11,7 +11,7 @@ stimulus = {'00echo_10msdelay' '20echo_10msdelay'};
 warning('if it is angies computer disk is W if it is kates it is Z, check path settings')
 
 path='W:\Kate\KA001\Analyzed\';
-
+abccol = cell(1,2);
 
 for idate=1:length(dates)
     day=num2str(dates(idate));
@@ -56,6 +56,7 @@ for idate=1:length(dates)
                 echo_resp(echo_resp<10)=NaN; %this line is to filter the responses before the first echo
                 echo_resp=echo_resp-10; %with this line I make the latency relative to the object echo
                 abc = histcounts(echo_resp(:), abcedges);
+                abccol{idxS}{end+1} = abc;
                 xvalss=repelem(abcedges,2);
                 yvalss=[0, repelem(abc,2), 0];
                 plot(xvalss,yvalss,'LineWidth',1.5)
@@ -77,7 +78,17 @@ for idate=1:length(dates)
         
     end
 end
-
+%%
+figure
+hold on
+x = cell2mat(abccol{1}')
+plot(abcedges(1:end-1),mean(x)+std(x))
+plot(abcedges(1:end-1),mean(x)-std(x))
+plot(abcedges(1:end-1),mean(x))
+x = cell2mat(abccol{2}')
+plot(abcedges(1:end-1),mean(x)+std(x))
+plot(abcedges(1:end-1),mean(x)-std(x))
+plot(abcedges(1:end-1),mean(x))
 
 %% combined latency analysis
 for iNum = 1 : length(dates)
