@@ -5,7 +5,7 @@ if pull==1
     groups=struct;
     groups.cyls.nums=[54 55 56];
     groups.cubes.nums=[57 58 59];
-    groups.spheres.nums=[61 60 61]; %this is not a good solution, but will keep code from breaking
+    groups.spheres.nums=[61 60]; %this is not a good solution, but will keep code from breaking
     groups.LDs.nums=[62 63 64];
     groups.SDs.nums=[65 66 67];
     groups.MPs.nums=[68 69 70];

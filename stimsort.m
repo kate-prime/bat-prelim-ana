@@ -5,6 +5,7 @@ close all
 %versionX='V3' made inputable
 
 [ dates, stimnumb3D, stimnumbClutter, stimnumbFT ] = datesOrga(versionX)
+%dates=20200214;
 % if strcmp(versionX,'V3')
 %     dates = [20180411  20180608  20180611 20180606 20180607];
 %     stimnumb=680; %change if needed is numb of different stim*times played each stim, usually 20

@@ -17,8 +17,10 @@ for i=1:size(list,1)
             data=summary.(pop).(shape).mean_20;
         elseif j==3
             col = [0.4660 0.6740 0.1880];
+            try
             data=summary.(pop).(shape).mean_40;
-        end
+            end
+         end
         mdata=mean(data,1);
         dev=std(data,0,1);
         t=1:size(mdata,2);

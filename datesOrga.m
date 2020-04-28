@@ -20,7 +20,7 @@ end
 
 %V3 was deleted cause it was a subset of V4
 if strcmp(versionX,'V4')
-    dates=[ 20200123 20200217,20191105,20191106,20191107,20191108,20191112];% 20200214    20200213 and 20200120 are being re waveclused ,  date 1111 has been deleted for good 
+    dates=[ 20200123 20200217,20191105,20191106,20191107,20191108,20191112 20200214];%     20200213 and 20200120 are being re waveclused ,  date 1111 has been deleted for good 
     subProws=10;
     stimnumb3D=880;
     stimnumbClutter=1400;
