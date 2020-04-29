@@ -3,7 +3,7 @@ function uncat_AngieMod (versionX) %written by KAllen, modified by ASalles
 %each depth, each reference works for all channels
 
 dates = datesOrga(versionX);
-%dates= 20200214;
+%dates= 20200120;
 
 for idx_day=1:length(dates)
     day=num2str(dates(idx_day))
