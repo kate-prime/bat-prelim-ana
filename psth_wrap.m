@@ -21,9 +21,9 @@ for i_date = 1 : length(dates)
             disp([file_dir(i_data).folder,'/', file_dir(i_data).name]) %can be removed but makes sure I record what files are being loaded
             trials=spike_data.spike_times;
             sr=1000;
-            [fig,groups_7]=makepsth(trials,sr,20,7);
-            save([fname(1:end-4),'_psth'],'groups_7');
-            saveas(fig,[fname(1:end-4) '_psth.png'])
+            [fig,groups_5]=makepsth(trials,sr,20,5);
+            save([fname(1:end-4),'_psth'],'groups_5','-append');
+            %saveas(fig,[fname(1:end-4) '_psth.png'])
             close all
         end
     end
