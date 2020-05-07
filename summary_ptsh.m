@@ -11,14 +11,14 @@ for i=1:size(list,1)
     for j=1:3 %remember that you hard coded this
         if j==1
             col = [0 0.4470 0.7410];
-            data=summary.(pop).(shape).mean_10;
+            data=summary.(pop).(shape).mean_0;
         elseif j==2
             col = [0.6350 0.0780 0.1840];
-            data=summary.(pop).(shape).mean_20;
+            data=summary.(pop).(shape).mean_45;
         elseif j==3
             col = [0.4660 0.6740 0.1880];
             try
-            data=summary.(pop).(shape).mean_40;
+            data=summary.(pop).(shape).mean_90;
             end
          end
         mdata=mean(data,1);
@@ -31,6 +31,6 @@ for i=1:size(list,1)
     title(shape)
     xlabel('Time (ms)')
     ylabel('FR (Hz)')
-    ylim([0 150])
+    ylim([0 30])
     end
 end
