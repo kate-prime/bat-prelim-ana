@@ -23,16 +23,17 @@ for i=1:size(list,1)
         end
         data=trials(:,(use(j)*reps-19):use(j)*reps);
         [bins,val]=binfun2(data,45,1);
-        %[gdata,mdata,dev]=gsmooth(val,sr,3);%lets just go with spike count
+        [gdata,mdata,dev]=gsmooth(val,sr,3);%lets just go with spike count
         %for now
-        mdata=sum(val,1);
+        %mdata=sum(val,1);
         t=bins(1,1:end-1);
         plot(t,mdata,'LineWidth',2,'color',col)
         %plot(t,(mdata+dev),'LineWidth',.5,'color',col)
         %plot(t,(mdata-dev),'LineWidth',.5,'color',col)
-        groups.(shape).gdata(:,:,j)=val;
+        %groups.(shape).gdata(:,:,j)=val;
+        groups.(shape).gdata(:,:,j)=gdata;
         groups.(shape).mdata(j,:)=mdata;
-        %groups.(shape).dev(j,:)=dev;
+        groups.(shape).dev(j,:)=dev;
     end
     title(shape)
     xlabel('Time (ms)')
