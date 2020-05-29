@@ -15,9 +15,9 @@ tonic=zeros(size(storageunit_means,1));
 sharp=zeros(size(storageunit_means,1));
 
 for ii=1:size(storageunit_means,1)
-    [pks, locs, widths, proms]=findpeaks(storageunit_means(ii)); %finds local peaks in smoothed data
+    [pks, locs, widths, proms]=findpeaks(storageunit_means(ii,:)); %finds local peaks in smoothed data
     %measures peak at half prom, but can be changed to half height
-    name=storageunit_names(ii,:);
+    name=cell2mat(storageunit_names(ii,:));
     peak_data.(name).pks=pks;
     peak_data.(name).locs=locs;
     peak_data.(name).widths=widths;

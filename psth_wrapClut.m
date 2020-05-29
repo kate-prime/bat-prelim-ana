@@ -3,7 +3,7 @@
 
 dates=datesOrga('V4');
 %dates=20200214;
-home=('Z:\Kate\KA001');
+home=('/Volumes/Data4/Kate/KA001');
 for i_date = 1 : length(dates)
     date= num2str(dates(i_date));
     folder_dir=dir([home,'/Analyzed/',date,'/Clut*']);
