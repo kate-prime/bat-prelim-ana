@@ -19,7 +19,7 @@ for idxRAS=1:20:length(data)
         %plot(call_onset(idxRAS,1)+15,10,'*b');
         %title(num2str(call_onset(idxRAS,1)))
      end
-     plot(t,(mean(stim_reps(idxRAS:idxRAS+19,:),1).*2),'b')
+     %plot(t,(mean(stim_reps(idxRAS:idxRAS+19,:),1).*2),'b')
      thing = val((round(idxRAS/reps)+1),:); %changed because it kept plotting sideways? KA;
      t2=bins((round(idxRAS/reps)+1),:);
     plot(t2,thing,'-r')

@@ -19,10 +19,10 @@ for i_date = 1 : length(dates)
         for i_data=1:size(file_dir,1)
             cd([home,'/Analyzed/',date,'/',depth,'/'])
             fname=file_dir(i_data,1).name;
-            load([file_dir(i_data).folder,'/', file_dir(i_data).name],'groups_7');
+            load([file_dir(i_data).folder,'/', file_dir(i_data).name],'groups_7_2ms');
             disp([file_dir(i_data).folder,'/', file_dir(i_data).name]) %can be removed but makes sure I record what files are being loaded
             
-            groups=groups_7;%remember this
+            groups=groups_7_2ms;%remember this
             
             fave=findfave(groups);
 %             fave=cell2mat(fave);

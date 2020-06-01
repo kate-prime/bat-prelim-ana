@@ -8,7 +8,7 @@ for i =1:length(list)
     end
 end
 num=3;    
-colors=hsv(num);
+colors=parula(num);
 mbox=NaN(num,size(dumb,2));
 devbox=NaN(num,size(dumb,2));
 for k=1:num
@@ -33,5 +33,5 @@ for m=1:size(list,1)
     end
     title(shape)
     xlabel('Time (ms)')
-    ylabel('spike count')
+    ylabel('Firing Rate (Hz)')
 end

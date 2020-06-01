@@ -31,6 +31,6 @@ for i=1:size(list,1)
     title(shape)
     xlabel('Time (ms)')
     ylabel('FR (Hz)')
-    ylim([0 30])
+    ylim([0 300])
     end
 end
