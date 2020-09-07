@@ -82,7 +82,7 @@ if n~=1  %find peaks in post call hist
         hold on
         scatter(stim_data(1:size(spike_data.count,1),2),spike_data.count,'filled','b')
         scatter((1:8),means(2,1:8),'filled','k')
-        xlim([0 9])
+        xlim([0 8])
         title(h(2),'Object')
         hold off
         h(3)=subplot(1,3,3);
@@ -108,14 +108,10 @@ if n~=1  %find peaks in post call hist
         indcube=find(jitter_box(:,3)==2);
         indLD=find(jitter_box(:,3)==3);
         indSD=find(jitter_box(:,3)==4);
-        indAMPcyl=find(jitter_box(:,3)==5);%by object
-        indAMPcube=find(jitter_box(:,3)==6);
-        indAMPLD=find(jitter_box(:,3)==7);
-        indAMPSD=find(jitter_box(:,3)==8);
-        means(2,1,2)=mean(jitter_box(indAMPcyl,1)); 
-        means(2,2,2)=mean(jitter_box(indAMPcube,1));
-        means(2,3,2)=mean(jitter_box(indAMPLD,1));
-        means(2,4,2)=mean(jitter_box(indAMPSD,1));
+        means(2,1,2)=mean(jitter_box(indcyl,1)); 
+        means(2,2,2)=mean(jitter_box(indcube,1));
+        means(2,3,2)=mean(jitter_box(indLD,1));
+        means(2,4,2)=mean(jitter_box(indSD,1));
         
         ind0=find(jitter_box(:,4)==0);
         ind45=find(jitter_box(:,4)==45);
@@ -139,7 +135,7 @@ if n~=1  %find peaks in post call hist
         hold on
         scatter(stim_data(1:size(spike_data.jitter,1),2),spike_data.jitter,'filled','b')
         scatter((1:4),means(2,1:4,2),'filled','k')
-        xlim([0 9])
+        xlim([0 5])
         title(h(2),'Object')
         hold off
         h(3)=subplot(1,3,3);
