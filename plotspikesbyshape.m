@@ -4,7 +4,7 @@ dumb=zeros(size(summary.allpop.cyls.ID,1),45*length(list));
 for i =1:length(list)
     shape=cell2mat(list(i));
     try
-    dumb(:,((i*45)-44):i*45)=summary.allpop.(shape).mean_90(:,:); %this is what to change
+    dumb(:,((i*45)-44):i*45)=summary.allpop.(shape).mean_40(:,:); %this is what to change
     end
 end
 num=3;    

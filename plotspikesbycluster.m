@@ -3,10 +3,10 @@ list=fieldnames(summary.allpop);
 dumb=zeros(size(summary.allpop.cyls.ID,1),45*length(list));
 for i =1:length(list)
     shape=cell2mat(list(i));
-    dumb(:,((i*45)-44):i*45)=summary.allpop.(shape).mean_0(:,:); 
-    dumb2(:,((i*45)-44):i*45)=summary.allpop.(shape).mean_45(:,:);
+    dumb(:,((i*45)-44):i*45)=summary.allpop.(shape).mean_10(:,:); 
+    dumb2(:,((i*45)-44):i*45)=summary.allpop.(shape).mean_20(:,:);
     try
-    dumb3(:,((i*45)-44):i*45)=summary.allpop.(shape).mean_90(:,:);
+    dumb3(:,((i*45)-44):i*45)=summary.allpop.(shape).mean_40(:,:);
     end
 end
 num=3;    

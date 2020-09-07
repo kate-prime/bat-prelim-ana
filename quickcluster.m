@@ -5,7 +5,7 @@ list=fieldnames(summary.allpop);
 dumb=zeros(size(summary.allpop.cyls.ID,1),45*length(list));
 for i =1:length(list)
     shape=cell2mat(list(i));
-    dumb(:,((i*45)-44):i*45)=summary.allpop.(shape).mean_0(:,:); %this is not a great solution, 
+    dumb(:,((i*45)-44):i*45)=summary.allpop.(shape).mean_10(:,:); %this is not a great solution, 
     %but the idea is to keep time as a variable, but collapse across shapes
 end
     
