@@ -1,3 +1,5 @@
+asdf
+%old version of 3d, should be merged into second_ana_clut
 
 function [h1,h2,h3,pref_delay,pref_obj,pref_ang,means,use]=second_ana(spike_data,stim_data)
 %KA 2019
@@ -199,3 +201,4 @@ if use==0
 end
     % Kate: worth determinine peak fr from isi? probably unless most are very low
     % firing
+=======

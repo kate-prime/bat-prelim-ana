@@ -1,6 +1,6 @@
+%last touched by KA 20200229
 
-
-function [spk_number,jitter,spikerate,resp_dur_total,latency] = Countspikes_ana(times,spiketimes,r,x,bins,delay,val,len,wind,reps,echo)
+function [spk_number,jitter,spikerate,resp_dur_total,latency] = Countspikes_ana(times,spiketimes,r,x,bins,delay,val,wind,reps,echo)
 %Modified from AS by KA 2019
 %function for preliminary analysis on spikes data from wave_clus
 %x=stim you're on (numeral)
@@ -9,7 +9,6 @@ function [spk_number,jitter,spikerate,resp_dur_total,latency] = Countspikes_ana(
 %r=size of spike matrix
 %bins is bin ID from binfun
 %val spike count in bins from binfun
-%len=length of stimulus window in ms
 %wind=window of the response to analayze in ms
 %delay=length from stim start to call onset in ms
 %reps is stimulus repeats

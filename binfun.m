@@ -11,7 +11,7 @@ function [data,bins,val]=binfun(data,len,wid,reps)
 
 for j=1:reps:length(data) %deletes spikes that happen after stimulus (between stim and TTL)
     trials_temp = data (:,j:j+reps-1);
-    trials_temp(trials_temp > (len+reps)) = NaN;
+    trials_temp(trials_temp > (len)) = NaN;
     data (:,j:j+(reps-1)) = trials_temp;
 end
   
