@@ -59,6 +59,7 @@ for m=1:size(list,1)
     plot(t,seg3-devbox3(3),'LineWidth',.5,'color',colors(3,:))
     
     title(shape)
+    ylim([0 150])
     xlabel('Time (ms)')
     ylabel('Firing Rate (Hz)')
 end
@@ -90,6 +91,7 @@ for m=1:size(list,1)
     plot(t,seg3-devbox3(3),'LineWidth',.5,'color',colors(3,:))
     
     title(shape)
+    ylim([0 150])
     xlabel('Time (ms)')
     ylabel('Firing Rate(Hz)')
 end
@@ -121,6 +123,7 @@ for m=1:size(list,1)
     plot(t,seg3-devbox3(3),'LineWidth',.5,'color',colors(3,:))
     
     title(shape)
+    ylim([0 150])
     xlabel('Time (ms)')
     ylabel('Firing Rate (Hz)')
 end

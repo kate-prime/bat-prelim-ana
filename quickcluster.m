@@ -13,6 +13,7 @@ distances=tsne(dumb,'NumDimensions',3);
 
 figure;
 scatter3(distances(:,1),distances(:,2),distances(:,3));
+%scatter(distances(:,1),distances(:,2))
 pause;
 close
 
@@ -26,6 +27,7 @@ scplot=figure;
 hold on
 for j=1:length(idx)
     scatter3(distances(j,1),distances(j,2),distances(j,3),15, colors(idx(j),:),'filled');
+    %scatter(distances(j,1),distances(j,2),15, colors(idx(j),:),'filled');
 end
 hold off
 mbox=NaN(num,size(dumb,2));

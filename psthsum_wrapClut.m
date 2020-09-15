@@ -1,14 +1,21 @@
 
 %a wrapper for making psth figures for clutter conditions
 
-dates=datesOrga('V4');
-%dates=[20191106];
+dates1=datesOrga('V2');
+dates2=datesOrga('V4');
+dates=[dates1,dates2];
 summary=struct;
 
-home=('/Volumes/Data4/Kate/KA001');
+home=('Z:\Kate\KA001\');
 for i_date = 1 : length(dates)
     date= num2str(dates(i_date));
-    folder_dir=dir([home,'/Analyzed/',date,'/Clut*']);
+        folder_dir1=dir([home,'Analyzed/',date,'/All*']);
+        folder_dir2=dir([home,'Analyzed/',date,'/Clut*']);
+        if length(folder_dir1)>length(folder_dir2)
+            folder_dir=folder_dir1;
+        else
+            folder_dir=folder_dir2;
+        end
     for i_dep=1:length(folder_dir)
         depth= folder_dir(i_dep).name;
         
@@ -201,4 +208,4 @@ for i_date = 1 : length(dates)
         end
     end
 end
-        save('summary_ptsh_dataClut','summary');
+        save('summary_ptsh_dataClut_all','summary');

@@ -4,7 +4,7 @@ dumb=zeros(size(summary.allpop.cyls.ID,1),45*length(list));
 for i =1:length(list)
     shape=cell2mat(list(i));
     try
-    dumb(:,((i*45)-44):i*45)=summary.allpop.(shape).mean_40(:,:); %this is what to change
+    dumb(:,((i*45)-44):i*45)=summary.allpop.(shape).mean_10(:,:); %this is what to change
     end
 end
 num=3;    
@@ -32,6 +32,7 @@ for m=1:size(list,1)
         plot(t,seg-devbox(n),'LineWidth',.5,'color',colors(n,:))
     end
     title(shape)
+    ylim([0 200])
     xlabel('Time (ms)')
     ylabel('Firing Rate (Hz)')
 end

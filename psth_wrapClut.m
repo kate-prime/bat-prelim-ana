@@ -1,29 +1,29 @@
 
 %a wrapper for making psth figures for clutter conditions
 
-dates=datesOrga('V4');
+dates=datesOrga('V2');
 %dates=20200214;
-home=('/Volumes/Data4/Kate/KA001');
+home=('Z:\Kate\KA001');
 for i_date = 1 : length(dates)
     date= num2str(dates(i_date));
-    folder_dir=dir([home,'/Analyzed/',date,'/Clut*']);
+    folder_dir=dir([home,'/Analyzed/',date,'/All*']);
     for i_dep=1:length(folder_dir)
         depth= folder_dir(i_dep).name;
         
         if length(depth)<3 
             continue
         end
-        file_dir=dir([home,'/Analyzed/',date,'/',depth,'/*_prelim.mat']);
+        file_dir=dir([home,'/Analyzed/',date,'/',depth,'/*_prelim3.mat']);
         for i_data=1:size(file_dir,1)
             cd([home,'/Analyzed/',date,'/',depth,'/'])
             fname=file_dir(i_data,1).name;
-            load([file_dir(i_data).folder,'/', file_dir(i_data).name],'spike_data');            
+            load([file_dir(i_data).folder,'/', file_dir(i_data).name],'spike_data');           
             disp([file_dir(i_data).folder,'/', file_dir(i_data).name]) %can be removed but makes sure I record what files are being loaded
-            trials=spike_data.spike_times;
+            trials=spike_data.spike_times;%or spike_times
             sr=1000;
-            [fig,groups_3]=makepsth(trials,sr,20,3);
-            save([fname(1:end-4),'_psth'],'groups_3','-append');
-            %saveas(fig,[fname(1:end-4) '_psth.png'])
+            [fig,groups_3]=makepsth(trials,sr,20,9);
+            save([fname(1:end-4),'_psth'],'groups_3');
+            saveas(fig,[fname(1:end-4) '_psth.png'])
             close all
         end
     end

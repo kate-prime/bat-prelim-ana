@@ -1,5 +1,5 @@
 %Modified from AS by KA 2019
-function [fig,spike_data]=prelim_ana(fname,data,call_onset,delay,len,wind,reps,subProws)
+function [spike_data]=prelim_ana(fname,data,call_onset,delay,len,wind,reps,subProws)
 
 %type: 1=3D, 2=FT
 %FUTURE KATE: figure out if you wanna loop or run FT and 3D separate, just
@@ -52,7 +52,7 @@ for n=1:size(call_onset,1)
 end
 
 %% Make the rasters 
-fig=makeras(data,len,reps,stim3D,subProws); %including stims here isn't necessesary, just adds a plot on the raster
+%fig=makeras(data,len,reps,subProws); %including stims here isn't necessesary, just adds a plot on the raster
 
 %% set up storage cells
 num=(size(data,2)/reps);
@@ -86,7 +86,7 @@ for x=1:(size(data,2)/reps)
     times=call_onset(r1:r2,:); %all onset times for that stim
     echoX=echos(x);
     %% Actually do the analysis
-    [spk_number,jitter,spikerate,resp_dur_total,latency] = Countspikes_ana(times,spiketimes,r,x,bins,delay,val,len,wind,reps,echoX);
+    [spk_number,jitter,spikerate,resp_dur_total,latency] = Countspikes_ana(times,spiketimes,r,x,bins,delay,val,wind,reps,echoX);
     
     spike_data.spikenumber(x,:) =spk_number';
     spike_data.jitter(x,:)=jitter;
@@ -95,6 +95,7 @@ for x=1:(size(data,2)/reps)
     spike_data.times(x,:)=times';
     spike_data.dur_total(x,:) = resp_dur_total;
     spike_data.fr_all(x,:) = spikerate;
+    spike_data.spike_times = data;
 
     %bad neurons will be filtered at next step by spike count and echo
     %response

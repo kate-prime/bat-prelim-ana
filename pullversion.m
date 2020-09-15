@@ -66,4 +66,15 @@ elseif pull==8
     groups.cubes.nums=[15 16];
     groups.LDs.nums=[17 18 19];
     groups.SDs.nums=[20 21 22];
+    
+    %%this is bad and disorganized but whatever
+elseif pull==9
+    %V2 pairs, not amp corrected clutter with 10ms delay
+    groups=struct;
+    groups.cyls.nums=[2 5 8];
+    groups.cubes.nums=[11 14 17];
+    groups.spheres.nums=[53 20 23];
+    groups.LDs.nums=[26 29 32];
+    groups.SDs.nums=[35 38 41];
+    groups.MPs.nums=[44 47 50];
 end

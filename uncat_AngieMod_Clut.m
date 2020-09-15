@@ -7,7 +7,7 @@ dates = datesOrga(versionX);
 
 for idx_day=1:length(dates)
     day=num2str(dates(idx_day))
-pathtouncat=['Z:\Kate\KA001\IC units\',day,'\Matfile'];%put the path that leads to the files you want to uncat
+pathtouncat=['Z:\Kate\KA001\IC units\',day];%put the path that leads to the files you want to uncat
 depthlist=dir([pathtouncat,'\All*']);
 
 for idx_depth=1:length(depthlist)

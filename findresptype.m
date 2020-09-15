@@ -17,7 +17,6 @@ early=zeros(size(storageunit_means,1),1);
 late=zeros(size(storageunit_means,1),1);
 
 for ii=1:size(storageunit_means,1)
-<<<<<<< HEAD
     [pks, locs, widths, proms]=findpeaks(storageunit_means(ii,:),'MinPeakHeight',30);%remember that you lowered this %finds local peaks in smoothed data
     %measures peak at half prom, but can be changed to half height
     name=cell2mat(storageunit_names(ii,:));
@@ -47,7 +46,6 @@ for ii=1:size(storageunit_means,1)
        early(ii)=1;
    else
        late(ii)=1;
-=======
     [pks, locs, widths, proms]=findpeaks(storageunit_means(ii,:)); %finds local peaks in smoothed data
     %measures peak at half prom, but can be changed to half height
     name=cell2mat(storageunit_names(ii,:));
@@ -57,7 +55,6 @@ for ii=1:size(storageunit_means,1)
     peak_data.(name).proms=proms;
    if find(max(pks))<10
        onset(ii)=1;
->>>>>>> d05b47b4884e69fee92979ff2eb8a0a061a163c4
    end
    if max(widths)>=3%3 ms threshold for defining sharp, can be adjusted
        tonic(ii)=1;
@@ -80,7 +77,8 @@ peak_data.sharp=sharp;
 peak_data.echo=echo;
 peak_data.late=late;
 peak_data.early=early;
-
+end
+end
 
 
 
