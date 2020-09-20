@@ -12,8 +12,8 @@ for idx=1:1%size(catUnits,1)
     Chn=['C',depthChn{2}];
     WavClust=neuronInfo{3};
    
-    neuron2fish=([path,'\',date,'\Clut_',depth,'\',Chn,'_',WavClust,'_neruon.mat']);
-    load(neruon2fish)
+    neuron2fish=([path,'\',date,'\Clut_',depth,'\',Chn,'_',WavClust,'_neuron.mat']);
+    load(neuron2fish)
     
     
 end
