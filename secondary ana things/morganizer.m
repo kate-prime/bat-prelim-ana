@@ -1,34 +1,40 @@
 
 cd('Z:\Kate\KA001\current summary data\Clutter 2ms conv data')
-load ('clust1_40clut.mat')
+load ('clustered_psth_2.mat','cluster3')
 call=struct;
 echo=struct;
-
+names=fieldnames(cluster3.no);
 for i=1:6
-    call(i).data=m(i).data(:,1:15,:);
-    echo(i).data=m(i).data(:,15:end,:);
+    obj=cell2mat(names(i));
+    data=cluster3.no.(obj);
+    call(i).data=data(:,1:19,:);
+    echo(i).data=data(:,19:end,:);
 end
-save('c120clut_ce.mat','call','echo')
+save('c3noclut_ce.mat','call','echo')
 clear
 
-load ('clust2_40clut.mat')
+load ('clustered_psth_2.mat','cluster3')
 call=struct;
 echo=struct;
-
+names=fieldnames(cluster3.ten);
 for i=1:6
-    call(i).data=m(i).data(:,1:15,:);
-    echo(i).data=m(i).data(:,15:end,:);
+    obj=cell2mat(names(i));
+    data=cluster3.ten.(obj);
+    call(i).data=data(:,1:19,:);
+    echo(i).data=data(:,19:end,:);
 end
-save('c220clut_ce.mat','call','echo')
+save('c310clut_ce.mat','call','echo')
 clear
 
-load ('clust3_40clut.mat')
+load ('clustered_psth_2.mat','cluster3')
 call=struct;
 echo=struct;
-
+names=fieldnames(cluster3.twenty);
 for i=1:6
-    call(i).data=m(i).data(:,1:15,:);
-    echo(i).data=m(i).data(:,15:end,:);
+    obj=cell2mat(names(i));
+    data=cluster3.twenty.(obj);
+    call(i).data=data(:,1:19,:);
+    echo(i).data=data(:,19:end,:);
 end
 save('c320clut_ce.mat','call','echo')
 clear
