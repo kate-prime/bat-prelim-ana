@@ -138,7 +138,7 @@ LDE=powerspect_echoes(LD,98,@(x)x);
 SDE=powerspect_echoes(SD,98,@(x)x);
 MPE=powerspect_echoes(MP,98,@(x)x);
  yyaxis right
- %histogram(BFcolabs(:,1),15)
+ histogram(BFcolabs(:,1),15)
  %histogram(BFcol70(:,1),15)
- histogram(BFcolAmp(:,1),15)
+ %histogram(BFcolAmp(:,1),15)
 ylabel('Number of neurons')
