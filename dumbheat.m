@@ -1,7 +1,11 @@
-function conmat=dumbheat(vals,tidle);
+function cmat=dumbheat(vals,tidle) 
+%a function for making a confusion matrix from pairwise discrim ana
+%vals=mean min err values
+
 box=[];
 for i=1:6
-    temp=vals((i*6)-5:i*6);
+    
+        temp=vals((i*6)-5:i*6);
     box=[box,temp];
 end
 for j=1:size(box,1)
@@ -17,7 +21,7 @@ correct=othertemp-box;
 correct=correct.*100;
 
 
-conmat=figure;
+cmat=figure;
 heatmap(correct)
 colormap('parula')
 
