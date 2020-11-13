@@ -113,7 +113,7 @@ ylabel('Depth')
 title('BF at 70dBs')
 
 
-%%
+%% POWER SPEC no Clutter
 
 
 load('clutter_v2.mat')
@@ -129,7 +129,34 @@ cubeE=powerspect_echoes(cube,96,@(x)x);
 LDE=powerspect_echoes(LD,96,@(x)x);
 SDE=powerspect_echoes(SD,96,@(x)x);
 MPE=powerspect_echoes(MP,96,@(x)x);
+%% POWER SPEC 10 Clutter
+cyl=stim.cyl_10echo_10msdelay(3750:end);
+cube=stim.cube_10echo_10msdelay(3750:end);
+LD=stim.LD_10echo_10msdelay(3750:end);
+SD=stim.SD_10echo_10msdelay(3750:end);
+MP=stim.MP_10echo_10msdelay(3750:end);
 
+
+[cylE,xx]=powerspect_echoes(cyl,96,@(x)x);
+cubeE=powerspect_echoes(cube,96,@(x)x);
+LDE=powerspect_echoes(LD,96,@(x)x);
+SDE=powerspect_echoes(SD,96,@(x)x);
+MPE=powerspect_echoes(MP,96,@(x)x);
+title('Clutter at 10 cm')
+%% POWER SPEC 20 Clutter
+cyl=stim.cyl_20echo_10msdelay(3750:end);
+cube=stim.cube_20echo_10msdelay(3750:end);
+LD=stim.LD_20echo_10msdelay(3750:end);
+SD=stim.SD_20echo_10msdelay(3750:end);
+MP=stim.MP_20echo_10msdelay(3750:end);
+
+
+[cylE,xx]=powerspect_echoes(cyl,96,@(x)x);
+cubeE=powerspect_echoes(cube,96,@(x)x);
+LDE=powerspect_echoes(LD,96,@(x)x);
+SDE=powerspect_echoes(SD,96,@(x)x);
+MPE=powerspect_echoes(MP,96,@(x)x);
+title('Clutter at 20 cm')
 %%
 
 [cylE,xx]=powerspect_echoes(cyl,98,@(x)x);
@@ -142,3 +169,14 @@ MPE=powerspect_echoes(MP,98,@(x)x);
  %histogram(BFcol70(:,1),15)
  %histogram(BFcolAmp(:,1),15)
 ylabel('Number of neurons')
+
+%%
+figure
+abswithJit=BFcolabs(:,1)+((rand([length(BFcolabs),1])*10));
+depthwithjit=BFcolabs(:,2)+((rand([length(BFcolabs),1])*50));
+scatter(abswithJit,depthwithjit,'filled','MarkerEdgeColor','k', 'MarkerFaceColor',[0.4660 0.6740 0.1880])
+xlabel('BF (kHz)')
+ylabel('Depth')
+title('BF absolute')
+ylim([0 1400])
+xlim([10 95])
