@@ -1,6 +1,5 @@
-function cmat=dumbheat(vals,tidle) 
-%a function for making a confusion matrix from pairwise discrim ana
-%vals=mean min err values
+function cmat=dumbheatSD(vals) 
+%A dumb solution to a silly problem!
 
 %remember that you cut out sphere later
 
@@ -21,17 +20,11 @@ for j=1:size(box,1)
     end
 end
 
-othertemp=ones(size(box));
-correct=othertemp-box;
-correct=correct.*100;
-
-
+box=round(box,2);
 cmat=figure;
-heatmap(correct)
+heatmap(box)
 colormap('parula')
 
 xlabel('Object')
 ylabel('Object')
 caxis([50 100])
-
-title(tidle)
