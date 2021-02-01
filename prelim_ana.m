@@ -25,7 +25,7 @@ end
 
 
 %% make the bins
-[data,bins,val]=binfun(data,len,2,reps);
+
 bins(:,size(bins,2))=[];
 spike_data.hist{1,1}=bins;
 spike_data.hist{1,2}=val;

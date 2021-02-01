@@ -22,7 +22,7 @@ for idxRAS=1:20:length(data)
      %plot(t,(mean(stim_reps(idxRAS:idxRAS+19,:),1).*2),'b')
      thing = val((round(idxRAS/reps)+1),:); %changed because it kept plotting sideways? KA;
      t2=bins((round(idxRAS/reps)+1),:);
-    plot(t2,thing,'-r')
+    %plot(t2,thing,'-r')
     ylim([0 reps+10]);
 
 end
