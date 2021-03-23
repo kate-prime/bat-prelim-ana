@@ -48,7 +48,7 @@ for idx=1:size(catUnits,1)
     colormap('parula')
     title(strrep(neuronname,'_',' '))
     
-    %saveas(gcf,['W:\Kate\KA001\FTheatmaps\POP',num2str(POP),'\',neuronname,'.png'])
+    %saveas(gcf,['W:\Kate\KA001\FTheatmaps\matfigs\POP',num2str(POP),'\',neuronname])
     
     
     
