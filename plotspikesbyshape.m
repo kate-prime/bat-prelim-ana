@@ -28,11 +28,12 @@ for m=1:size(list,1)
         seg=mbox(n,((m*45)-44):m*45);
         t=1:size(seg,2);
         plot(t,seg,'LineWidth',2,'color',colors(n,:))
-        plot(t,seg+devbox(n),'LineWidth',.5,'color',colors(n,:))
-        plot(t,seg-devbox(n),'LineWidth',.5,'color',colors(n,:))
+        plot(t,seg+devbox(n),'LineWidth',.1,'color',colors(n,:))
+        plot(t,seg-devbox(n),'LineWidth',.1,'color',colors(n,:))
     end
     title(shape)
-    ylim([0 200])
+    ylim([0 120])
+    xlim([0 45])
     xlabel('Time (ms)')
     ylabel('Firing Rate (Hz)')
 end

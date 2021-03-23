@@ -43,25 +43,26 @@ for m=1:size(list,1)
     seg=mbox1(1,((m*45)-44):m*45);
     t=1:size(seg,2);
     plot(t,seg,'LineWidth',2,'color',colors(1,:))
-    plot(t,seg+devbox1(1),'LineWidth',.5,'color',colors(1,:))
-    plot(t,seg-devbox1(1),'LineWidth',.5,'color',colors(1,:))
+    plot(t,seg+devbox1(1),'LineWidth',.1,'color',colors(1,:))
+    plot(t,seg-devbox1(1),'LineWidth',.1,'color',colors(1,:))
     
     seg2=mbox2(1,((m*45)-44):m*45);
     t=1:size(seg2,2);
     plot(t,seg2,'LineWidth',2,'color',colors(2,:))
-    plot(t,seg2+devbox2(2),'LineWidth',.5,'color',colors(2,:))
-    plot(t,seg2-devbox2(2),'LineWidth',.5,'color',colors(2,:))
+    plot(t,seg2+devbox2(2),'LineWidth',.1,'color',colors(2,:))
+    plot(t,seg2-devbox2(2),'LineWidth',.1,'color',colors(2,:))
     
     seg3=mbox3(1,((m*45)-44):m*45);
     t=1:size(seg3,2);
     plot(t,seg3,'LineWidth',2,'color',colors(3,:))
-    plot(t,seg3+devbox3(3),'LineWidth',.5,'color',colors(3,:))
-    plot(t,seg3-devbox3(3),'LineWidth',.5,'color',colors(3,:))
+    plot(t,seg3+devbox3(3),'LineWidth',.1,'color',colors(3,:))
+    plot(t,seg3-devbox3(3),'LineWidth',.1,'color',colors(3,:))
     
     title(shape)
-    ylim([0 150])
+    ylim([0 120])
+    xlim([0 45])
     xlabel('Time (ms)')
-    ylabel('Firing Rate (Hz)')
+    ylabel('Instantaneous Firing Rate (Hz)')
 end
 
     frplot=figure;
@@ -75,25 +76,26 @@ for m=1:size(list,1)
     seg=mbox1(2,((m*45)-44):m*45);
     t=1:size(seg,2);
     plot(t,seg,'LineWidth',2,'color',colors(1,:))
-    plot(t,seg+devbox1(1),'LineWidth',.5,'color',colors(1,:))
-    plot(t,seg-devbox1(1),'LineWidth',.5,'color',colors(1,:))
+    plot(t,seg+devbox1(1),'LineWidth',.1,'color',colors(1,:))
+    plot(t,seg-devbox1(1),'LineWidth',.1,'color',colors(1,:))
     
     seg2=mbox2(2,((m*45)-44):m*45);
     t=1:size(seg2,2);
     plot(t,seg2,'LineWidth',2,'color',colors(2,:))
-    plot(t,seg2+devbox2(2),'LineWidth',.5,'color',colors(2,:))
-    plot(t,seg2-devbox2(2),'LineWidth',.5,'color',colors(2,:))
+    plot(t,seg2+devbox2(2),'LineWidth',.1,'color',colors(2,:))
+    plot(t,seg2-devbox2(2),'LineWidth',.1,'color',colors(2,:))
     
     seg3=mbox3(2,((m*45)-44):m*45);
     t=1:size(seg3,2);
     plot(t,seg3,'LineWidth',2,'color',colors(3,:))
-    plot(t,seg3+devbox3(3),'LineWidth',.5,'color',colors(3,:))
-    plot(t,seg3-devbox3(3),'LineWidth',.5,'color',colors(3,:))
+    plot(t,seg3+devbox3(3),'LineWidth',.1,'color',colors(3,:))
+    plot(t,seg3-devbox3(3),'LineWidth',.1,'color',colors(3,:))
     
     title(shape)
-    ylim([0 150])
+    ylim([0 120])
+    xlim([0 45])
     xlabel('Time (ms)')
-    ylabel('Firing Rate(Hz)')
+    ylabel('Instantaneous Firing Rate (Hz)')
 end
 
     frplot=figure;
@@ -107,23 +109,24 @@ for m=1:size(list,1)
     seg=mbox1(3,((m*45)-44):m*45);
     t=1:size(seg,2);
     plot(t,seg,'LineWidth',2,'color',colors(1,:))
-    plot(t,seg+devbox1(1),'LineWidth',.5,'color',colors(1,:))
-    plot(t,seg-devbox1(1),'LineWidth',.5,'color',colors(1,:))
+    plot(t,seg+devbox1(1),'LineWidth',.1,'color',colors(1,:))
+    plot(t,seg-devbox1(1),'LineWidth',.1,'color',colors(1,:))
     
     seg2=mbox2(3,((m*45)-44):m*45);
     t=1:size(seg2,2);
     plot(t,seg2,'LineWidth',2,'color',colors(2,:))
-    plot(t,seg2+devbox2(2),'LineWidth',.5,'color',colors(2,:))
-    plot(t,seg2-devbox2(2),'LineWidth',.5,'color',colors(2,:))
+    plot(t,seg2+devbox2(2),'LineWidth',.1,'color',colors(2,:))
+    plot(t,seg2-devbox2(2),'LineWidth',.1,'color',colors(2,:))
     
     seg3=mbox3(3,((m*45)-44):m*45);
     t=1:size(seg3,2);
     plot(t,seg3,'LineWidth',2,'color',colors(3,:))
-    plot(t,seg3+devbox3(3),'LineWidth',.5,'color',colors(3,:))
-    plot(t,seg3-devbox3(3),'LineWidth',.5,'color',colors(3,:))
+    plot(t,seg3+devbox3(3),'LineWidth',.1,'color',colors(3,:))
+    plot(t,seg3-devbox3(3),'LineWidth',.1,'color',colors(3,:))
     
     title(shape)
-    ylim([0 150])
+    ylim([0 120])
+    xlim([0 45])
     xlabel('Time (ms)')
-    ylabel('Firing Rate (Hz)')
+    ylabel('Instantaneous Firing Rate (Hz)')
 end

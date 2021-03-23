@@ -23,7 +23,7 @@ for i=1:size(list,1)
         end
         data=trials(:,(use(j)*reps-19):use(j)*reps);
         [bins,val]=binfun2(data,45,1);
-        [gdata,mdata,dev]=gsmooth(val,sr,2);%lets just go with spike count
+        [gdata,mdata,dev]=gsmooth(val,sr,3);%lets just go with spike count
         %for now
         %mdata=sum(val,1);
         t=bins(1,1:end-1);
